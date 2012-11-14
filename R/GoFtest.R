@@ -1,0 +1,24 @@
+GoFtest <-
+function(ActualValues, SimulatedValues, r) {
+  NumberOfSimulations <- dim(SimulatedValues)[1]
+  AverageSimulatedValues <- apply(SimulatedValues, 2, sum)/(NumberOfSimulations-1)
+  rIncrements <- (r-c(0,r)[1:length(r)])[2:length(r)]
+  
+  # Ui calculate the statistic for a simulation 
+  Ui <- function(SimulationNumber) {
+    Departure <- (SimulatedValues[SimulationNumber, ]-AverageSimulatedValues)[1:length(r)-1]
+    WeightedDeparture <- (Departure[!is.nan(Departure)])^2*rIncrements[!is.nan(Departure)]
+    return(sum(WeightedDeparture))
+  }
+  
+  # Calculate the Ui statistic for all simulations
+  SimulatedU <- sapply(1:NumberOfSimulations, Ui)
+
+  # Calculate the statistic for the actual value
+  RecenteredValues <- (ActualValues-AverageSimulatedValues)[1:length(r)-1]
+  WeightedRecenteredValues <- (RecenteredValues[!is.nan(RecenteredValues)])^2*rIncrements[!is.nan(RecenteredValues)]
+  ActualU <- sum(WeightedRecenteredValues)
+  
+  # Return the rank
+  return(mean(ActualU<SimulatedU))
+}
