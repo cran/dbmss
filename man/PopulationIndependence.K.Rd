@@ -1,10 +1,10 @@
 \name{PopulationIndependence.K}
 \alias{PopulationIndependence.K}
 \title{
-	Simulations of a point pattern according to the null hypothesis of population independence defined for K
+	Simulations of a point pattern according to the null hypothesis of population independence defined for \emph{K}
 }
 \description{
-  Simulates of a point pattern according to the null hypothesis of population independence defined for K.
+  Simulates of a point pattern according to the null hypothesis of population independence defined for \emph{K}.
 }
 \usage{
 PopulationIndependence.K(X, ReferenceType, NeighborType)
@@ -29,7 +29,7 @@ PopulationIndependence.K(X, ReferenceType, NeighborType)
   A new point pattern (an object of class \code{\link{ppp.object}}).
 }
 \references{
-  Goreaud, F. et Pelissier, R. (2003). Avoiding misinterpretation of biotic interactions with the intertype K12 fonction: population independence vs random labelling hypotheses. Journal of Vegetation Science 14(5): 681-692.
+  Goreaud, F. et Pelissier, R. (2003). Avoiding misinterpretation of biotic interactions with the intertype K12 fonction: population independence vs random labelling hypotheses. \emph{Journal of Vegetation Science} 14(5): 681-692.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>

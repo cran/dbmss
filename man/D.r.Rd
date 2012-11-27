@@ -1,10 +1,10 @@
 \name{D.r}
 \alias{D.r}
 \title{
-  Estimation of the D function
+  Estimation of the \emph{D} function
 }
 \description{
-	Estimates the D function}
+	Estimates the \emph{D} function}
 \usage{
 D.r(X, r, Cases, Controls, Intertype = FALSE)
 }
@@ -18,30 +18,31 @@ D.r(X, r, Cases, Controls, Intertype = FALSE)
 	A vector of distances.
   }
   \item{Cases}{
-	One of the point types
+	One of the point types.
   }
   \item{Controls}{
 	One of the point types.
   }
   \item{Intertype}{
-	if TRUE, D is computed as Di in Marcon and Puech (2012). 
+	Logical; if \code{TRUE}, \emph{D} is computed as \emph{Di} in Marcon and Puech (2012). 
   }
 }
 \details{
-	The Di function allows comparing the structure of the cases to that of the controls around cases, that is to say the comparison is made around the same points.
+	The \emph{Di} function allows comparing the structure of the cases to that of the controls around cases, that is to say the comparison is made around the same points. This has been advocated by Arbia et al. (2008) and formalized by Marcon and Puech (2012).
 }
 \value{
-	A vector containing D(r) values.
+	A vector containing \emph{D(r)} values.
 }
 \references{
-	Diggle, P. J. and Chetwynd, A. G. (1991). Second-Order Analysis of Spatial Clustering for Inhomogeneous Populations. Biometrics 47(3): 1155-1163.7\cr
-	Marcon, E. and F. Puech (2012). A typology of distance-based measures of spatial concentration. HAL SHS. 00679993.
+	Arbia, G., Espa, G. and Quah, D. (2008). A class of spatial econometric methods in the empirical analysis of clusters of firms in the space. \emph{Empirical Economics} 34(1): 81-103.\cr
+	Diggle, P. J. and Chetwynd, A. G. (1991). Second-Order Analysis of Spatial Clustering for Inhomogeneous Populations. \emph{Biometrics} 47(3): 1155-1163.\cr
+	Marcon, E. and F. Puech (2012). A typology of distance-based measures of spatial concentration. \emph{HAL SHS}. 00679993.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
 }
 \note{
-	The computation of \code{D.r(r)} relies on spatstat functions \code{\link{Kest}} and \code{\link{Kcross}}.
+	The computation of \code{D.r} relies on spatstat functions \code{\link{Kest}} and \code{\link{Kcross}}.
 }
 
 \seealso{

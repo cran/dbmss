@@ -1,10 +1,10 @@
 \name{DEnvelope}
 \alias{DEnvelope}
 \title{
-	Estimation of the confidence envelope of the D function under its null hypothesis
+	Estimation of the confidence envelope of the \emph{D} function under its null hypothesis
 }
 \description{
-	Simulates point patterns according to the null hypothesis and returns the envelope of D according to the confidence level.
+	Simulates point patterns according to the null hypothesis and returns the envelope of \emph{D} according to the confidence level.
 }
 \usage{
 DEnvelope(NumberOfSimulations, Alpha, X, r, Cases, Controls, Intertype = FALSE)
@@ -32,7 +32,7 @@ DEnvelope(NumberOfSimulations, Alpha, X, r, Cases, Controls, Intertype = FALSE)
 	One of the point types.
   }
   \item{Intertype}{
-	if TRUE, D is computed as Di in Marcon and Puech (2012). 
+	Logical; if \code{TRUE}, \emph{D} is computed as \emph{Di} in Marcon and Puech (2012). 
   }
 }
 \details{
@@ -40,14 +40,14 @@ DEnvelope(NumberOfSimulations, Alpha, X, r, Cases, Controls, Intertype = FALSE)
 }
 \value{
 A list:
-	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of Kd(R)}
+	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of \emph{D(R)}}
 	\item{Min}{A vector: the lower bound of the envelope}
 	\item{Max}{A vector: the upper bound of the envelope}
 }
 \references{
-	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. Ecology 69(4): 1017-1024.\cr
-	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. Ecology 87(8): 1925-1931.
-	Marcon, E. and F. Puech (2012). A typology of distance-based measures of spatial concentration. HAL SHS. 00679993.
+	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. \emph{Ecology} 69(4): 1017-1024.\cr
+	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.\cr
+	Marcon, E. and F. Puech (2012). A typology of distance-based measures of spatial concentration. \emph{HAL SHS}. 00679993.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
@@ -70,9 +70,11 @@ ActualValues.X <- D.r(X, r, "V. Americana", "Q. Rosea", Intertype = TRUE)
 # Calculate confidence envelope (should be 1000 simulations, reduced to 20 to save time)
 NumberOfSimulations <- 20
 Alpha <- .05
-LocalEnvelope.X <- DEnvelope(NumberOfSimulations, Alpha, X, r, "V. Americana", "Q. Rosea", Intertype = TRUE)
+LocalEnvelope.X <- DEnvelope(NumberOfSimulations, Alpha, X, r, 
+    "V. Americana", "Q. Rosea", Intertype = TRUE)
 
 # Plot
-PlotResults(r, DivideByPiR2(ActualValues.X, r), lapply(LocalEnvelope.X, DivideByPiR2, r), ylab="D / (pi R^2)", ReferenceValue=0)
+PlotResults(r, DivideByPiR2(ActualValues.X, r), lapply(LocalEnvelope.X, DivideByPiR2, r), 
+    ylab="D / (pi R^2)", ReferenceValue=0)
 
 }

@@ -1,10 +1,10 @@
 \name{Lmm.r}
 \alias{Lmm.r}
 \title{
-  Estimation of the Lmm function
+  Estimation of the \emph{Lmm} function
 }
 \description{
-  Estimates the Lmm function
+  Estimates the \emph{Lmm} function
 }
 \usage{
 Lmm.r(X, r, ReferenceType = "")
@@ -23,14 +23,14 @@ Lmm.r(X, r, ReferenceType = "")
   }
 }
 \details{
-	Lmm is the normalized version of Kmm: Lmm = sqrt(Kmm/pi)-r
+	\emph{Lmm} is the normalized version of Kmm: \eqn{Lmm(r)=\sqrt{\frac{Kmm}{\pi}}-r}.
 }
 \value{
-	A vector containing L(r) values.
+	A vector containing \emph{Lmm(r)} values.
 }
 \references{
-	Penttinen, A., Stoyan, D. and Henttonen, H. M. (1992). Marked Point Processes in Forest Statistics. Forest Science 38(4): 806-824.\cr
-	Espa, G., Giuliani, D. and Arbia, G. (2010). Weighting Ripley's K-function to account for the firm dimension in the analysis of spatial concentration. Discussion Papers, 12/2010. Universita di Trento, Trento: 26.	
+	Penttinen, A., Stoyan, D. and Henttonen, H. M. (1992). Marked Point Processes in Forest Statistics. \emph{Forest Science} 38(4): 806-824.\cr
+	Espa, G., Giuliani, D. and Arbia, G. (2010). Weighting Ripley's K-function to account for the firm dimension in the analysis of spatial concentration. \emph{Discussion Papers}, 12/2010. Universita di Trento, Trento: 26.	
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>

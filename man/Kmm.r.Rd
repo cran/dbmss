@@ -1,10 +1,10 @@
 \name{Kmm.r}
 \alias{Kmm.r}
 \title{
-  Estimation of the Kmm function
+  Estimation of the \emph{Kmm} function
 }
 \description{
-  Estimates of the Kmm function
+  Estimates of the \emph{Kmm} function
 }
 \usage{
 Kmm.r(X, r, ReferenceType = "")
@@ -23,20 +23,20 @@ Kmm.r(X, r, ReferenceType = "")
   }
 }
 \details{
-	The Kmm function is used to test the independence of marks.
+	The \emph{Kmm} function is used to test the independence of marks.
 }
 \value{
-	A vector containing Kmm(r) values.
+	A vector containing \emph{Kmm(r)} values.
 }
 \references{
-	Penttinen, A., Stoyan, D. and Henttonen, H. M. (1992). Marked Point Processes in Forest Statistics. Forest Science 38(4): 806-824.\cr
-	Penttinen, A. (2006). Statistics for Marked Point Patterns. in The Yearbook of the Finnish Statistical Society. The Finnish Statistical Society, Helsinki: 70-91.
+	Penttinen, A., Stoyan, D. and Henttonen, H. M. (1992). Marked Point Processes in Forest Statistics. \emph{Forest Science} 38(4): 806-824.\cr
+	Penttinen, A. (2006). Statistics for Marked Point Patterns. in \emph{The Yearbook of the Finnish Statistical Society}. The Finnish Statistical Society, Helsinki: 70-91.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
 }
 \note{
-	The function is computed using markcorrint() in spatstat.
+	The function is computed using \code{\link{markcorrint}} in spatstat.
 }
 
 \seealso{

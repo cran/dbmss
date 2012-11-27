@@ -1,10 +1,10 @@
 \name{RandomLabeling.M}
 \alias{RandomLabeling.M}
 \title{
-	Simulations of a point pattern according to the null hypothesis of random labelling defined for M
+	Simulations of a point pattern according to the null hypothesis of random labelling defined for \emph{M}
 }
 \description{
-	Simulates of a point pattern according to the null hypothesis of random labelling defined for M
+	Simulates of a point pattern according to the null hypothesis of random labelling defined for \emph{M}
 }
 \usage{
 RandomLabeling.M(X)
@@ -23,8 +23,8 @@ RandomLabeling.M(X)
   A new point pattern (an object of class \code{\link{ppp.object}}).
 }
 \references{
-  Marcon, E. and Puech, F. (2010). Measures of the Geographic Concentration of Industries: Improving Distance-Based Methods. Journal of Economic Geography 10(5): 745-762.\cr
-  Marcon, E., F. Puech, et al. (2012). Characterizing the relative spatial structure of point patterns. International Journal of Ecology 2012(Article ID 619281): 11.
+  Marcon, E. and Puech, F. (2010). Measures of the Geographic Concentration of Industries: Improving Distance-Based Methods. \emph{Journal of Economic Geography} 10(5): 745-762.\cr
+  Marcon, E., F. Puech, et al. (2012). Characterizing the relative spatial structure of point patterns. \emph{International Journal of Ecology} 2012(Article ID 619281): 11.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>

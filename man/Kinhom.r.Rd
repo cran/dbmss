@@ -1,10 +1,10 @@
 \name{Kinhom.r}
 \alias{Kinhom.r}
 \title{
-  Estimation of the inhomogenous K function
+  Estimation of the inhomogenous \emph{K} function
 }
 \description{
-	Estimates the Kinhom function
+	Estimates the \emph{Kinhom} function
 }
 \usage{
 Kinhom.r(X, r, ReferenceType = "", lambda=NULL)
@@ -27,23 +27,23 @@ Kinhom.r(X, r, ReferenceType = "", lambda=NULL)
   }
 }
 \details{
-	Kinhom is a cumulative, topographic measure of an inhomogenous point pattern structure.\cr
+	\emph{Kinhom} is a cumulative, topographic measure of an inhomogenous point pattern structure.\cr
 	By default, density estimation is performed at points by \code{\link{density.ppp}} using the optimal bandwith (\code{\link{bw.diggle}}). It can be calculated separately (see example), including at pixels if the point pattern is too large for the default estimation to succeed, and provided as the argument \code{lambda}:
 	Arbia et al. (2012) for example use another point pattern as a reference to estimate density.\cr
-	Bivariate Kinhom is not currently supported.
+	Bivariate \emph{Kinhom} is not currently supported.
 }
 \value{
-	A vector containing Kinhom(r) values.
+	A vector containing \emph{Kinhom(r)} values.
 }
 \references{
-	Baddeley, A. J., J. Moller, et al. (2000). Non- and semi-parametric estimation of interaction in inhomogeneous point patterns. Statistica Neerlandica 54(3): 329-350.\cr
-	Arbia, G., G. Espa, et al. (2012). Clusters of firms in an inhomogeneous space: The high-tech industries in Milan. Economic Modelling 29(1): 3-11.
+	Baddeley, A. J., J. Moller, et al. (2000). Non- and semi-parametric estimation of interaction in inhomogeneous point patterns. \emph{Statistica Neerlandica} 54(3): 329-350.\cr
+	Arbia, G., G. Espa, et al. (2012). Clusters of firms in an inhomogeneous space: The high-tech industries in Milan. \emph{Economic Modelling} 29(1): 3-11.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
 }
 \note{
-	The computation of \code{Kinhom.r()} relies on spatstat functions \code{\link{Kinhom}}, \code{\link{density.ppp}} and \code{\link{bw.diggle}}.
+	The computation of \code{Kinhom.r} relies on spatstat functions \code{\link{Kinhom}}, \code{\link{density.ppp}} and \code{\link{bw.diggle}}.
 }
 \seealso{
 	\code{\link{KinhomEnvelope}}, \code{\link{Kinhom}}

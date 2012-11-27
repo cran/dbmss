@@ -1,7 +1,7 @@
 \name{SimulateM}
 \alias{SimulateM}
 \title{
-	Simulations of point patterns to obtain values of M under the null hypothesis
+	Simulations of point patterns to obtain values of \emph{M} under the null hypothesis
 }
 \description{
 	This function is used internally by \code{\link{MEnvelope}} to fill the simulation matrix.
@@ -26,15 +26,15 @@ SimulateM(X, r, ReferenceType, NeighborType, SimulationType = "RandomLocation", 
 	One of the point types.
   }
   \item{SimulationType}{
-	A string describing the null hypothesis to simulate. The null hypothesis may be "RandomLocation": points are redistributed on the actual locations; "RandomLabeling": randomizes point types, keeping locations and weights unchanged; "PopulationIndependence": keeps reference points unchanged, randomizes other point locations.
+	A string describing the null hypothesis to simulate. The null hypothesis may be "\emph{RandomLocation}": points are redistributed on the actual locations; "\emph{RandomLabeling}": randomizes point types, keeping locations and weights unchanged; "\emph{PopulationIndependence}": keeps reference points unchanged, randomizes other point locations.
   }
   \item{CaseControl}{
-	If TRUE, the case-control version of M is computed. ReferenceType points are cases, NeighborType points are controls.
+	Logical; if \code{TRUE}, the case-control version of \emph{M} is computed. \emph{ReferenceType} points are cases, \emph{NeighborType} points are controls.
   }
 }
 
 \value{
-	A vector containing simulated M(r) values.
+	A vector containing simulated \emph{M(r)} values.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>

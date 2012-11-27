@@ -3,26 +3,26 @@ Ktest <- function(X, r)
 
   # Utilities
   #-------------------------------------------------------------------------------
-  # ern : probability for a point to be in another's neighborhood.(pi * r² / n² corrected from edge effects)
+  # ern : Probability for a point to be in another's neighborhood.(pi * r² / n² corrected from edge effects)
   ern <- function(r, w, l)
   {
     return(r*r/w/l*(pi-4*r/3*(1/w+1/l)+r*r/2/w/l))
   }
   #-------------------------------------------------------------------------------
-  # espKc : expectancy of K, when density is known
-  espKc<-function(r,w,l)
+  # espKc : Expectation of K, when density is known
+  espKc <- function(r,w,l)
   {
     return(w*l*ern(r,w,l))
   }
   #-------------------------------------------------------------------------------
-  # espKi : expectation of K, when density is unknown. rho n² is estimated by the number of points (lambda).
+  # espKi : Expectation of K, when density is unknown. rho n² is estimated by the number of points (lambda).
   #        Difference between espKi and espKc goes to 0 when points are more than 20.
   espKi <- function(r, N, w, l)
   {
     return(espKc(r, w, l)*(1-(1+N)*exp(-N)))
   }
   #-------------------------------------------------------------------------------
-  # eh : expectation of h1²(U, r)
+  # eh : Expectation of h1²(U, r)
   eh <- function(r, w, l)
   {
     return(r^5*(w+l)/2/w^3/l^3*(8*pi/3-256/45) +r^6/w^3/l^3*(11*pi/48+8/9-16/9*(w+l)*(w+l)/w/l) +4/3*r^7*(w+l)/w^4/l^4 -r^8/4/w^4/l^4)
@@ -98,8 +98,8 @@ Ktest <- function(X, r)
   # r1, r2 : distances
   # w      : width of the rectangle window
   # l      : length of the rectangle window
-    covh1 <- function(r1, r2, w, l)
-    {
+  covh1 <- function(r1, r2, w, l)
+  {
     # Values of the product in the corner. Coordinates are x'=(n-xi)/r2 without normalization in r'^2r^2/w^2/l^2
     # This function must be inside covh1 because it needs to use local variables, that can not be passed as parameters because adaptIntegrate forbides it.
     corner <- function(x){(foncA1(ra2*x/ra1, ra1, w, l)+foncA2(ra2*x/ra1, ra1, w, l)+foncA3(ra2*x/ra1, ra1, w, l)+foncA4(ra2*x/ra1, ra1, w, l))*(foncA3(x, ra2, w, l)+foncA4(x, ra2, w, l))}
@@ -142,10 +142,10 @@ Ktest <- function(X, r)
   # Values of h1 on different zones without normalization by r^2/w/l
   brn    <- function(r, w, l){4*r*(w+l)/(3*w*l)-r*r/(2*w*l)}
   indic  <- function(a){as.numeric(a)}
-  foncA1 <- function(x, r, w, l){brn(r, w, l)*indic(x[1]>=1)*indic(x[2]>=1)}
-  foncA2 <- function(x, r, w, l){(brn(r, w, l)-foncg(x[2]))*indic(x[1]>=1)*indic(x[2]<1)+(brn(r, w, l)-foncg(x[1]))*indic(x[2]>=1)*indic(x[1]<1)}
-  foncA3 <- function(x, r, w, l){(brn(r, w, l)-foncg(x[1])-foncg(x[2]))*indic(x[1]<1)*indic(x[2]<1)*indic(x[1]^2+x[2]^2>1)}
-  foncA4 <- function(x, r, w, l){(brn(r, w, l)+x[1]*x[2]-(foncg(x[1])+foncg(x[2]))/2-pi/4)*indic(x[1]<1)*indic(x[2]<1)*indic(x[1]^2+x[2]^2<=1)}
+  foncA1 <- function(x, r, w, l){brn(r, w, l)*indic(x[1] >= 1)*indic(x[2] >= 1)}
+  foncA2 <- function(x, r, w, l){(brn(r, w, l)-foncg(x[2]))*indic(x[1] >= 1)*indic(x[2] < 1)+(brn(r, w, l)-foncg(x[1]))*indic(x[2] >= 1)*indic(x[1] < 1)}
+  foncA3 <- function(x, r, w, l){(brn(r, w, l)-foncg(x[1])-foncg(x[2]))*indic(x[1] < 1)*indic(x[2] < 1)*indic(x[1]^2+x[2]^2 > 1)}
+  foncA4 <- function(x, r, w, l){(brn(r, w, l)+x[1]*x[2]-(foncg(x[1])+foncg(x[2]))/2-pi/4)*indic(x[1] < 1)*indic(x[2] < 1)*indic(x[1]^2+x[2]^2 <= 1)}
   
   integrand3 <- function(x, r1, r2){foncg01(r1*x/r2)*foncg01(x)}
   #-------------------------------------------------------------------------------
@@ -155,36 +155,35 @@ Ktest <- function(X, r)
   if (!is.rectangle(X$window)) stop("The window must be a rectangle to apply Ktest.")
     
   #  value = NA if the number of points is less than 2  
-  if (X$n>1)
-   {
-   # Width - Length
-   l <- X$window$xrange[2]-X$window$xrange[1]
-   w <- X$window$yrange[2]-X$window$yrange[1]
-   # espKi : expectation of K, rho unknown, calculated according to the number of points.
-   espKi_ <- espKi(r, X$n, w, l)
+  if (X$n > 1)
+    {
+    # Width - Length
+    l <- X$window$xrange[2]-X$window$xrange[1]
+    w <- X$window$yrange[2]-X$window$yrange[1]
+    # espKi : expectation of K, rho unknown, calculated according to the number of points.
+    espKi_ <- espKi(r, X$n, w, l)
 
-   # Computed variance. Depends on the the observed number of points and the window.
-   sigmaKi_ <- sigmaKi(r, X$n, w, l)
+    # Computed variance. Depends on the the observed number of points and the window.
+    sigmaKi_ <- sigmaKi(r, X$n, w, l)
    
-  
-   # Distance matrix.
-   pairdist_ <- pairdist.ppp(X)  # Requires a lot of RAM. Limited to 8, 000 points with 32-bit versions of R.
+    # Distance matrix.
+    pairdist_ <- pairdist.ppp(X)  # Requires a lot of RAM. Limited to 8, 000 points with 32-bit versions of R.
 
-   # Estimation of K
-   Kest<-mat.or.vec(1, length(r))
+    # Estimation of K
+    Kest<-mat.or.vec(1, length(r))
   
-   # For each distance r
-   for (i in 1:length(r))
-   {
-     # NbPairs : number of pairs of points less than r apart (a>0 eliminates distance from a point to itself)
-     # *1.0 is to convert values to real and avoid infinite values in b*n*n
-     NbPairs <- sum(pairdist_>0 & pairdist_<r[i])*1.0 
+    # For each distance r
+    for (i in 1:length(r))
+    {
+      # NbPairs : number of pairs of points less than r apart (a>0 eliminates distance from a point to itself)
+      # *1.0 is to convert values to real and avoid infinite values in b*n*n
+      NbPairs <- sum(pairdist_ > 0 & pairdist_ < r[i])*1.0 
    
-     # Kest gets the estimator of K, centered on the expected value.
-     Kest[i] <- NbPairs*w*l/(X$n*(X$n-1))-espKi_[i]
-   }         
-   TestVector <- invsqrtmat(sigmaKi_) %*% t(Kest) 
-   return(1-pchisq(sum(TestVector*TestVector), length(r)))
-   }
-else return(NA) 
+      # Kest gets the estimator of K, centered on the expected value.
+      Kest[i] <- NbPairs*w*l/(X$n*(X$n-1))-espKi_[i]
+    }         
+    TestVector <- invsqrtmat(sigmaKi_) %*% t(Kest) 
+    return(1-pchisq(sum(TestVector*TestVector), length(r)))
+  }
+  else return(NA) 
 }

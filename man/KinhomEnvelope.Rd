@@ -1,13 +1,14 @@
 \name{KinhomEnvelope}
 \alias{KinhomEnvelope}
 \title{
-	Estimation of the confidence envelope of the Kinhom function under its null hypothesis
+	Estimation of the confidence envelope of the \emph{Kinhom} function under its null hypothesis
 }
 \description{
-	  Simulates point patterns according to the null hypothesis and returns the envelope of Kinhom according to the confidence level.
+	  Simulates point patterns according to the null hypothesis and returns the envelope of \emph{Kinhom} according to the confidence level.
 }
 \usage{
-KinhomEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType="", SimulationType="RandomPosition", lambda=NULL)
+KinhomEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType="", 
+    SimulationType="RandomPosition", lambda=NULL)
 }
 \arguments{
   \item{NumberOfSimulations}{
@@ -29,8 +30,8 @@ KinhomEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType="", SimulationTyp
   }
   \item{SimulationType}{
 	A string describing the null hypothesis to simulate. The null hypothesis, may be 
-  "RandomPosition": points are drawn in an inhomogenous Poisson process (intensity is either lambda or estimated from X); 
-  "RandomLocation": points are redistributed accross actual locations.
+	"\emph{RandomPosition}": points are drawn in an inhomogenous Poisson process (intensity is either \code{lambda} or estimated from \code{X}); 
+	"\emph{RandomLocation}": points are redistributed accross actual locations.
   }
   \item{lambda}{
 	An estimation of the point pattern density, obtained by the \code{\link{density.ppp}} function.
@@ -41,13 +42,13 @@ KinhomEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType="", SimulationTyp
 }
 \value{
 A list:
-	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of Kinhom(R)}
-	\item{Min}{A vector: the lower bound of the envelope}
-	\item{Max}{A vector: the upper bound of the envelope}
+	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of \emph{Kinhom(R)}.}
+	\item{Min}{A vector: the lower bound of the envelope.}
+	\item{Max}{A vector: the upper bound of the envelope.}
 }
 \references{
-	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. Ecology 69(4): 1017-1024.\cr
-	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. Ecology 87(8): 1925-1931.
+	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. \emph{Ecology} 69(4): 1017-1024.\cr
+	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
@@ -76,9 +77,11 @@ ActualValues.X <- Kinhom.r(X, r, "V. Americana", lambda)
 # Calculate confidence envelope (should be 1000 simulations, reduced to 4 to save time)
 NumberOfSimulations <- 4
 Alpha <- .10
-LocalEnvelope.X <- KinhomEnvelope(NumberOfSimulations, Alpha, X, r, , SimulationType="RandomPosition", lambda=lambda)
+LocalEnvelope.X <- KinhomEnvelope(NumberOfSimulations, Alpha, X, r, , 
+    SimulationType="RandomPosition", lambda=lambda)
 
 # Plot
-PlotResults(r, DivideByPiR2(ActualValues.X, r), lapply(LocalEnvelope.X, DivideByPiR2, r), ylab="Kinhom / (pi R^2)", ReferenceValue=1)
+PlotResults(r, DivideByPiR2(ActualValues.X, r), lapply(LocalEnvelope.X, DivideByPiR2, r), 
+    ylab="Kinhom / (pi R^2)", ReferenceValue=1)
 
 }

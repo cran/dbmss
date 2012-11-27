@@ -1,10 +1,10 @@
 \name{LmmEnvelope}
 \alias{LmmEnvelope}
 \title{
-	Estimation of the confidence envelope of the Lmm function under its null hypothesis
+	Estimation of the confidence envelope of the \emph{Lmm} function under its null hypothesis
 }
 \description{
-	  Simulates point patterns according to the null hypothesis and returns the envelope of Lmm according to the confidence level.
+	  Simulates point patterns according to the null hypothesis and returns the envelope of \emph{Lmm} according to the confidence level.
 }
 \usage{
 LmmEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType = "")
@@ -33,13 +33,13 @@ LmmEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType = "")
 }
 \value{
 A list:
-	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of Lmm(R)}
+	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of \emph{Lmm(R)}}
 	\item{Min}{A vector: the lower bound of the envelope}
 	\item{Max}{A vector: the upper bound of the envelope}
 }
 \references{
-	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. Ecology 69(4): 1017-1024.
-	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. Ecology 87(8): 1925-1931.
+	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. \emph{Ecology} 69(4): 1017-1024.\cr
+	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>

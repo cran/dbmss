@@ -1,7 +1,7 @@
 \name{SimulateKd}
 \alias{SimulateKd}
 \title{
-	Simulations of point patterns to obtain values of Kd under the null hypothesis
+	Simulations of point patterns to obtain values of \emph{Kd} under the null hypothesis
 }
 \description{
 	This function is used internally by \code{\link{KdEnvelope}} to fill the simulation matrix.
@@ -26,15 +26,15 @@ SimulateKd(X, r, ReferenceType, NeighborType, Weighted = FALSE, SimulationType =
 	One of the point types.
   }
   \item{Weighted}{
-	if TRUE, estimates the Kemp function.
+	Logical; if \code{TRUE}, estimates the \emph{Kemp} function.
   }
   \item{SimulationType}{
-	A string describing the null hypothesis to simulate. The null hypothesis may be "RandomLocation": points are redistributed on the actual locations; "RandomLabeling": randomizes point types, keeping locations and weights unchanged; "PopulationIndependence": keeps reference points unchanged, randomizes other point locations.
+	A string describing the null hypothesis to simulate. The null hypothesis may be "\emph{RandomLocation}": points are redistributed on the actual locations; "\emph{RandomLabeling}": randomizes point types, keeping locations and weights unchanged; "\emph{PopulationIndependence}": keeps reference points unchanged, randomizes other point locations.
   }
 }
 
 \value{
-	A vector containing simulated Kd(r) values.
+	A vector containing simulated \emph{Kd(r)} values.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>

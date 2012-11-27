@@ -1,13 +1,13 @@
 \name{Kd.r}
 \alias{Kd.r}
 \title{
-  Estimation of the Kd function
+  Estimation of the \emph{Kd} function
 }
 \description{
-	Estimates the Kd function
+	Estimates the \emph{Kd} function
 }
 \usage{
-Kd.r(X, r, ReferenceType, NeighborType, Weighted = FALSE)
+Kd.r(X, r, ReferenceType, NeighborType, Weighted = FALSE, Original=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,28 +26,27 @@ Kd.r(X, r, ReferenceType, NeighborType, Weighted = FALSE)
 	One of the point types.
   }
   \item{Weighted}{
-	if TRUE, estimates the Kemp function.
+	Logical; if \code{TRUE}, estimates the \emph{Kemp} function.
+  }
+  \item{Original}{
+	Logical; if \code{TRUE} (by default), the original bandwidth selection by Duranton and Overman (2005) following Silverman (2006: eq 3.31) is used. If \code{FALSE}, it is calculated following Sheather and Jones (1991), ie. the state of the art. See \code{\link{bw.SJ}} for more details.
   }
 }
 \details{
-	Kd is a density, relative measure of a point pattern structure.\cr
-	Kd is computed efficiently by building a matrix of distances between point pairs and calculating the density of their distribution. As in Duranton and Overman (2005), the kernel estimator is Gaussian.
-	The bandwdwith is calculated following Sheather and Jones (1991) rather than Silverman (1986: eq 3.31), see \code{\link{bw.SJ}} for more details.
+	\emph{Kd} is a density, relative measure of a point pattern structure.\cr
+	\emph{Kd} is computed efficiently by building a matrix of distances between point pairs and calculating the density of their distribution. The kernel estimator is Gaussian.
+	The weighted \emph{Kd} function has been named \emph{Kemp} (\emph{emp} is for employees) by Duranton and Overman (2005).
 }
 \value{
-	A vector containing M(r) values.
+	A vector containing \emph{Kd(r)} values.
 }
 \references{
-	Duranton, G. and Overman, H. G. (2005). Testing for Localisation Using Micro-Geographic Data. Review of Economic Studies 72(4): 1077-1106.\cr
-	Sheather, S. J. and Jones, M. C. (1991) A reliable data-based bandwidth selection method for kernel density estimation. Journal of the Royal Statistical Society series B, 53, 683-690.
+	Duranton, G. and Overman, H. G. (2005). Testing for Localisation Using Micro-Geographic Data. \emph{Review of Economic Studies} 72(4): 1077-1106.\cr
+	Sheather, S. J. and Jones, M. C. (1991) A reliable data-based bandwidth selection method for kernel density estimation. \emph{Journal of the Royal Statistical Society series B}, 53, 683-690.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
 }
-\note{
-	Kd is computed using the density() function with a Gaussian kernel. This is more efficicent than Duranton and Overman's original algorithm.
-}
-
 \seealso{
 	\code{\link{KdEnvelope}}, \code{\link{GlobalEnvelope}}, \code{\link{M.r}}
 }
@@ -61,6 +60,7 @@ r <- 0:100
 ActualValues.X <- Kd.r(paracou16, r, "Q. Rosea", "Q. Rosea")
 
 # Plot
-PlotResults(r, ActualValues.X, ylab="Kd", Legend=TRUE, LegendItems="Kd", LegendPosition="bottomright")
+PlotResults(r, ActualValues.X, ylab="Kd", Legend=TRUE, LegendItems="Kd", 
+    LegendPosition="bottomright")
 
 }

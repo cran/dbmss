@@ -1,13 +1,14 @@
 \name{gEnvelope}
 \alias{gEnvelope}
 \title{
-	Estimation of the confidence envelope of the g function under its null hypothesis
+	Estimation of the confidence envelope of the \emph{g} function under its null hypothesis
 }
 \description{
-	  Simulates point patterns according to the null hypothesis and returns the envelope of g according to the confidence level.
+	  Simulates point patterns according to the null hypothesis and returns the envelope of \emph{g} according to the confidence level.
 }
 \usage{
-gEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType = "", NeighborType = "", SimulationType = "RandomPosition")
+gEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType = "", 
+    NeighborType = "", SimulationType = "RandomPosition")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -32,7 +33,7 @@ gEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType = "", NeighborType = "
 	One of the point types. Default is all point types.
   }
   \item{SimulationType}{
-	A string describing the null hypothesis to simulate. The null hypothesis may be "RandomPosition": points are drawn in a Poisson process; "RandomLabeling": randomizes point types, keeping locations unchanged; "PopulationIndependence": keeps reference points unchanged, randomizes other point locations.
+	A string describing the null hypothesis to simulate. The null hypothesis may be "\emph{RandomPosition}": points are drawn in a Poisson process; "\emph{RandomLabeling}": randomizes point types, keeping locations unchanged; "\emph{PopulationIndependence}": keeps reference points unchanged, randomizes other point locations.
   }
 }
 \details{
@@ -40,13 +41,13 @@ gEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType = "", NeighborType = "
 }
 \value{
 A list:
-	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of g(R)}
+	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of \emph{g(R)}}
 	\item{Min}{A vector: the lower bound of the envelope}
 	\item{Max}{A vector: the upper bound of the envelope}
 }
 \references{
-	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. Ecology 69(4): 1017-1024.\cr
-	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. Ecology 87(8): 1925-1931.
+	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. \emph{Ecology} 69(4): 1017-1024.\cr
+	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
@@ -69,7 +70,8 @@ ActualValues.X <- g.r(X, r, "Q. Rosea", "V. Americana")
 # Calculate confidence envelope (should be 1000 simulations, reduced to 4 to save time)
 NumberOfSimulations <- 4
 Alpha <- .10
-LocalEnvelope.X <- gEnvelope(NumberOfSimulations, Alpha, X, r, "Q. Rosea", "V. Americana", SimulationType="RandomLabeling")
+LocalEnvelope.X <- gEnvelope(NumberOfSimulations, Alpha, X, r, 
+    "Q. Rosea", "V. Americana", SimulationType="RandomLabeling")
 
 # Plot
 PlotResults(r, ActualValues.X, LocalEnvelope.X, ylab="g", ReferenceValue=1)

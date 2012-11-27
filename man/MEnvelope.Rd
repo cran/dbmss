@@ -1,13 +1,14 @@
 \name{MEnvelope}
 \alias{MEnvelope}
 \title{
-	Estimation of the confidence envelope of the M function under its null hypothesis
+	Estimation of the confidence envelope of the \emph{M} function under its null hypothesis
 }
 \description{
-	  Simulates point patterns according to the null hypothesis and returns the envelope of M according to the confidence level.
+	  Simulates point patterns according to the null hypothesis and returns the envelope of \emph{M} according to the confidence level.
 }
 \usage{
-	MEnvelope(NumberOfSimulations, Alpha = .05, X, r, ReferenceType, NeighborType, SimulationType = "RandomLocation", CaseControl = FALSE)
+	MEnvelope(NumberOfSimulations, Alpha = .05, X, r, ReferenceType, NeighborType, 
+      SimulationType = "RandomLocation", CaseControl = FALSE)
 }
 \arguments{
   \item{NumberOfSimulations}{
@@ -31,10 +32,10 @@
 	One of the point types.
   }
   \item{CaseControl}{
-	If TRUE, the case-control version of M is computed. ReferenceType points are cases, NeighborType points are controls.
+	Logical; if \code{TRUE}, the case-control version of \emph{M} is computed. \emph{ReferenceType} points are cases, \emph{NeighborType} points are controls.
   }
   \item{SimulationType}{
-	A string describing the null hypothesis to simulate. The null hypothesis may be "RandomLocation": points are redistributed accross actual locations; "RandomLabeling": randomizes point types, keeping locations unchanged; "PopulationIndependence": keeps reference points unchanged, redistributes others accross actual locations.
+	A string describing the null hypothesis to simulate. The null hypothesis may be "\emph{RandomLocation}": points are redistributed accross actual locations; "\emph{RandomLabeling}": randomizes point types, keeping locations unchanged; "\emph{PopulationIndependence}": keeps reference points unchanged, redistributes others accross actual locations.
   }
 }
 \details{
@@ -42,13 +43,13 @@
 }
 \value{
 A list:
-	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of M(R)}
+	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of \emph{M(R)}}
 	\item{Min}{A vector: the lower bound of the envelope}
 	\item{Max}{A vector: the upper bound of the envelope}
 }
 \references{
-	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. Ecology 69(4): 1017-1024.\cr
-	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. Ecology 87(8): 1925-1931.
+	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. \emph{Ecology} 69(4): 1017-1024.\cr
+	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
@@ -71,7 +72,8 @@ ActualValues.X <- M.r(X, r, "V. Americana", "Q. Rosea")
 # Calculate confidence envelope (should be 1000 simulations, reduced to 4 to save time)
 NumberOfSimulations <- 4
 Alpha <- .10
-LocalEnvelope.X <- MEnvelope(NumberOfSimulations, Alpha, X, r,  "V. Americana", "Q. Rosea", "RandomLabeling")
+LocalEnvelope.X <- MEnvelope(NumberOfSimulations, Alpha, X, r, 
+    "V. Americana", "Q. Rosea", "RandomLabeling")
 
 # Plot
 PlotResults(r, ActualValues.X, LocalEnvelope.X, ylab="M", ReferenceValue=1)

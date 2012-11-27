@@ -1,10 +1,10 @@
 \name{RandomPosition.K}
 \alias{RandomPosition.K}
 \title{
-	Simulations of a point pattern according to the null hypothesis of random position defined for K
+	Simulations of a point pattern according to the null hypothesis of random position defined for \emph{K}
 }
 \description{
-	Simulations of a point pattern according to the null hypothesis of random position defined for K.
+	Simulations of a point pattern according to the null hypothesis of random position defined for \emph{K}.
 }
 \usage{
 RandomPosition.K(X)

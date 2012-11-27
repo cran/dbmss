@@ -1,10 +1,10 @@
 \name{K.r}
 \alias{K.r}
 \title{
-  Estimation of the K function
+  Estimation of the \emph{K} function
 }
 \description{
-	Estimates the K function
+	Estimates the \emph{K} function
 }
 \usage{
 K.r(X, r, ReferenceType = "", NeighborType = "")
@@ -27,20 +27,20 @@ K.r(X, r, ReferenceType = "", NeighborType = "")
   }
 }
 \details{
-	K is a cumulative, topographic measure of a point pattern structure.
+	\emph{K} is a cumulative, topographic measure of a point pattern structure.
 }
 \value{
-	A vector containing K(r) values.
+	A vector containing \emph{K(r)} values.
 }
 \references{
-	Ripley, B. D. (1976). The Foundations of Stochastic Geometry. Annals of Probability 4(6): 995-998.\cr
-	Ripley, B. D. (1977). Modelling Spatial Patterns. Journal of the Royal Statistical Society B 39(2): 172-212.
+	Ripley, B. D. (1976). The Foundations of Stochastic Geometry. \emph{Annals of Probability} 4(6): 995-998.\cr
+	Ripley, B. D. (1977). Modelling Spatial Patterns. \emph{Journal of the Royal Statistical Society B} 39(2): 172-212.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
 }
 \note{
-	The computation of K.r() relies on spatstat functions Kest and Kcross.
+	The computation of \code{K.r} relies on spatstat functions \code{\link{Kest}} and \code{\link{Kcross}}.
 }
 \seealso{
 	\code{\link{L.r}}, \code{\link{Ktest}}, \code{\link{KEnvelope}}, \code{\link{Kest}}, \code{\link{Kcross}}

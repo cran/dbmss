@@ -4,7 +4,7 @@
   Test of a point pattern against Complete Spatial Randomness
 }
 \description{
-  Tests the point pattern against CSR using values of the K function
+  Tests the point pattern against CSR using values of the \emph{K} function
 }
 \usage{
   Ktest(X, r)
@@ -18,13 +18,13 @@
 }
 }
 \details{
-	The test returns the risk to reject CSR erroneously, based on the distribution of the K function.
+	The test returns the risk to reject CSR erroneously, based on the distribution of the \emph{K} function.
 }
 \value{
 	A p-value.
 }
 \references{
-	Lang, G. and Marcon, E. (2010). Testing randomness of spatial point patterns with the Ripley statistic. ArXiv e-prints 1006.1567.
+	Lang, G. and Marcon, E. (2010). Testing randomness of spatial point patterns with the Ripley statistic. \emph{ArXiv e-prints} 1006.1567.
 }
 \author{
 	Gabriel Lang <Gabriel.Lang@agroparistech.fr>

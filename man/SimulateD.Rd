@@ -1,7 +1,7 @@
 \name{SimulateD}
 \alias{SimulateD}
 \title{
-	Simulations of point patterns to obtain values of D under the null hypothesis
+	Simulations of point patterns to obtain values of \emph{D} under the null hypothesis
 }
 \description{
 	This function is used internally by \code{\link{DEnvelope}} to fill the simulation matrix.
@@ -25,11 +25,11 @@ SimulateD(X, r, Cases, Controls, Intertype = FALSE)
 	One of the point types.
   }
   \item{Intertype}{
-	if TRUE, D is computed as Di in Marcon and Puech (2012). 
+	Logical; if \code{TRUE}, \emph{D} is computed as \emph{Di} in Marcon and Puech (2012). 
   }
 }
 \value{
-	A vector containing simulated D(r) values.
+	A vector containing simulated \emph{D(r)} values.
 }
 \references{
 	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. Ecology 69(4): 1017-1024.\cr

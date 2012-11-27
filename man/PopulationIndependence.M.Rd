@@ -1,10 +1,10 @@
 \name{PopulationIndependence.M}
 \alias{PopulationIndependence.M}
 \title{
-	Simulations of a point pattern according to the null hypothesis of population independence defined for M
+	Simulations of a point pattern according to the null hypothesis of population independence defined for \emph{M}
 }
 \description{
-  	Simulates of a point pattern according to the null hypothesis of population independence defined for M
+  	Simulates of a point pattern according to the null hypothesis of population independence defined for \emph{M}
 }
 \usage{
 PopulationIndependence.M(X, ReferenceType)
@@ -26,8 +26,8 @@ PopulationIndependence.M(X, ReferenceType)
   A new point pattern (an object of class \code{\link{ppp.object}}).
 }
 \references{
-  Marcon, E. and Puech, F. (2010). Measures of the Geographic Concentration of Industries: Improving Distance-Based Methods. Journal of Economic Geography 10(5): 745-762.\cr
-  Marcon, E., F. Puech, et al. (2012). Characterizing the relative spatial structure of point patterns. International Journal of Ecology 2012(Article ID 619281): 11.
+  Marcon, E. and Puech, F. (2010). Measures of the Geographic Concentration of Industries: Improving Distance-Based Methods. \emph{Journal of Economic Geography} 10(5): 745-762.\cr
+  Marcon, E., F. Puech, et al. (2012). Characterizing the relative spatial structure of point patterns. \emph{International Journal of Ecology} 2012(Article ID 619281): 11.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
@@ -51,7 +51,8 @@ plot(X, main="Original pattern, Point Type")
 Y <- PopulationIndependence.M(X, "A")
 # Invert the order of columns in mark to plot the point type, not the point weight
 Y$marks <- data.frame(Y$marks$PointType, Y$marks$PointWeight)
-# Points of type "A" (circles) are unchanged, all other points have been redistributed randomly accross locations
+# Points of type "A" (circles) are unchanged, 
+# all other points have been redistributed randomly accross locations
 plot(Y, main="Randomized pattern, Point Type")
 
 }

@@ -1,13 +1,14 @@
 \name{KdEnvelope}
 \alias{KdEnvelope}
 \title{
-	Estimation of the confidence envelope of the Kd function under its null hypothesis
+	Estimation of the confidence envelope of the \emph{Kd} function under its null hypothesis
 }
 \description{
-	  Simulates point patterns according to the null hypothesis and returns the envelope of Kd according to the confidence level.
+	  Simulates point patterns according to the null hypothesis and returns the envelope of \emph{Kd} according to the confidence level.
 }
 \usage{
-KdEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType, NeighborType, Weighted = FALSE, SimulationType = "RandomLocation")
+KdEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType, NeighborType, 
+    Weighted = FALSE, SimulationType = "RandomLocation")
 }
 \arguments{
   \item{NumberOfSimulations}{
@@ -31,10 +32,10 @@ KdEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType, NeighborType, Weight
 	One of the point types.
   }
   \item{Weighted}{
-	if TRUE, estimates the Kemp function.
+	Logical; if \code{TRUE}, estimates the \emph{Kemp} function.
   }
   \item{SimulationType}{
-	A string describing the null hypothesis to simulate. The null hypothesis may be "RandomLocation": points are redistributed on the actual locations; "RandomLabeling": randomizes point types, keeping locations and weights unchanged; "PopulationIndependence": keeps reference points unchanged, randomizes other point locations.
+	A string describing the null hypothesis to simulate. The null hypothesis may be "\emph{RandomLocation}": points are redistributed on the actual locations; "\emph{RandomLabeling}": randomizes point types, keeping locations and weights unchanged; "\emph{PopulationIndependence}": keeps reference points unchanged, randomizes other point locations.
   }
 }
 \details{
@@ -42,13 +43,13 @@ KdEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType, NeighborType, Weight
 }
 \value{
 A list:
-	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of Kd(R)}
+	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of \emph{Kd(R)}}
 	\item{Min}{A vector: the lower bound of the envelope}
 	\item{Max}{A vector: the upper bound of the envelope}
 }
 \references{
-	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. Ecology 69(4): 1017-1024.\cr
-	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. Ecology 87(8): 1925-1931.
+	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. \emph{Ecology} 69(4): 1017-1024.\cr
+	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
@@ -75,6 +76,7 @@ LocalEnvelope.X <- KdEnvelope(NumberOfSimulations, Alpha, X, r, "Q. Rosea", "Q. 
 GlobalEnvelope.X <- GlobalEnvelope(LocalEnvelope.X$Simulations, Alpha)
 
 # Plot
-PlotResults(r, ActualValues.X, LocalEnvelope.X, GlobalEnvelope.X, ylab="Kd", Legend=TRUE, LegendItems=c("M", "Local CI", "Global CI"), LegendPosition="bottomright")
+PlotResults(r, ActualValues.X, LocalEnvelope.X, GlobalEnvelope.X, ylab="Kd", Legend=TRUE, 
+    LegendItems=c("M", "Local CI", "Global CI"), LegendPosition="bottomright")
 
 }

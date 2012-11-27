@@ -1,10 +1,10 @@
 \name{L.r}
 \alias{L.r}
 \title{
-  Estimation of the L function
+  Estimation of the \emph{L} function
 }
 \description{
-  Estimates the L function
+  Estimates the \emph{L} function
 }
 \usage{
 L.r(X, r, ReferenceType = "", NeighborType = "")
@@ -26,19 +26,19 @@ L.r(X, r, ReferenceType = "", NeighborType = "")
   }
 }
 \details{
-	L is the normalized version of K: L = sqrt(K/pi)-r
+	\emph{L} is the normalized version of \emph{K}: \eqn{L(r)=\sqrt{\frac{K}{\pi}}-r}.
 }
 \value{
-	A vector containing L(r) values.
+	A vector containing \emph{L(r)} values.
 }
 \references{
-	Besag, J. E. (1977). Comments on Ripley's paper. Journal of the Royal Statistical Society B 39(2): 193-195.
+	Besag, J. E. (1977). Comments on Ripley's paper. \emph{Journal of the Royal Statistical Society B} 39(2): 193-195.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
 }
 \note{
-	L was originally defined as L = sqrt(K/pi). It has been used as L = sqrt(K/pi)-r in a part of the literature because this normalization is easier to plot.
+	\emph{L} was originally defined as \eqn{L(r)=\sqrt{\frac{K}{\pi}}}. It has been used as \eqn{L(r)=\sqrt{\frac{K}{\pi}}-r} in a part of the literature because this normalization is easier to plot.
 }
 
 \seealso{

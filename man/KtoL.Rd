@@ -1,10 +1,10 @@
 \name{KtoL}
 \alias{KtoL}
 \title{
-	Nomalization of K-like functions into L-like functions
+	Nomalization of \emph{K}-like functions into \emph{L}-like functions
 }
 \description{
-  This function is used internally to transform K into L.
+  This function is used internally to transform \emph{K} into \emph{L}.
 }
 \usage{
 KtoL(Value, r)

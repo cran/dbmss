@@ -1,7 +1,7 @@
 \name{SimulateKmm}
 \alias{SimulateKmm}
 \title{
-	Simulations of point patterns to obtain values of Kmm under the null hypothesis
+	Simulations of point patterns to obtain values of \emph{Kmm} under the null hypothesis
 }
 \description{
 	This function is used internally by \code{\link{KmmEnvelope}} to fill the simulation matrix.
@@ -24,7 +24,7 @@ SimulateKmm(X, r, ReferenceType = "")
 }
 
 \value{
-	A vector containing simulated Kmm(r) values.
+	A vector containing simulated \emph{Kmm(r)} values.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>

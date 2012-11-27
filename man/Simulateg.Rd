@@ -1,7 +1,7 @@
 \name{Simulateg}
 \alias{Simulateg}
 \title{
-	Simulations of point patterns to obtain values of g under the null hypothesis
+	Simulations of point patterns to obtain values of \emph{g} under the null hypothesis
 }
 \description{
 	This function is used internally by \code{\link{gEnvelope}} to fill the simulation matrix.
@@ -25,12 +25,12 @@
 	One of the point types.
   }
   \item{SimulationType}{
-	A string describing the null hypothesis to simulate. The null hypothesis may be "RandomPosition": points are drawn in a Poisson process; "RandomLabeling": randomizes point types, keeping locations unchanged; "PopulationIndependence": keeps reference points unchanged, randomizes other point locations.
+	A string describing the null hypothesis to simulate. The null hypothesis may be "\emph{RandomPosition}": points are drawn in a Poisson process; "\emph{RandomLabeling}": randomizes point types, keeping locations unchanged; "\emph{PopulationIndependence}": keeps reference points unchanged, randomizes other point locations.
   }
 }
 
 \value{
-	A vector containing simulated g(r) values.
+	A vector containing simulated \emph{g(r)} values.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>

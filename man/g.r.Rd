@@ -1,10 +1,10 @@
 \name{g.r}
 \alias{g.r}
 \title{
-  Estimation of the g function
+  Estimation of the \emph{g} function
 }
 \description{
-	Estimates the g function
+	Estimates the \emph{g} function
 }
 \usage{
 g.r(X, r, ReferenceType = "", NeighborType = "")
@@ -26,20 +26,20 @@ g.r(X, r, ReferenceType = "", NeighborType = "")
   }
 }
 \details{
-	The computation of g.r() relies on spatstat function markcorrint.
+	The computation of \code{g.r} relies on spatstat function \code{\link{sewpcf}}.
 }
 \value{
-	A vector containing K(r) values.
+	A vector containing \emph{g(r)} values.
 }
 \references{
-	Stoyan, D. and Stoyan, H. (1994) Fractals, random shapes and point fields: methods of geometrical statistics. John Wiley and Sons. 
+	Stoyan, D. and Stoyan, H. (1994) \emph{Fractals, random shapes and point fields: methods of geometrical statistics}. John Wiley and Sons. 
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
 }
 
 \seealso{
-	\code{\link{gEnvelope}}, \code{\link{pcf}}
+	\code{\link{gEnvelope}}
 }
 \examples{
 

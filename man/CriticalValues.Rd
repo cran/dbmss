@@ -1,10 +1,10 @@
 \name{CriticalValues}
 \alias{CriticalValues}
 \title{
-	Calcultate the critical values of a column of a matrix
+	Calculate the critical values of a column of a matrix
 }
 \description{
-	This function is used internally to apply quatiles() to each column of a matrix of simulations.
+	This function is used internally to apply \code{\link{quantile}} to each column of a matrix of simulations.
 }
 \usage{
 CriticalValues(rNumber, Simulations, Alpha)
@@ -21,13 +21,13 @@ CriticalValues(rNumber, Simulations, Alpha)
  }
 }
 \value{
-	A vector of length 2 containg the Aplha/2 and 1-Alpha/2 quantiles.
+	A vector of length 2 containg the \eqn{Alpha/2} and \eqn{1-Alpha/2} quantiles.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
 }
 \note{
-	This function allows applying the quantile() function to a matrix.
+	This function allows applying the \code{\link{quantile}} function to a matrix.
 }
 
 \keyword{internal}

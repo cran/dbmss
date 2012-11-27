@@ -1,10 +1,10 @@
 \name{DivideByPiR2}
 \alias{DivideByPiR2}
 \title{
-	Divides a value by pi R^2
+	Divides a value by \eqn{\pi R^2}
 }
 \description{
-  This function is designed to simplify plotting K and similar functions dividing their values by  pi R^2
+  This function is designed to simplify plotting \emph{K} and similar functions dividing their values by \eqn{\pi R^2}.
 }
 \usage{
 DivideByPiR2(Value, r)
@@ -21,11 +21,11 @@ DivideByPiR2(Value, r)
   A vector of values.
 }
 \details{
-  The classical normalization (Besag, 1977) of K(r) is L(r)=sqrt(K/pi). The normalization by pi R^2 is advocated by Marcon and Puech (2012) to allow the unification of distance-based measures of spatial structures.
+  The classical normalization (Besag, 1977) of \emph{K(r)} is \eqn{L(r)=\sqrt{\frac{K}{\pi}}}. The normalization by \eqn{\pi R^2} is advocated by Marcon and Puech (2012) to allow the unification of distance-based measures of spatial structures.
 }
 \references{
- 	Besag, J. E. (1977). Comments on Ripley's paper. Journal of the Royal Statistical Society B 39(2): 193-195.\cr
-	Marcon, E. and F. Puech (2012). A typology of distance-based measures of spatial concentration. HAL SHS. 00679993.
+ 	Besag, J. E. (1977). Comments on Ripley's paper. \emph{Journal of the Royal Statistical Society B} 39(2): 193-195.\cr
+	Marcon, E. and F. Puech (2012). A typology of distance-based measures of spatial concentration. \emph{HAL SHS}. 00679993.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
@@ -50,6 +50,7 @@ Alpha <- .10
 LocalEnvelope.X <- KEnvelope(NumberOfSimulations, Alpha, X, r)
 
 # Plot
-PlotResults(r, DivideByPiR2(ActualValues.X, r), lapply(LocalEnvelope.X, DivideByPiR2, r), ylab="K / (pi R^2)", ReferenceValue=1)
+PlotResults(r, DivideByPiR2(ActualValues.X, r), lapply(LocalEnvelope.X, DivideByPiR2, r), 
+    ylab="K / (pi R^2)", ReferenceValue=1)
 
 }

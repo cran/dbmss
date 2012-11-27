@@ -1,7 +1,7 @@
 \name{SimulateKinhom}
 \alias{SimulateKinhom}
 \title{
-	Simulations of point patterns to obtain values of Kinhom under the null hypothesis
+	Simulations of point patterns to obtain values of \emph{Kinhom} under the null hypothesis
 }
 \description{
 	This function is used internally by \code{\link{KinhomEnvelope}} to fill the simulation matrix.
@@ -23,8 +23,8 @@ SimulateKinhom(X, r, ReferenceType, SimulationType="RandomPosition", lambda)
   }
   \item{SimulationType}{
 	A string describing the null hypothesis to simulate. The null hypothesis, may be 
-	"RandomPosition": points are drawn in an inhomogenous Poisson process (intensity is either lambda or estimated from X); 
-	"RandomLocation": points are redistributed accross actual locations.
+	"\emph{RandomPosition}": points are drawn in an inhomogenous Poisson process (intensity is either \code{lambda} or estimated from \code{X}); 
+	"\emph{RandomLocation}": points are redistributed accross actual locations.
   }
   \item{lambda}{
 	An estimation of the point pattern density, obtained by the \code{\link{density.ppp}} function.
@@ -32,7 +32,7 @@ SimulateKinhom(X, r, ReferenceType, SimulationType="RandomPosition", lambda)
 }
 
 \value{
-	A vector containing simulated Kinhom(r) values.
+	A vector containing simulated \emph{Kinhom(r)} values.
 }
 \author{
 	Eric Marcon <Eric.Marcon@ecofog.gf>
