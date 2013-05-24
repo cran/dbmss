@@ -1,9 +1,32 @@
 KdEnvelope <-
-function(NumberOfSimulations, Alpha, X, r, ReferenceType, NeighborType, Weighted=FALSE, SimulationType = "RandomLocation") {
-  # Compute simulations
-  KdSims <- t(replicate(NumberOfSimulations, SimulateKd(X, r, ReferenceType, NeighborType, Weighted, SimulationType)))
-  # Compute the confidence envelope
-  Envelope <- sapply(1:length(r), CriticalValues, KdSims, Alpha)
-  # Return the simulations and the envelope
-  return(list(Simulations=KdSims, Min=Envelope[1, ], Max=Envelope[2, ]))
+function(X, r, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, NeighborType = ReferenceType, 
+         Weighted = FALSE, Original = TRUE, SimulationType = "RandomLocation", Global = FALSE) {
+
+  CheckdbmssArguments()
+  
+  # Choose the null hypothesis
+  SimulatedPP <- switch (SimulationType,
+                         RandomLocation = expression(rRandomLocation(X, CheckArguments = FALSE)),
+                         RandomLabeling = expression(rRandomLabelingM(X, CheckArguments = FALSE)),
+                         PopulationIndependence = expression(rPopulationIndependenceM(X, ReferenceType, CheckArguments = FALSE))
+                         )
+  if (is.null(SimulatedPP))
+    stop(paste("The null hypothesis", sQuote(SimulationType), "has not been recognized."))
+  # local envelope, keep extreme values for lo and hi (nrank=1)
+  Envelope <- envelope(X, fun=Kdhat, nsim=NumberOfSimulations, nrank=1,
+                       r=r, ReferenceType=ReferenceType, NeighborType=NeighborType, Weighted=Weighted, Original=Original,
+                       CheckArguments = FALSE,
+                       simulate=SimulatedPP, savefuns=TRUE
+                       )
+  attr(Envelope, "einfo")$H0 <- switch (SimulationType,
+                                        RandomLocation = "Random Location",
+                                        RandomLabeling = "Random Labeling",
+                                        PopulationIndependence = "PopulationIndependence"
+                                        )
+  # Calculate confidence intervals
+  Envelope <- FillEnveloppe(Envelope, Alpha, Global)
+  # No edge effect correction
+  attr(Envelope, "einfo")$valname <- NULL
+  # Return the envelope
+  return (Envelope)
 }

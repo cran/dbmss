@@ -1,0 +1,67 @@
+	CHANGES IN dbmss VERSION 2.0.0
+	==============================
+
+OVERVIEW 
+
+	o Most code rewritten.
+	
+SIGNIFICANT USER-VISIBLE CHANGES
+
+	o Names of functions X.r became Xhat.
+	o Point patterns are now of class wmppp.
+	o Results are of class fv, envelopes of class envelope.
+
+	
+	CHANGES IN dbmss VERSION 1.2.5
+	==============================
+
+OVERVIEW 
+
+	o NEWS file added.
+	
+
+
+	CHANGES IN dbmss VERSION 1.2.4
+	==============================
+	
+OVERVIEW 
+
+	o Documentation format improved.
+
+ 
+SIGNIFICANT USER-VISIBLE CHANGES
+
+	o The default behavior of Kd is that of Duranton and Overman (2005). An optional parameter is added to used improved bandwith selection.
+
+ 
+BUG FIXES
+
+	o The density estimation of Kd was run twice.
+	Fixed.
+
+
+
+	CHANGES IN dbmss VERSION 1.2.3
+	==============================
+	
+OVERVIEW 
+
+	o First version on CRAN. Versions 1.2.2 and 1.2.3 contain faster examples to follow CRAN requirements.
+
+   
+
+	CHANGES IN dbmss VERSION 1.2.1
+	==============================
+	
+OVERVIEW 
+
+	o Kinhom function added.
+
+
+
+    CHANGES IN dbmss VERSION 1.1
+	============================
+	
+OVERVIEW 
+
+	o First version.

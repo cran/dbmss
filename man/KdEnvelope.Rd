@@ -1,82 +1,80 @@
 \name{KdEnvelope}
 \alias{KdEnvelope}
 \title{
-	Estimation of the confidence envelope of the \emph{Kd} function under its null hypothesis
+  Estimation of the confidence envelope of the Kd function under its null hypothesis
 }
 \description{
-	  Simulates point patterns according to the null hypothesis and returns the envelope of \emph{Kd} according to the confidence level.
+    Simulates point patterns according to the null hypothesis and returns the envelope of \emph{Kd} according to the confidence level.
 }
 \usage{
-KdEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType, NeighborType, 
-    Weighted = FALSE, SimulationType = "RandomLocation")
+KdEnvelope(X, r, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, 
+           NeighborType = ReferenceType, Weighted = FALSE, Original = TRUE, 
+           SimulationType = "RandomLocation", Global = FALSE)
 }
 \arguments{
-  \item{NumberOfSimulations}{
-	The number of simulations to run.
-  }
-  \item{Alpha}{
-	The risk level.
-  }
   \item{X}{
-  A point pattern (\code{\link{ppp.object}}), marks must be a dataframe with two columns:\cr
-    \code{PointType}: labels, as factors.\cr
-    \code{PointWeight}: weights.
+    A point pattern (\code{\link{wmppp.object}}).
   }
   \item{r}{
-	A vector of distances.
- }
+    A vector of distances. No default value is available.
+  }
+  \item{NumberOfSimulations}{
+    The number of simulations to run.
+  }
+  \item{Alpha}{
+    The risk level.
+  }
   \item{ReferenceType}{
-	One of the point types.
+    One of the point types. By default, the same as reference type.
   }
   \item{NeighborType}{
-	One of the point types.
+    One of the point types.
   }
   \item{Weighted}{
-	Logical; if \code{TRUE}, estimates the \emph{Kemp} function.
+    Logical; if \code{TRUE}, estimates the \emph{Kemp} function.
+  }
+  \item{Original}{
+    Logical; if \code{TRUE} (by default), the original bandwidth selection by Duranton and Overman (2005) following Silverman (2006: eq 3.31) is used. If \code{FALSE}, it is calculated following Sheather and Jones (1991), \emph{i.e.} the state of the art. See \code{\link{bw.SJ}} for more details.
   }
   \item{SimulationType}{
-	A string describing the null hypothesis to simulate. The null hypothesis may be "\emph{RandomLocation}": points are redistributed on the actual locations; "\emph{RandomLabeling}": randomizes point types, keeping locations and weights unchanged; "\emph{PopulationIndependence}": keeps reference points unchanged, randomizes other point locations.
+    A string describing the null hypothesis to simulate. The null hypothesis may be
+    "\emph{RandomLocation}": points are redistributed on the actual locations;
+    "\emph{RandomLabeling}": randomizes point types, keeping locations and weights unchanged;
+    "\emph{PopulationIndependence}": keeps reference points unchanged, randomizes other point locations.
+  }
+  \item{Global}{
+    Logical; if \code{TRUE}, a global envelope sensu Duranton and Overman (2005) is calculated. 
   }
 }
 \details{
-	This envelope is local, that is to say it is computed separately at each distance. See Loosmore and Ford (2006) for a discussion.
+  This envelope is local by default, that is to say it is computed separately at each distance. See Loosmore and Ford (2006) for a discussion.\cr
+  The global enveloppe is calculated by iteration: the simulations reaching one of the upper or lower values at any distance are eliminated at each step. The process is repeated until \emph{Alpha / Number of simulations} simulations are dropped. The remaining upper and lower bounds at all distances constitute the global envelope. Interpolation is used if the exact ratio cannot be reached.
 }
 \value{
-A list:
-	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of \emph{Kd(R)}}
-	\item{Min}{A vector: the lower bound of the envelope}
-	\item{Max}{A vector: the upper bound of the envelope}
+  An envelope object (\code{\link{envelope}}). There are methods for print and plot for this class.\cr
+  The \code{fv} contains the observed value of the function, its average simulated value and the confidence enveloppe.
 }
 \references{
-	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. \emph{Ecology} 69(4): 1017-1024.\cr
-	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.
+  Duranton, G. and Overman, H. G. (2005). Testing for Localisation Using Micro-Geographic Data. \emph{Review of Economic Studies} 72(4): 1077-1106.\cr
+  Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. \emph{Ecology} 69(4): 1017-1024.\cr
+  Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.\cr
+  Marcon, E. and F. Puech (2012). A typology of distance-based measures of spatial concentration. \emph{HAL SHS}. 00679993.\cr
+  Silverman, B. W. (1986). \emph{Density estimation for statistics and data analysis}. Chapman and Hall, London.
+
 }
 \author{
-	Eric Marcon <Eric.Marcon@ecofog.gf>
+  Eric Marcon <Eric.Marcon@ecofog.gf>
 }
 \seealso{
-	\code{\link{Kd.r}}
+  \code{\link{Kdhat}}
 }
 
 \examples{
 
 data(paracou16)
-# Keep only 50% of points to run this example
-X <- rthin(paracou16, 0.5)
-plot(X)
+plot(paracou16[paracou16$marks$PointType=="Q. Rosea"])
 
-# Calculate Kd
+# Calculate confidence envelope
 r <- 0:100
-ActualValues.X <- Kd.r(X, r, "Q. Rosea", "Q. Rosea")
-
-# Calculate confidence envelope (should be 1000 simulations, reduced to 20 to save time)
-NumberOfSimulations <- 20
-Alpha <- .20
-LocalEnvelope.X <- KdEnvelope(NumberOfSimulations, Alpha, X, r, "Q. Rosea", "Q. Rosea")
-GlobalEnvelope.X <- GlobalEnvelope(LocalEnvelope.X$Simulations, Alpha)
-
-# Plot
-PlotResults(r, ActualValues.X, LocalEnvelope.X, GlobalEnvelope.X, ylab="Kd", Legend=TRUE, 
-    LegendItems=c("M", "Local CI", "Global CI"), LegendPosition="bottomright")
-
+plot(KdEnvelope(paracou16, r, ReferenceType="Q. Rosea", Global=TRUE))
 }

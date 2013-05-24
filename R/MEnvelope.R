@@ -1,13 +1,32 @@
 MEnvelope <-
-function(NumberOfSimulations, Alpha = .05, X, r, ReferenceType, NeighborType, SimulationType = "RandomLocation", CaseControl=FALSE) {
-  # Warning for erroneous configurations
-  if (CaseControl & (SimulationType != "RandomLocation")) {
-    warning(paste("The null hypothesis for case-control M should be RandomLocation. The argument used is", SimulationType))
-  }
-  # Compute simulations
-  Msims <- t(replicate(NumberOfSimulations, SimulateM(X, r, ReferenceType, NeighborType, SimulationType, CaseControl)))
-  # Compute the local confidence envelope
-  Envelope <- sapply(1:length(r), CriticalValues, Msims, Alpha)
-  # Return the simulations and the envelope
-  return(list(Simulations=Msims, Min=Envelope[1, ], Max=Envelope[2, ]))
+function(X, r, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, NeighborType, 
+         CaseControl = FALSE, SimulationType = "RandomLocation", Global = FALSE) {
+
+  CheckdbmssArguments()
+    
+  # Choose the null hypothesis
+  SimulatedPP <- switch (SimulationType,
+                         RandomLocation = expression(rRandomLocation(X, CheckArguments = FALSE)),
+                         RandomLabeling = expression(rRandomLabelingM(X, CheckArguments = FALSE)),
+                         PopulationIndependence = expression(rPopulationIndependenceM(X, ReferenceType, CheckArguments = FALSE))
+                         )
+  if (is.null(SimulatedPP))
+    stop(paste("The null hypothesis", sQuote(SimulationType), "has not been recognized."))
+  # local envelope, keep extreme values for lo and hi (nrank=1)
+  Envelope <- envelope(X, fun=Mhat, nsim=NumberOfSimulations, nrank=1,
+                       r=r, ReferenceType=ReferenceType, NeighborType=NeighborType, CaseControl=CaseControl, 
+                       CheckArguments = FALSE,
+                       simulate=SimulatedPP, savefuns=TRUE
+                       )
+  attr(Envelope, "einfo")$H0 <- switch (SimulationType,
+                                        RandomLocation = "Random Location",
+                                        RandomLabeling = "Random Labeling",
+                                        PopulationIndependence = "PopulationIndependence"
+                                        )
+  # Calculate confidence intervals
+  Envelope <- FillEnveloppe(Envelope, Alpha, Global)
+  # No edge effect correction
+  attr(Envelope, "einfo")$valname <- NULL
+  # Return the envelope
+  return (Envelope)
 }

@@ -7,30 +7,31 @@
   Tests the point pattern against CSR using values of the \emph{K} function
 }
 \usage{
-  Ktest(X, r)
+Ktest(X, r)
 }
 \arguments{
   \item{X}{
-  A point pattern (\code{\link{ppp.object}}). Marks are ignored. The window must be a rectangle sensu spatstat (tested by \code{\link{is.rectangle}}).
-}
+    A point pattern (\code{\link{ppp.object}}). Marks are ignored. The window must be a rectangle sensu spatstat (tested by \code{\link{is.rectangle}}).
+  }
   \item{r}{
-	A vector of distances.
-}
+    A vector of distances.
+  }
 }
 \details{
-	The test returns the risk to reject CSR erroneously, based on the distribution of the \emph{K} function.
+  The test returns the risk to reject CSR erroneously, based on the distribution of the \emph{K} function.
 }
 \value{
-	A p-value.
+  A p-value.
 }
 \references{
-	Lang, G. and Marcon, E. (2010). Testing randomness of spatial point patterns with the Ripley statistic. \emph{ArXiv e-prints} 1006.1567.
+  Lang, G. and Marcon, E. (in press). Testing randomness of spatial point patterns with the Ripley statistic. \emph{ESAIM: Probability and Statistics.}\cr
+  Marcon, E., S. Traissac, and Lang, G. (2013). A Statistical Test for Ripley's Function Rejection of Poisson Null Hypothesis. \emph{ISRN Ecology} 2013(Article ID 753475): 9.
 }
 \author{
-	Gabriel Lang <Gabriel.Lang@agroparistech.fr>
+  Gabriel Lang <Gabriel.Lang@agroparistech.fr>
 }
 \seealso{
-	\code{\link{K.r}}, \code{\link{GoFtest}}
+  \code{\link{Khat}}, \code{\link{GoFtest}}
 }
 \examples{
 

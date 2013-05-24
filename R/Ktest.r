@@ -1,9 +1,20 @@
 Ktest <- function(X, r)
 {
 
+  # Verify X
+  if (!inherits(X, "ppp"))
+    stop("X is not of class ppp") 
+  # Verify r
+  if (!is.numeric(r) && !is.vector(r)) 
+    stop("r must be a numeric vector")
+  if (length(r) < 2) 
+    stop(paste("r has length", length(r), "- must be at least 2"))
+  if (any(diff(r) <= 0)) 
+    stop("successive values of r must be increasing")  
+  
   # Utilities
   #-------------------------------------------------------------------------------
-  # ern : Probability for a point to be in another's neighborhood.(pi * r² / n² corrected from edge effects)
+  # ern : Probability for a point to be in another's neighborhood.(pi * r? / n? corrected from edge effects)
   ern <- function(r, w, l)
   {
     return(r*r/w/l*(pi-4*r/3*(1/w+1/l)+r*r/2/w/l))
@@ -15,20 +26,20 @@ Ktest <- function(X, r)
     return(w*l*ern(r,w,l))
   }
   #-------------------------------------------------------------------------------
-  # espKi : Expectation of K, when density is unknown. rho n² is estimated by the number of points (lambda).
+  # espKi : Expectation of K, when density is unknown. rho n? is estimated by the number of points (lambda).
   #        Difference between espKi and espKc goes to 0 when points are more than 20.
   espKi <- function(r, N, w, l)
   {
     return(espKc(r, w, l)*(1-(1+N)*exp(-N)))
   }
   #-------------------------------------------------------------------------------
-  # eh : Expectation of h1²(U, r)
+  # eh : Expectation of h1?(U, r)
   eh <- function(r, w, l)
   {
     return(r^5*(w+l)/2/w^3/l^3*(8*pi/3-256/45) +r^6/w^3/l^3*(11*pi/48+8/9-16/9*(w+l)*(w+l)/w/l) +4/3*r^7*(w+l)/w^4/l^4 -r^8/4/w^4/l^4)
   }
   # ------------------------------------------------------------------------------
-  # sigmaKi : Variance matrix for the estimator of K (unknown rho), normalized by multiplication by par n²rho
+  # sigmaKi : Variance matrix for the estimator of K (unknown rho), normalized by multiplication by par n?rho
   # vec     : Vector of distances to compute K (example : c(1, 2) to calculate K(1) and K(2)
   # N       : number of points
   # w       : width of the rectangle window

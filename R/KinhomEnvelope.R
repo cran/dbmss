@@ -1,5 +1,9 @@
 KinhomEnvelope <-
-function(NumberOfSimulations, Alpha, X, r, ReferenceType="", SimulationType="RandomPosition", lambda=NULL) {
+function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, 
+         ReferenceType = "", lambda = NULL, SimulationType = "RandomPosition", Global = FALSE) {
+
+  CheckdbmssArguments()
+  
   # Estimate intensity if it has not been provided.
   if (is.null(lambda)) {
     if (ReferenceType == "") {
@@ -9,10 +13,28 @@ function(NumberOfSimulations, Alpha, X, r, ReferenceType="", SimulationType="Ran
     }
     lambda <- density.ppp(X.reduced, sigma=bw.diggle(X.reduced))
   }
-  # Compute simulations 
-  KinhomSims <- t(replicate(NumberOfSimulations, SimulateKinhom(X, r, ReferenceType, SimulationType, lambda)))
-  # Compute the confidence envelope
-  Envelope <- sapply(1:length(r), CriticalValues, KinhomSims, Alpha)
-  # Return the simulations and the envelope
-  return(list(Simulations=KinhomSims, Min=Envelope[1, ], Max=Envelope[2, ]))
+  
+  # Choose the null hypothesis
+  SimulatedPP <- switch (SimulationType,
+                         RandomPosition = expression(rpoispp(lambda)),
+                         RandomLocation = expression(rRandomLocation(X, CheckArguments = FALSE)),
+                         RandomLabeling = expression(rRandomLabeling(X, CheckArguments = FALSE)),
+                         PopulationIndependence = expression(rPopulationIndependenceM(X, ReferenceType = ReferenceType, CheckArguments = FALSE))
+                         )
+  if (is.null(SimulatedPP))
+    stop(paste("The null hypothesis", sQuote(SimulationType), "has not been recognized."))
+  # local envelope, keep extreme values for lo and hi (nrank=1)
+  Envelope <- envelope(X, fun=Kinhomhat, nsim=NumberOfSimulations, nrank=1,
+                       r=r, ReferenceType=ReferenceType, lambda=lambda, 
+                       CheckArguments = FALSE,
+                       simulate=SimulatedPP, savefuns=TRUE
+                       )
+  attr(Envelope, "einfo")$H0 <- switch (SimulationType,
+                                        RandomPosition = "Random Position",
+                                        RandomLocation = "Random Location",
+                                        )
+  # Calculate confidence intervals
+  Envelope <- FillEnveloppe(Envelope, Alpha, Global)
+  # Return the envelope
+  return (Envelope)
 }

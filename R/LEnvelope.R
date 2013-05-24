@@ -1,5 +1,16 @@
 LEnvelope <-
-function(NumberOfSimulations, Alpha, X, r, ReferenceType="", NeighborType="", SimulationType="RandomPosition") {
-  Envelope <- KEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType, NeighborType, SimulationType)
-  return(lapply(Envelope, KtoL, r))
+function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, 
+         ReferenceType = "", NeighborType = "", SimulationType = "RandomPosition", Global = FALSE) {
+  
+  # Calculate the envelope of K
+  Envelope <- KEnvelope(X, r, NumberOfSimulations, Alpha, ReferenceType, NeighborType, SimulationType, Global)
+  # Transform K to L
+  Columns <- names(Envelope)[-1]
+  for(i in Columns) {
+    Envelope[[i]] <- sqrt(Envelope[[i]]/pi)-Envelope$r
+  }
+  attr(Envelope, "ylab") <- "L(r)"
+  attr(Envelope, "yexp") <- "L(r)"
+  attr(Envelope, "fname") <- "L"
+  return (Envelope)
 }

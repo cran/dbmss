@@ -1,79 +1,73 @@
 \name{gEnvelope}
 \alias{gEnvelope}
 \title{
-	Estimation of the confidence envelope of the \emph{g} function under its null hypothesis
+  Estimation of the confidence envelope of the g function under its null hypothesis
 }
 \description{
-	  Simulates point patterns according to the null hypothesis and returns the envelope of \emph{g} according to the confidence level.
+    Simulates point patterns according to the null hypothesis and returns the envelope of \emph{g} according to the confidence level.
 }
 \usage{
-gEnvelope(NumberOfSimulations, Alpha, X, r, ReferenceType = "", 
-    NeighborType = "", SimulationType = "RandomPosition")
+gEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, 
+         ReferenceType = "", NeighborType = "", SimulationType = "RandomPosition",
+         Global = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{NumberOfSimulations}{
-	The number of simulations to run.
-  }
-  \item{Alpha}{
-	The risk level.
-  }
   \item{X}{
-  A point pattern (\code{\link{ppp.object}}), marks must be a dataframe with two columns:\cr
-    \code{PointType}: labels, as factors.\cr
-    \code{PointWeight}: weights.
+    A point pattern (\code{\link{wmppp.object}}).
   }
   \item{r}{
-	A vector of distances.
- }
+    A vector of distances. If \code{NULL}, a sensible default value is chosen (512 intervals, from 0 to half the diameter of the window) following \code{\link{spatstat}}.
+  }
+  \item{NumberOfSimulations}{
+    The number of simulations to run.
+  }
+  \item{Alpha}{
+    The risk level.
+  }
   \item{ReferenceType}{
-	One of the point types. Default is all point types.
+    One of the point types. Default is all point types.
   }
   \item{NeighborType}{
-	One of the point types. Default is all point types.
+    One of the point types. Default is all point types.
   }
   \item{SimulationType}{
-	A string describing the null hypothesis to simulate. The null hypothesis may be "\emph{RandomPosition}": points are drawn in a Poisson process; "\emph{RandomLabeling}": randomizes point types, keeping locations unchanged; "\emph{PopulationIndependence}": keeps reference points unchanged, randomizes other point locations.
+    A string describing the null hypothesis to simulate. The null hypothesis may be "\emph{RandomPosition}": points are drawn in a Poisson process; "\emph{RandomLabeling}": randomizes point types, keeping locations unchanged; "\emph{PopulationIndependence}": keeps reference points unchanged, shifts other point locations.
+  }
+  \item{Global}{
+    Logical; if \code{TRUE}, a global envelope sensu Duranton and Overman (2005) is calculated. 
   }
 }
 \details{
-	This envelope is local, that is to say it is computed separately at each distance. See Loosmore and Ford (2006) for a discussion.
+  This envelope is local by default, that is to say it is computed separately at each distance. See Loosmore and Ford (2006) for a discussion.\cr
+  The global enveloppe is calculated by iteration: the simulations reaching one of the upper or lower values at any distance are eliminated at each step. The process is repeated until \emph{Alpha / Number of simulations} simulations are dropped. The remaining upper and lower bounds at all distances constitute the global envelope. Interpolation is used if the exact ratio cannot be reached.
 }
 \value{
-A list:
-	\item{Simulations}{A matrix containing the simulated values (each line is a simulation, each column a value of \emph{g(R)}}
-	\item{Min}{A vector: the lower bound of the envelope}
-	\item{Max}{A vector: the upper bound of the envelope}
+  An envelope object (\code{\link{envelope}}). There are methods for print and plot for this class.\cr
+  The \code{fv} contains the observed value of the function, its average simulated value and the confidence enveloppe.
 }
 \references{
-	Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. \emph{Ecology} 69(4): 1017-1024.\cr
-	Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.
+  Duranton, G. and Overman, H. G. (2005). Testing for Localisation Using Micro-Geographic Data. \emph{Review of Economic Studies} 72(4): 1077-1106.\cr
+  Kenkel, N. C. (1988). Pattern of Self-Thinning in Jack Pine: Testing the Random Mortality Hypothesis. \emph{Ecology} 69(4): 1017-1024.\cr
+  Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.\cr
+  Marcon, E. and F. Puech (2012). A typology of distance-based measures of spatial concentration. \emph{HAL SHS}. 00679993.
 }
 \author{
-	Eric Marcon <Eric.Marcon@ecofog.gf>
+  Eric Marcon <Eric.Marcon@ecofog.gf>
 }
 \seealso{
-	\code{\link{g.r}}
+  \code{\link{ghat}}, \code{\link{rRandomPositionK}}, \code{\link{rRandomLocation}}, \code{\link{rPopulationIndependenceK}}
 }
 
 \examples{
 
 data(paracou16)
-# Keep only 50% of points to run this example
-X <- rthin(paracou16, 0.5)
+# Keep only 20% of points to run this example
+X <- as.wmppp(rthin(paracou16, 0.2))
 plot(X)
 
-# Calculate g
+# Calculate confidence envelope (should be 1000 simulations, reduced to 10 to save time)
 r <- 0:40
-ActualValues.X <- g.r(X, r, "Q. Rosea", "V. Americana")
-
-# Calculate confidence envelope (should be 1000 simulations, reduced to 4 to save time)
-NumberOfSimulations <- 4
-Alpha <- .10
-LocalEnvelope.X <- gEnvelope(NumberOfSimulations, Alpha, X, r, 
-    "Q. Rosea", "V. Americana", SimulationType="RandomLabeling")
-
-# Plot
-PlotResults(r, ActualValues.X, LocalEnvelope.X, ylab="g", ReferenceValue=1)
-
+NumberOfSimulations <- 10
+# Plot the envelope
+plot(gEnvelope(X, r, NumberOfSimulations))
 }
