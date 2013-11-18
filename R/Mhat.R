@@ -55,7 +55,7 @@ function(X, r, ReferenceType, NeighborType, CaseControl = FALSE, CheckArguments 
     return(sum(LocalRatio[is.finite(LocalRatio)])/sum(GlobalRatio[is.finite(LocalRatio)]))
   }
     
-  # Build a dataframe with r, theorethical value = 1, and M(r)
+  # Build a dataframe with r, theoretical value = 1, and M(r)
   MEstimate <- data.frame(r, rep(1, length(r)), sapply(r*r, M.distance))
   colnames(MEstimate) <- c("r", "theo", "M")
   

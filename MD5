@@ -1,6 +1,6 @@
-6958762dcc85a8bc07079ad4da9dc66f *DESCRIPTION
+3c13efe055267ee2acf2d02d38e52e25 *DESCRIPTION
 df390c53434517b304ac5db487184641 *NAMESPACE
-ba46d40e35017c797011e800e38779de *NEWS
+b5a92cb3e28b52fac408aec4f3d454dc *NEWS
 cf4f420e66e6e6f6867f5d2953ad75e5 *R/CheckdbmssArguments.R
 bd7f78fc8c236805d9040e754027fd3f *R/DEnvelope.R
 d6392e2783bf7a1be4ed7d8d87944632 *R/Dhat.R
@@ -9,7 +9,7 @@ f2d32b51302e95759fddea560ef2bda7 *R/GlobalEnvelope.R
 8e8bec51a9e6d27858d6120f3686eb35 *R/GoFtest.R
 060cd7319d3b16076b98dbf78e9dee47 *R/KEnvelope.R
 a2081f6c92ce3607304e892930a07ba6 *R/KdEnvelope.R
-63ea11afff12bed438448f3ac6c33433 *R/Kdhat.R
+ed188e1b7daeaf12cc7e4973b0d1298c *R/Kdhat.R
 a9fda126b0ecc61ecca9b4a859375b3c *R/Khat.R
 d5996c67b7f11666185acd7a5c96c622 *R/KinhomEnvelope.R
 3f1a5a8f66b89ef3ca53602dd09cff8b *R/Kinhomhat.R
@@ -21,7 +21,7 @@ fefb0fc951ec1a83e44c874677255a25 *R/LEnvelope.R
 02ae2c77f334952c80e088cd72d35a54 *R/LmmEnvelope.R
 4b0a575a97eea888d55f1be22abc8311 *R/Lmmhat.R
 b567b756c23c5f295c73a990e34b7e91 *R/MEnvelope.R
-a37ac1980779efece093e96b07b7a0c3 *R/Mhat.R
+7fbd480cd7ccdec7447a7856713c1693 *R/Mhat.R
 564f837c9ed2710a7ce961ab47cebe1e *R/as.wmppp.R
 abc1da781776417eed2478891e7cfd91 *R/as.wmppp.data.frame.R
 7d5992ae3929df8a67fe03475f2aba1f *R/as.wmppp.ppp.R
@@ -60,7 +60,7 @@ ff22292bff8c5c1430cfe2a654155954 *man/LmmEnvelope.Rd
 fd51f56f1cd79ac3a2c21385d0378e95 *man/MEnvelope.Rd
 8d55aea44cf524c75340c980751237bd *man/Mhat.Rd
 a1049e26b1f6a0c1610b075da4f6a616 *man/as.wmppp.Rd
-443512fdc8b253530ea58b760e24a640 *man/dbmss-package.Rd
+1fc5a0f62228893926dfcb488acaefe5 *man/dbmss-package.Rd
 74db9bf29193aaf7be755a7afa95db70 *man/dbmssEnvelope.Rd
 0b425ba23f4ff3005b15a73dc751c57c *man/gEnvelope.Rd
 00b8fcc24ec359b5ec629c4c30514ca0 *man/ghat.Rd

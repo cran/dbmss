@@ -30,7 +30,13 @@ function(X, r, ReferenceType, NeighborType = ReferenceType, Weighted = FALSE, Or
   if (Weighted) {
     Weights <- matrix(rep(X$marks$PointWeight, each=X$n), nrow=X$n)
     Weights <- Weights[IsReferenceType, IsNeighborType]
-    Density <- density(Dist, weights=Weights/sum(Weights), from=0, na.rm=TRUE, bw=bw)
+    # Eliminate self point pair so that density works later
+    if (NeighborType == ReferenceType) {
+      diag(Weights) <- NA
+      Dist <- Dist[!is.na(Dist)]
+      Weights <- Weights[!is.na(Weights)]
+    }
+    Density <- density(Dist, weights=Weights/sum(Weights), from=0, bw=bw)
   } else {
     Density <- density(Dist, from=0, na.rm=TRUE, bw=bw)
   }  

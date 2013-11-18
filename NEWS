@@ -1,3 +1,20 @@
+	CHANGES IN dbmss VERSION 2.0.5
+	==============================
+	
+BUG FIXES
+
+	o Kdhat with Reference and Neighbor points of the same type and Weighted=TRUE returned an error.
+	Fixed.
+
+	
+	CHANGES IN dbmss VERSION 2.0.3
+	==============================
+	
+OVERVIEW
+
+	o Minor corrections, mainly comments and formating.
+
+	
 	CHANGES IN dbmss VERSION 2.0.0
 	==============================
 
@@ -19,7 +36,6 @@ OVERVIEW
 
 	o NEWS file added.
 	
-
 
 	CHANGES IN dbmss VERSION 1.2.4
 	==============================
