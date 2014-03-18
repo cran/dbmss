@@ -1,5 +1,5 @@
 Mhat <-
-function(X, r, ReferenceType, NeighborType, CaseControl = FALSE, CheckArguments = TRUE) {
+function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl = FALSE, CheckArguments = TRUE) {
   # Eliminate erroneous configurations
   if (CheckArguments) {
     CheckdbmssArguments()
@@ -9,8 +9,11 @@ function(X, r, ReferenceType, NeighborType, CaseControl = FALSE, CheckArguments 
     }
   }
   
-  # Compute the matrix of distances (squared to save time)
-  Dist <- pairdist.ppp(X, squared=TRUE)
+  # Default r values: 64 values up to half the max distance
+  if (is.null(r)) {
+    rMax <- diameter(X$window)
+    r <- rMax*c(0, 1:20, seq(22, 40, 2), seq(45, 100,5), seq(110, 200, 10), seq(220, 400, 20))/800
+  }
   
   # Vectors to recognize point types
   IsReferenceType <- X$marks$PointType==ReferenceType
@@ -31,32 +34,33 @@ function(X, r, ReferenceType, NeighborType, CaseControl = FALSE, CheckArguments 
   }
   GlobalRatio <- Wn/Wa
   
-  # M.distance calculates M at a single distance
-  M.distance <- function(distance) {
-    # Select point pairs less than r apart
-    IsCloseEnough <- (Dist <= distance)
-    # Eliminate point pairs made of a single point
-    diag(IsCloseEnough) <- FALSE
-    # Calculate the weight of neighbors
-    IsCloseEnough <- IsCloseEnough[IsReferenceType, ]
-    if (CaseControl) {
-      IsCloseEnoughAndCase <- t(t(IsCloseEnough) & IsReferenceType)
-      NeighborTypeWeight <- IsCloseEnoughAndCase %*% X$marks$PointWeight
-      IsCloseEnoughAndControl <- t(t(IsCloseEnough) & IsNeighborType)
-      AllNeighborWeight <- IsCloseEnoughAndControl %*% X$marks$PointWeight
-    } else {                                                    
-      IsCloseEnoughAndNeighborType <- t(t(IsCloseEnough) & IsNeighborType)
-      NeighborTypeWeight <- IsCloseEnoughAndNeighborType %*% X$marks$PointWeight
-      AllNeighborWeight <- IsCloseEnough %*% X$marks$PointWeight
-    }
-    # Calculate the local ratio
-    LocalRatio <- NeighborTypeWeight/AllNeighborWeight
-    # Calculate M, eliminate undefined values (no neighbor of any type)
-    return(sum(LocalRatio[is.finite(LocalRatio)])/sum(GlobalRatio[is.finite(LocalRatio)]))
+  Nr <- length(r)
+  # Neighborhoods (i.e. all neighbors of a point less than a distance apart)
+  # Prepare matrix, one line for each point, one column for each distance
+  # Store weights of neighbors of interest in first Nr columns, all points from Nr+1 to 2*Nr
+  Nbd <- matrix(0.0, nrow=X$n, ncol=2*Nr)
+  
+  # Call C routine to fill Nbd
+  if (CaseControl) {
+    CountNbdCC(r, X$x, X$y, X$marks$PointWeight, Nbd, IsReferenceType, IsNeighborType)    
+  } else {
+    CountNbd(r, X$x, X$y, X$marks$PointWeight, Nbd, IsReferenceType, IsNeighborType)
   }
-    
-  # Build a dataframe with r, theoretical value = 1, and M(r)
-  MEstimate <- data.frame(r, rep(1, length(r)), sapply(r*r, M.distance))
+  
+  # Keep the lines of the matrix corresponding to reference points (cases).
+  # Other lines are useless and have not been filled by the loops
+  NbdInt <- Nbd[IsReferenceType, 1:Nr]
+  NbdAll <- Nbd[IsReferenceType, (Nr+1):(2*Nr)]
+  # Cumulate weights up to each distance
+  NbdInt <- t(apply(NbdInt, 1, cumsum))
+  NbdAll <- t(apply(NbdAll, 1, cumsum))
+  
+  # Calulate the ratio of points of interest around each point
+  LocalRatio <- NbdInt/NbdAll
+  # Divide it by the global ratio. Ignore points with no neighbor at all.
+  Mvalues <- apply(LocalRatio, 2, function(x) sum(x[is.finite(x)])/sum(GlobalRatio[is.finite(x)]))
+  # Put the results into an fv object
+  MEstimate <- data.frame(r, rep(1, length(r)), Mvalues)
   colnames(MEstimate) <- c("r", "theo", "M")
   
   # Return the values of M(r)

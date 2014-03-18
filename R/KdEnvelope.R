@@ -1,5 +1,5 @@
 KdEnvelope <-
-function(X, r, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, NeighborType = ReferenceType, 
+function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, NeighborType = ReferenceType, 
          Weighted = FALSE, Original = TRUE, SimulationType = "RandomLocation", Global = FALSE) {
 
   CheckdbmssArguments()

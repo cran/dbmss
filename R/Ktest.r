@@ -13,8 +13,10 @@ Ktest <- function(X, r)
     stop("successive values of r must be increasing")  
   
   # Utilities
+  # r : radius
+  # w, l : width and length of the window
   #-------------------------------------------------------------------------------
-  # ern : Probability for a point to be in another's neighborhood.(pi * r? / n? corrected from edge effects)
+  # ern : Probability for a point to be in another's neighborhood.(pi * r^2 / (w*l) corrected from edge effects)
   ern <- function(r, w, l)
   {
     return(r*r/w/l*(pi-4*r/3*(1/w+1/l)+r*r/2/w/l))
@@ -26,20 +28,20 @@ Ktest <- function(X, r)
     return(w*l*ern(r,w,l))
   }
   #-------------------------------------------------------------------------------
-  # espKi : Expectation of K, when density is unknown. rho n? is estimated by the number of points (lambda).
+  # espKi : Expectation of K, when density is unknown. rho*w*l is estimated by the number of points (N).
   #        Difference between espKi and espKc goes to 0 when points are more than 20.
   espKi <- function(r, N, w, l)
   {
     return(espKc(r, w, l)*(1-(1+N)*exp(-N)))
   }
   #-------------------------------------------------------------------------------
-  # eh : Expectation of h1?(U, r)
+  # eh : Expectation of h_1^2(U, r)
   eh <- function(r, w, l)
   {
     return(r^5*(w+l)/2/w^3/l^3*(8*pi/3-256/45) +r^6/w^3/l^3*(11*pi/48+8/9-16/9*(w+l)*(w+l)/w/l) +4/3*r^7*(w+l)/w^4/l^4 -r^8/4/w^4/l^4)
   }
   # ------------------------------------------------------------------------------
-  # sigmaKi : Variance matrix for the estimator of K (unknown rho), normalized by multiplication by par n?rho
+  # sigmaKi : Variance matrix for the estimator of K (unknown rho), normalized by multiplication by par w*l*rho
   # vec     : Vector of distances to compute K (example : c(1, 2) to calculate K(1) and K(2)
   # N       : number of points
   # w       : width of the rectangle window
@@ -181,19 +183,14 @@ Ktest <- function(X, r)
     pairdist_ <- pairdist.ppp(X)  # Requires a lot of RAM. Limited to 8, 000 points with 32-bit versions of R.
 
     # Estimation of K
-    Kest<-mat.or.vec(1, length(r))
-  
-    # For each distance r
-    for (i in 1:length(r))
-    {
-      # NbPairs : number of pairs of points less than r apart (a>0 eliminates distance from a point to itself)
-      # *1.0 is to convert values to real and avoid infinite values in b*n*n
-      NbPairs <- sum(pairdist_ > 0 & pairdist_ < r[i])*1.0 
-   
-      # Kest gets the estimator of K, centered on the expected value.
-      Kest[i] <- NbPairs*w*l/(X$n*(X$n-1))-espKi_[i]
-    }         
-    TestVector <- invsqrtmat(sigmaKi_) %*% t(Kest) 
+    # NbPairs : number of pairs of points less than r apart (it's a vector, one value for each r)
+    # pairdist_ >0 eliminates distance from a point to itself
+    # *1.0 is to convert values to real and avoid infinite values in NbPairs*w*l later
+    NbPairs <- sapply(r, function(d) sum(pairdist_ > 0 & pairdist_ < d)*1.0)
+    # Kest gets the estimator of K, centered on the expected value.
+    Kest <- NbPairs*w*l/(X$n*(X$n-1))-espKi_
+    
+    TestVector <- invsqrtmat(sigmaKi_) %*% Kest 
     return(1-pchisq(sum(TestVector*TestVector), length(r)))
   }
   else return(NA) 

@@ -1,1 +1,5 @@
+useDynLib(dbmss)
+import(spatstat)
+import(cubature)
+import(Rcpp)
 exportPattern("^[[:alpha:]]+")

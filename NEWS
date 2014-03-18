@@ -1,4 +1,25 @@
-	CHANGES IN dbmss VERSION 2.0.5
+  CHANGES IN dbmss VERSION 2.1.0
+  ==============================
+	
+SIGNIFICANT USER-VISIBLE CHANGES
+
+	o Kdhat and M are computed through C++ loops instead of spatstat paridist(). Much faster, and uses far less memory.
+
+
+  CHANGES IN dbmss VERSION 2.0.6
+	==============================
+	
+SIGNIFICANT USER-VISIBLE CHANGES
+
+	o Kdhat and M propose a default value for argument r.
+  o Vignette added.
+
+MINOR CHANGE
+
+  o Kdhat probability density estimation is cut at the lowest distance between points instead of 0.
+
+
+  CHANGES IN dbmss VERSION 2.0.5
 	==============================
 	
 BUG FIXES

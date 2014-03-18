@@ -4,7 +4,7 @@
   Class of Weighted, Marked, Planar Point Patterns
 }
 \description{
-  A class \code{"wmppp"} to represent a two-dimensional point pattern of class \code{\link{ppp}} whose marks are be a dataframe with two columns:
+  A class \code{"wmppp"} to represent a two-dimensional point pattern of class \code{\link{ppp}} whose marks are a dataframe with two columns:
   \itemize{
     \item \code{PointType}: labels, as factors
     \item \code{PointWeight}: weights.

@@ -7,7 +7,7 @@
     Simulates point patterns according to the null hypothesis and returns the envelope of \emph{Kd} according to the confidence level.
 }
 \usage{
-KdEnvelope(X, r, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, 
+KdEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, 
            NeighborType = ReferenceType, Weighted = FALSE, Original = TRUE, 
            SimulationType = "RandomLocation", Global = FALSE)
 }
@@ -16,7 +16,7 @@ KdEnvelope(X, r, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType,
     A point pattern (\code{\link{wmppp.object}}).
   }
   \item{r}{
-    A vector of distances. No default value is available.
+    A vector of distances. If \code{NULL}, a default value is set: 512 equally spaced values are used, and the first 256 are returned, corresponding to half the maximum distance between points (following Duranton and Overman, 2005).
   }
   \item{NumberOfSimulations}{
     The number of simulations to run.
@@ -75,6 +75,5 @@ data(paracou16)
 plot(paracou16[paracou16$marks$PointType=="Q. Rosea"])
 
 # Calculate confidence envelope
-r <- 0:100
-plot(KdEnvelope(paracou16, r, ReferenceType="Q. Rosea", Global=TRUE))
+plot(KdEnvelope(paracou16, , ReferenceType="Q. Rosea", Global=TRUE))
 }

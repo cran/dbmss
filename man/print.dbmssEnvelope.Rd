@@ -13,7 +13,7 @@
   \item{x}{
     An object of class "dbmssEnvelope".
   }
-  \item{...}{
+  \item{\dots}{
     Ignored.
   }
 }

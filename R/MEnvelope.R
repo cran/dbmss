@@ -1,5 +1,5 @@
 MEnvelope <-
-function(X, r, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, NeighborType, 
+function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, NeighborType = ReferenceType, 
          CaseControl = FALSE, SimulationType = "RandomLocation", Global = FALSE) {
 
   CheckdbmssArguments()

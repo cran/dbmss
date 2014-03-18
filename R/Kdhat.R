@@ -1,5 +1,5 @@
 Kdhat <-
-function(X, r, ReferenceType, NeighborType = ReferenceType, Weighted = FALSE, Original = TRUE, CheckArguments = TRUE) {
+function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FALSE, Original = TRUE, CheckArguments = TRUE) {
   
   if (CheckArguments) {
     CheckdbmssArguments()
@@ -7,41 +7,55 @@ function(X, r, ReferenceType, NeighborType = ReferenceType, Weighted = FALSE, Or
   
   # Select the bandwith: original choice by Duranton and Overman or optimized one.
   if (Original) {
-    bw = "nrd0"
+    bw <- "nrd0"
   } else {
-    bw = "sj"
+    bw <- "sj"
   }
   
   # Vectors to recognize point types
   IsReferenceType <- X$marks$PointType==ReferenceType
   IsNeighborType <- X$marks$PointType==NeighborType
   # Eliminate useless points
-  X <- X[IsReferenceType | IsNeighborType]
-  # Compute the matrix of distances
-  Dist <- pairdist.ppp(X)
-  # Eliminate self point pair
-  diag(Dist) <- NA
-    
-  # Reduce the matrix to pairs of interest
-  IsReferenceType <- X$marks$PointType==ReferenceType
-  IsNeighborType <- X$marks$PointType==NeighborType
-  Dist <- Dist[IsReferenceType, IsNeighborType]
+  Y <- X[IsReferenceType | IsNeighborType]
+  # Update for Y
+  IsReferenceType <- Y$marks$PointType==ReferenceType
+  IsNeighborType <- Y$marks$PointType==NeighborType
   
-  if (Weighted) {
-    Weights <- matrix(rep(X$marks$PointWeight, each=X$n), nrow=X$n)
-    Weights <- Weights[IsReferenceType, IsNeighborType]
-    # Eliminate self point pair so that density works later
-    if (NeighborType == ReferenceType) {
-      diag(Weights) <- NA
-      Dist <- Dist[!is.na(Dist)]
-      Weights <- Weights[!is.na(Weights)]
-    }
-    Density <- density(Dist, weights=Weights/sum(Weights), from=0, bw=bw)
+  # Prepare a vector for distances between all point pairs.
+  if (ReferenceType == NeighborType) {
+    # Univariate Kd: n(n-1)/2 pairs
+    NbDist <- sum(IsReferenceType)*(sum(IsReferenceType)-1)/2
   } else {
-    Density <- density(Dist, from=0, na.rm=TRUE, bw=bw)
-  }  
-  # Interpolate results at the chosen R
-  Kd <- approx(Density$x, Density$y, xout=r)$y
+    # Bivariate Kd: n1*n2/2 pairs
+    NbDist <- sum(IsReferenceType)*sum(IsNeighborType)/2
+  }
+  Dist <- vector(mode="double", length=NbDist)
+  
+  # Prepare a vector for weights if Weighted. Else, set a single value.
+  if (Weighted) {
+    Weights <- vector(mode="double", length=NbDist)
+  } else {
+    Weights <- 1
+  }
+  
+  # C++ routine to fill distances and weights
+  DistKd(Y$x, Y$y, Y$marks$PointWeight, Weights, Dist, IsReferenceType, IsNeighborType)
+  
+  # Estimate probability density.
+  if (Weighted) {
+    Density <- density(Dist, weights=Weights/sum(Weights), cut=0, bw=bw)
+  } else {
+    Density <- density(Dist, cut=0, bw=bw)  
+  }
+
+  if(is.null(r)) {
+    # Return estimated values up to half the max distance (following D&O, 2005)
+    r <- Density$x[1:256]
+    Kd <- Density$y[1:256]
+  } else {
+    # Interpolate results at the chosen R
+    Kd <- approx(Density$x, Density$y, xout=r)$y    
+  }
   KdEstimate <- data.frame(r, Kd)
   colnames(KdEstimate) <- c("r", "Kd")
   

@@ -7,7 +7,8 @@
     Simulates point patterns according to the null hypothesis and returns the envelope of \emph{M} according to the confidence level.
 }
 \usage{
-MEnvelope(X, r, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, NeighborType, 
+MEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05,
+          ReferenceType, NeighborType = ReferenceType, 
           CaseControl = FALSE, SimulationType = "RandomLocation", Global = FALSE)
 }
 \arguments{
@@ -15,7 +16,7 @@ MEnvelope(X, r, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, Neighbor
     A point pattern (\code{\link{wmppp.object}}).
   }
   \item{r}{
-    A vector of distances. No default value is available.
+    A vector of distances. If \code{NULL}, a default value is set: 32 unequally spaced values are used up to half the maximum distance between points \eqn{d_m}. The first value is 0, first steps are small (\eqn{d_m/200}) then incresase progressively up to \eqn{d_m/20}.
   }
   \item{NumberOfSimulations}{
     The number of simulations to run.
@@ -71,9 +72,8 @@ X <- as.wmppp(rthin(paracou16, 0.5))
 plot(X)
 
 # Calculate confidence envelope (should be 1000 simulations, reduced to 4 to save time)
-r <- seq(0, 30, 2)
 NumberOfSimulations <- 4
 Alpha <- .10
-plot(MEnvelope(X, r, NumberOfSimulations, Alpha, 
+plot(MEnvelope(X, , NumberOfSimulations, Alpha, 
     "V. Americana", "Q. Rosea", FALSE, "RandomLabeling"))
 }

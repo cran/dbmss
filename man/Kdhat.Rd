@@ -7,7 +7,7 @@
   Estimates the \emph{Kd} function
 }
 \usage{
- Kdhat(X, r, ReferenceType, NeighborType = ReferenceType, Weighted = FALSE,
+ Kdhat(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FALSE,
        Original = TRUE, CheckArguments = TRUE)
 }
 \arguments{
@@ -15,7 +15,7 @@
     A point pattern (\code{\link{wmppp.object}}).
   }
   \item{r}{
-    A vector of distances. No default value is available.
+    A vector of distances. If \code{NULL}, a default value is set: 512 equally spaced values are used, and the first 256 are returned, corresponding to half the maximum distance between points (following Duranton and Overman, 2005).
   }
   \item{ReferenceType}{
     One of the point types.
@@ -34,8 +34,8 @@
   }
 }
 \details{
-  \emph{Kd} is a density, absolute measure of a point pattern structure.\cr
-  \emph{Kd} is computed efficiently by building a matrix of distances between point pairs and calculating the density of their distribution. The kernel estimator is Gaussian.
+  \emph{Kd} is a density, absolute measure of a point pattern structure. \emph{Kd} is computed efficiently by building a matrix of distances between point pairs and calculating the density of their distribution (the default values of \code{r} are those of the \code{\link{density}} function). The kernel estimator is Gaussian.
+  
   The weighted \emph{Kd} function has been named \emph{Kemp} (\emph{emp} is for employees) by Duranton and Overman (2005).
 }
 \value{
@@ -58,8 +58,7 @@ data(paracou16)
 plot(paracou16)
 
 # Calculate Kd
-r <- 0:100
-(Paracou <- Kdhat(paracou16, r, "Q. Rosea", "V. Americana"))
+(Paracou <- Kdhat(paracou16, , "Q. Rosea", "V. Americana"))
 # Plot
 plot(Paracou)
 }
