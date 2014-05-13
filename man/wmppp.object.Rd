@@ -11,7 +11,7 @@
   }
 }
 \details{
-  This class represents a two-dimensional point pattern dataset. \code{wmppp} objects are also of class \code{\link{ppp}}.\cr
+  This class represents a two-dimensional point pattern dataset. \code{wmppp} objects are also of class \code{\link{ppp}}.
   
   Objects of class \code{wmppp} may be created by the function \code{\link{wmppp}} and converted from other types of data by the function \code{\link{as.wmppp}}.
 }

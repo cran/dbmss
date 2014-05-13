@@ -27,16 +27,19 @@ Kinhomhat(X, r = NULL, ReferenceType = "", lambda = NULL, CheckArguments = TRUE)
   }
 }
 \details{
-  \emph{Kinhom} is a cumulative, topographic measure of an inhomogenous point pattern structure.\cr
+  \emph{Kinhom} is a cumulative, topographic measure of an inhomogenous point pattern structure.
+  
   By default, density estimation is performed at points by \code{\link{density.ppp}} using the optimal bandwith (\code{\link{bw.diggle}}). It can be calculated separately (see example), including at pixels if the point pattern is too large for the default estimation to succeed, and provided as the argument \code{lambda}:
-  Arbia et al. (2012) for example use another point pattern as a reference to estimate density.\cr
+  Arbia et al. (2012) for example use another point pattern as a reference to estimate density.
+  
   Bivariate \emph{Kinhom} is not currently supported.
 }
 \value{
-  An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.\cr
+  An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.
 }
 \references{
-  Baddeley, A. J., J. Moller, et al. (2000). Non- and semi-parametric estimation of interaction in inhomogeneous point patterns. \emph{Statistica Neerlandica} 54(3): 329-350.\cr
+  Baddeley, A. J., J. Moller, et al. (2000). Non- and semi-parametric estimation of interaction in inhomogeneous point patterns. \emph{Statistica Neerlandica} 54(3): 329-350.
+  
   Arbia, G., G. Espa, et al. (2012). Clusters of firms in an inhomogeneous space: The high-tech industries in Milan. \emph{Economic Modelling} 29(1): 3-11.
 }
 \author{

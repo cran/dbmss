@@ -177,20 +177,17 @@ void DistKd(SEXP Rx, SEXP Ry, SEXP RPointWeight, SEXP RWeights, SEXP RDist, SEXP
 
   int d=0;
   for (int i=0; i < (x.length()-1); i++) {
-    // Consider reference points only
-    if (IsReferenceType[i]) {
-      // Point j is a neighbor of i
-      for (int j=i+1; j < x.length(); j++) {
-        // If j is a neighbor of interest
-        if (IsNeighborType[j]) {
-          // Calculate distance
-          Dist[d] = sqrt((x[i]-x[j])*(x[i]-x[j]) + (y[i]-y[j])*(y[i]-y[j]));
-          if (Weighted) {
-            // if weighted, calculate the product of weights
-            Weights[d] = PointWeight[i]*PointWeight[j];
-          }
-          d++;
+    // Point j is a neighbor of i
+    for (int j=i+1; j < x.length(); j++) {
+      // i and j must be reference and neighbor
+      if ((IsReferenceType[i] & IsNeighborType[j]) | (IsReferenceType[j] & IsNeighborType[i])) {
+        // Calculate distance
+        Dist[d] = sqrt((x[i]-x[j])*(x[i]-x[j]) + (y[i]-y[j])*(y[i]-y[j]));
+        if (Weighted) {
+          // if weighted, calculate the product of weights
+        Weights[d] = PointWeight[i]*PointWeight[j];
         }
+        d++;
       }
     }
   }

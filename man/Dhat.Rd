@@ -32,11 +32,13 @@ Dhat(X, r = NULL, Cases, Controls, Intertype = FALSE, CheckArguments = TRUE)
   The \emph{Di} function allows comparing the structure of the cases to that of the controls around cases, that is to say the comparison is made around the same points. This has been advocated by Arbia et al. (2008) and formalized by Marcon and Puech (2012).
 }
 \value{
-  An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.\cr
+  An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.
 }
 \references{
-  Arbia, G., Espa, G. and Quah, D. (2008). A class of spatial econometric methods in the empirical analysis of clusters of firms in the space. \emph{Empirical Economics} 34(1): 81-103.\cr
-  Diggle, P. J. and Chetwynd, A. G. (1991). Second-Order Analysis of Spatial Clustering for Inhomogeneous Populations. \emph{Biometrics} 47(3): 1155-1163.\cr
+  Arbia, G., Espa, G. and Quah, D. (2008). A class of spatial econometric methods in the empirical analysis of clusters of firms in the space. \emph{Empirical Economics} 34(1): 81-103.
+  
+  Diggle, P. J. and Chetwynd, A. G. (1991). Second-Order Analysis of Spatial Clustering for Inhomogeneous Populations. \emph{Biometrics} 47(3): 1155-1163.
+  
   Marcon, E. and F. Puech (2012). A typology of distance-based measures of spatial concentration. \emph{HAL SHS}. 00679993.
 }
 \author{

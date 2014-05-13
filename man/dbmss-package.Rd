@@ -12,8 +12,8 @@
 \tabular{ll}{
 Package: \tab dbmss\cr
 Type: \tab Package\cr
-Version: \tab 2.1.0\cr
-Date: \tab 2014-03-18\cr
+Version: \tab 2.1.1\cr
+Date: \tab 2014-05-13\cr
 License: \tab GNU General Public License\cr
 }
 }

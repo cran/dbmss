@@ -15,7 +15,7 @@
     A point pattern (\code{\link{wmppp.object}}).
   }
   \item{r}{
-    A vector of distances. If \code{NULL}, a default value is set: 512 equally spaced values are used, and the first 256 are returned, corresponding to half the maximum distance between points (following Duranton and Overman, 2005).
+    A vector of distances. If \code{NULL}, a default value is set: 512 equally spaced values are used, from the smallest to the median distance between points (following Duranton and Overman, 2005).
   }
   \item{ReferenceType}{
     One of the point types.
@@ -39,11 +39,13 @@
   The weighted \emph{Kd} function has been named \emph{Kemp} (\emph{emp} is for employees) by Duranton and Overman (2005).
 }
 \value{
-  An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.\cr
+  An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.
 }
 \references{
-  Duranton, G. and Overman, H. G. (2005). Testing for Localisation Using Micro-Geographic Data. \emph{Review of Economic Studies} 72(4): 1077-1106.\cr
-  Sheather, S. J. and Jones, M. C. (1991) A reliable data-based bandwidth selection method for kernel density estimation. \emph{Journal of the Royal Statistical Society series B}, 53, 683-690.\cr
+  Duranton, G. and Overman, H. G. (2005). Testing for Localisation Using Micro-Geographic Data. \emph{Review of Economic Studies} 72(4): 1077-1106.
+  
+  Sheather, S. J. and Jones, M. C. (1991) A reliable data-based bandwidth selection method for kernel density estimation. \emph{Journal of the Royal Statistical Society series B}, 53, 683-690.
+  
   Silverman, B. W. (1986). \emph{Density estimation for statistics and data analysis}. Chapman and Hall, London.
 }
 \author{

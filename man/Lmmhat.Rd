@@ -27,10 +27,11 @@ Lmmhat(X, r = NULL, ReferenceType = "", CheckArguments = TRUE)
   \emph{Lmm} is the normalized version of \emph{Kmm}: \eqn{Lmm(r)=\sqrt{\frac{Kmm}{\pi}}-r}.
 }
 \value{
-  An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.\cr
+  An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.
 }
 \references{
-  Penttinen, A., Stoyan, D. and Henttonen, H. M. (1992). Marked Point Processes in Forest Statistics. \emph{Forest Science} 38(4): 806-824.\cr
+  Penttinen, A., Stoyan, D. and Henttonen, H. M. (1992). Marked Point Processes in Forest Statistics. \emph{Forest Science} 38(4): 806-824.
+  
   Espa, G., Giuliani, D. and Arbia, G. (2010). Weighting Ripley's K-function to account for the firm dimension in the analysis of spatial concentration. \emph{Discussion Papers}, 12/2010. Universita di Trento, Trento: 26.  
 }
 \author{
@@ -43,7 +44,7 @@ Lmmhat(X, r = NULL, ReferenceType = "", CheckArguments = TRUE)
 \examples{
 
 data(paracou16)
-# Keep only 50% of points to run this example
+# Keep only 50\% of points to run this example
 X <- as.wmppp(rthin(paracou16, 0.5))
 plot(X)
 

@@ -5,13 +5,13 @@ function(Simulations, Alpha) {
   
   # Initialize
   Simulations <- as.data.frame(Simulations)[, -1] # Eliminate r
-  NumberOfSimulations <- dim(Simulations)[2]
+  NumberOfSimulations <- ncol(Simulations)
   TargetNumber <- (1-Alpha)*NumberOfSimulations
   KeptSimulations <- Simulations
-  PresentMinValues <- apply(Simulations, 1, min)
-  PresentMaxValues <- apply(Simulations, 1, max)
+  PresentMinValues <- apply(Simulations, 1, min, na.rm=TRUE)
+  PresentMaxValues <- apply(Simulations, 1, max, na.rm=TRUE)
   # Loop until the target number of simulations is kept
-  while(dim(KeptSimulations)[2] > TargetNumber) {
+  while(ncol(KeptSimulations) > TargetNumber) {
     # Remember previous min and max
     PreviousMinValues <- PresentMinValues
     PreviousMaxValues <- PresentMaxValues
@@ -23,11 +23,11 @@ function(Simulations, Alpha) {
     if (is.null(dim(KeptSimulations)))
       stop("Global envelope could not be calculated. More simulations are necessary.")
     # Calculate min and max
-    PresentMinValues <- apply(KeptSimulations, 1, min)
-    PresentMaxValues <- apply(KeptSimulations, 1, max)
+    PresentMinValues <- apply(KeptSimulations, 1, min, na.rm=TRUE)
+    PresentMaxValues <- apply(KeptSimulations, 1, max, na.rm=TRUE)
   }  
   # Interpolate because the kept number of simulations is not always the target
-  NumberOfKeptSimulations <- dim(KeptSimulations)[2]
+  NumberOfKeptSimulations <- ncol(KeptSimulations)
   Glo <- PresentMinValues + (PreviousMinValues-PresentMinValues)/NumberOfSimulations*(TargetNumber-NumberOfKeptSimulations)
   Ghi <- PresentMaxValues + (PreviousMaxValues-PresentMaxValues)/NumberOfSimulations*(TargetNumber-NumberOfKeptSimulations)
   return(rbind(Glo, Ghi))

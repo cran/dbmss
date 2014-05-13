@@ -11,7 +11,7 @@ as.wmppp.ppp <-
         PointType <- Marks[, "pointtype"]
       }
       if (!is.factor(PointType))  {
-        stop("Point types have been found in the marks of the point pattern but they must be factors")
+        PointType <- as.factor(PointType)
       }    
       if ("pointweight" %in% names(Marks)) {
         PointWeight <- Marks[, "pointweight"]

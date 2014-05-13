@@ -21,7 +21,7 @@ function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, Ne
   attr(Envelope, "einfo")$H0 <- switch (SimulationType,
                                         RandomLocation = "Random Location",
                                         RandomLabeling = "Random Labeling",
-                                        PopulationIndependence = "PopulationIndependence"
+                                        PopulationIndependence = "Population Independence"
                                         )
   # Calculate confidence intervals
   Envelope <- FillEnveloppe(Envelope, Alpha, Global)

@@ -27,10 +27,11 @@ Kmmhat(X, r = NULL, ReferenceType = "", CheckArguments = TRUE)
   The \emph{Kmm} function is used to test the independence of marks.
 }
 \value{
-  An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.\cr
+  An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.
 }
 \references{
-  Penttinen, A., Stoyan, D. and Henttonen, H. M. (1992). Marked Point Processes in Forest Statistics. \emph{Forest Science} 38(4): 806-824.\cr
+  Penttinen, A., Stoyan, D. and Henttonen, H. M. (1992). Marked Point Processes in Forest Statistics. \emph{Forest Science} 38(4): 806-824.
+  
   Penttinen, A. (2006). Statistics for Marked Point Patterns. in \emph{The Yearbook of the Finnish Statistical Society}. The Finnish Statistical Society, Helsinki: 70-91.
 }
 \author{
@@ -46,7 +47,7 @@ Kmmhat(X, r = NULL, ReferenceType = "", CheckArguments = TRUE)
 \examples{
 
 data(paracou16)
-# Keep only 50% of points to run this example
+# Keep only 50\% of points to run this example
 X <- as.wmppp(rthin(paracou16, 0.5))
 plot(X)
 

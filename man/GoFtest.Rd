@@ -21,15 +21,18 @@ GoFtest(Envelope)
   A p-value.
 }
 \references{
-  Diggle, P. J. (1983). \emph{Statistical analysis of spatial point patterns}. Academic Press, London. 148 p.\cr
-  Loosmore, N. B. and  Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.\cr
+  Diggle, P. J. (1983). \emph{Statistical analysis of spatial point patterns}. Academic Press, London. 148 p.
+  
+  Loosmore, N. B. and  Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.
+  
   Marcon, E., F. Puech, et al. (2012). Characterizing the relative spatial structure of point patterns. International \emph{Journal of Ecology} 2012(Article ID 619281): 11.  
 }
 \author{
   Eric Marcon <Eric.Marcon@ecofog.gf>
 }
 \note{
-  No support exists in the literature to apply the GoF test to non-cumulative functions (\emph{g}, \emph{Kd}...).\cr
+  No support exists in the literature to apply the GoF test to non-cumulative functions (\emph{g}, \emph{Kd}...).
+  
   \code{\link{Ktest}} is a much better test (it does not rely on simulations) but it is limited to the \emph{K} function against complete spatial randomness (CSR) in a rectangle window.
 }
 

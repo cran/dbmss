@@ -24,7 +24,8 @@ Ktest(X, r)
   A p-value.
 }
 \references{
-  Lang, G. and Marcon, E. (in press). Testing randomness of spatial point patterns with the Ripley statistic. \emph{ESAIM: Probability and Statistics.}\cr
+  Lang, G. and Marcon, E. (2013). Testing randomness of spatial point patterns with the Ripley statistic. \emph{ESAIM: Probability and Statistics.} 17: 767-788.
+  
   Marcon, E., S. Traissac, and Lang, G. (2013). A Statistical Test for Ripley's Function Rejection of Poisson Null Hypothesis. \emph{ISRN Ecology} 2013(Article ID 753475): 9.
 }
 \author{

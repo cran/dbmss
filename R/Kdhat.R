@@ -26,8 +26,8 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
     # Univariate Kd: n(n-1)/2 pairs
     NbDist <- sum(IsReferenceType)*(sum(IsReferenceType)-1)/2
   } else {
-    # Bivariate Kd: n1*n2/2 pairs
-    NbDist <- sum(IsReferenceType)*sum(IsNeighborType)/2
+    # Bivariate Kd: n1*n2 pairs
+    NbDist <- sum(IsReferenceType)*sum(IsNeighborType)
   }
   Dist <- vector(mode="double", length=NbDist)
   
@@ -41,17 +41,26 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
   # C++ routine to fill distances and weights
   DistKd(Y$x, Y$y, Y$marks$PointWeight, Weights, Dist, IsReferenceType, IsNeighborType)
   
+  if(is.null(r)) {
+    # Default interval for R: between the min distance and the median one.
+    rmin <- min(Dist)
+    rmax <- median(Dist)
+  } else {
+    rmin <- min(r)
+    rmax <- max(r)
+  }
+    
   # Estimate probability density.
   if (Weighted) {
-    Density <- density(Dist, weights=Weights/sum(Weights), cut=0, bw=bw)
+    Density <- density(Dist, weights=Weights/sum(Weights), cut=0, from=rmin, to=rmax, bw=bw)
   } else {
-    Density <- density(Dist, cut=0, bw=bw)  
+    Density <- density(Dist, cut=0, from=rmin, to=rmax, bw=bw)  
   }
 
   if(is.null(r)) {
-    # Return estimated values up to half the max distance (following D&O, 2005)
-    r <- Density$x[1:256]
-    Kd <- Density$y[1:256]
+    # Return estimated values
+    r <- Density$x
+    Kd <- Density$y
   } else {
     # Interpolate results at the chosen R
     Kd <- approx(Density$x, Density$y, xout=r)$y    
@@ -59,6 +68,6 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
   KdEstimate <- data.frame(r, Kd)
   colnames(KdEstimate) <- c("r", "Kd")
   
-  # Return the values of g(r)
+  # Return the values of Kd(r)
   return (fv(KdEstimate, argu="r", ylab=quote(Kd(r)), valu="Kd", fmla= ". ~ r", alim=c(0, max(r)), labl=c("r", paste("hat(%s)(r)", sep="")), desc=c("distance argument r", "Estimated Kd(r)"), unitname=X$window$unit, fname="Kd"))
 }

@@ -30,10 +30,11 @@ Khat(X, r = NULL, ReferenceType = "", NeighborType = "", CheckArguments = TRUE)
   \emph{K} is a cumulative, topographic measure of a point pattern structure.
 }
 \value{
-  An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.\cr
+  An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.
 }
 \references{
-  Ripley, B. D. (1976). The Foundations of Stochastic Geometry. \emph{Annals of Probability} 4(6): 995-998.\cr
+  Ripley, B. D. (1976). The Foundations of Stochastic Geometry. \emph{Annals of Probability} 4(6): 995-998.
+  
   Ripley, B. D. (1977). Modelling Spatial Patterns. \emph{Journal of the Royal Statistical Society B} 39(2): 172-212.
 }
 \author{
