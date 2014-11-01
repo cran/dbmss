@@ -13,3 +13,7 @@ DistKd <- function(Rx, Ry, RPointWeight, RWeights, RDist, RIsReferenceType, RIsN
     invisible(.Call('dbmss_DistKd', PACKAGE = 'dbmss', Rx, Ry, RPointWeight, RWeights, RDist, RIsReferenceType, RIsNeighborType))
 }
 
+CountNbdKd <- function(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType) {
+    invisible(.Call('dbmss_CountNbdKd', PACKAGE = 'dbmss', Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType))
+}
+

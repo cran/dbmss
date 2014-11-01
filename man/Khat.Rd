@@ -7,7 +7,7 @@
   Estimates the \emph{K} function
 }
 \usage{
-Khat(X, r = NULL, ReferenceType = "", NeighborType = "", CheckArguments = TRUE)
+Khat(X, r = NULL, ReferenceType = "", NeighborType = ReferenceType, CheckArguments = TRUE)
 }
 \arguments{
   \item{X}{
@@ -20,7 +20,7 @@ Khat(X, r = NULL, ReferenceType = "", NeighborType = "", CheckArguments = TRUE)
     One of the point types. Default is all point types.
   }
   \item{NeighborType}{
-    One of the point types. Default is all point types.
+    One of the point types. By default, the same as reference type.
   }
   \item{CheckArguments}{
     Logical; if \code{TRUE}, the function arguments are verified. Should be set to \code{FALSE} to save time in simulations for example, when the arguments have been checked elsewhere.

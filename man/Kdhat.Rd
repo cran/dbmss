@@ -8,7 +8,7 @@
 }
 \usage{
  Kdhat(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FALSE,
-       Original = TRUE, CheckArguments = TRUE)
+       Original = TRUE, Approximate = ifelse(X$n < 10000, 0, 1), CheckArguments = TRUE)
 }
 \arguments{
   \item{X}{
@@ -18,7 +18,7 @@
     A vector of distances. If \code{NULL}, a default value is set: 512 equally spaced values are used, from the smallest to the median distance between points (following Duranton and Overman, 2005).
   }
   \item{ReferenceType}{
-    One of the point types.
+    One of the point types. If "", all points are considered (this is not the default value; \code{NeighborType} is ignored then) to estimate the average value of simulated \emph{Kd} values under the null hypothesis of \emph{RandomLocation} (Marcon and Puech, 2012).
   }
   \item{NeighborType}{
     One of the point types. By default, the same as reference type.
@@ -27,7 +27,10 @@
     Logical; if \code{TRUE}, estimates the \emph{Kemp} function.
   }
   \item{Original}{
-    Logical; if \code{TRUE} (by default), the original bandwidth selection by Duranton and Overman (2005) following Silverman (2006: eq 3.31) is used. If \code{FALSE}, it is calculated following Sheather and Jones (1991), \emph{i.e.} the state of the art. See \code{\link{bw.SJ}} for more details.
+    Logical; if \code{TRUE} (by default), the original bandwidth selection by Duranton and Overman (2005) following Silverman (1986: eq 3.31) is used. If \code{FALSE}, it is calculated following Sheather and Jones (1991), \emph{i.e.} the state of the art. See \code{\link{bw.SJ}} for more details.
+  }
+  \item{Approximate}{
+    if not 0 (1 is a good choice), exact distances between pairs of points are rounded to 1024 times \code{Approximate} single values equally spaced between 0 and the largest distance. This technique (Scholl and Brenner, 2013) allows saving a lot of memory when addressing large point sets (the default value is 1 over 10000 points). Increasing \code{Approximate} allows better precision at the cost of proportional memory use.
   }
   \item{CheckArguments}{
     Logical; if \code{TRUE}, the function arguments are verified. Should be set to \code{FALSE} to save time in simulations for example, when the arguments have been checked elsewhere.
@@ -44,7 +47,11 @@
 \references{
   Duranton, G. and Overman, H. G. (2005). Testing for Localisation Using Micro-Geographic Data. \emph{Review of Economic Studies} 72(4): 1077-1106.
   
-  Sheather, S. J. and Jones, M. C. (1991) A reliable data-based bandwidth selection method for kernel density estimation. \emph{Journal of the Royal Statistical Society series B}, 53, 683-690.
+  Marcon, E. and F. Puech (2012). A typology of distance-based measures of spatial concentration. \emph{HAL SHS}. 00679993.
+  
+  Scholl, T. and Brenner, T. (2013) Optimizing Distance-Based Methods for Big Data Analysis, \emph{Working Papers on Innovation and Space} No 2013-09, Philipps University Marburg
+
+Sheather, S. J. and Jones, M. C. (1991) A reliable data-based bandwidth selection method for kernel density estimation. \emph{Journal of the Royal Statistical Society series B}, 53, 683-690.
   
   Silverman, B. W. (1986). \emph{Density estimation for statistics and data analysis}. Chapman and Hall, London.
 }

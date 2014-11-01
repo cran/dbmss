@@ -9,6 +9,7 @@
 \usage{
 KdEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, 
            NeighborType = ReferenceType, Weighted = FALSE, Original = TRUE, 
+           Approximate = ifelse(X$n < 10000, 0, 1), 
            SimulationType = "RandomLocation", Global = FALSE)
 }
 \arguments{
@@ -25,16 +26,19 @@ KdEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType,
     The risk level, 5\% by default.
   }
   \item{ReferenceType}{
-    One of the point types. By default, the same as reference type.
+    One of the point types.
   }
   \item{NeighborType}{
-    One of the point types.
+    One of the point types. By default, the same as reference type.
   }
   \item{Weighted}{
     Logical; if \code{TRUE}, estimates the \emph{Kemp} function.
   }
   \item{Original}{
     Logical; if \code{TRUE} (by default), the original bandwidth selection by Duranton and Overman (2005) following Silverman (2006: eq 3.31) is used. If \code{FALSE}, it is calculated following Sheather and Jones (1991), \emph{i.e.} the state of the art. See \code{\link{bw.SJ}} for more details.
+  }
+  \item{Approximate}{
+    if not 0 (1 is a good choice), exact distances between pairs of points are rounded to 1024 times \code{Approximate} single values equally spaced between 0 and the largest distance. This technique (Scholl and Brenner, 2013) allows saving a lot of memory when addressing large point sets (the default value is 1 over 10000 points). Increasing \code{Approximate} allows better precision at the cost of proportional memory use.
   }
   \item{SimulationType}{
     A string describing the null hypothesis to simulate. The null hypothesis may be
@@ -64,7 +68,9 @@ KdEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType,
   Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.
   
   Marcon, E. and F. Puech (2012). A typology of distance-based measures of spatial concentration. \emph{HAL SHS}. 00679993.
-  
+
+  Scholl, T. and Brenner, T. (2013) Optimizing Distance-Based Methods for Big Data Analysis, \emph{Working Papers on Innovation and Space} No 2013-09, Philipps University Marburg
+
   Silverman, B. W. (1986). \emph{Density estimation for statistics and data analysis}. Chapman and Hall, London.
 }
 \author{
@@ -81,4 +87,8 @@ plot(paracou16[paracou16$marks$PointType=="Q. Rosea"])
 
 # Calculate confidence envelope
 plot(KdEnvelope(paracou16, , ReferenceType="Q. Rosea", Global=TRUE))
+
+# Center of the confidence interval
+Kdhat(paracou16, ReferenceType="") -> kd
+lines(kd$Kd ~ kd$r, lty=3, col="green")
 }

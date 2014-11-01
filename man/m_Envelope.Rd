@@ -1,22 +1,22 @@
-\name{KEnvelope}
-\alias{KEnvelope}
+\name{mEnvelope}
+\alias{mEnvelope}
 \title{
-  Estimation of the confidence envelope of the K function under its null hypothesis
+  Estimation of the confidence envelope of the m function under its null hypothesis
 }
 \description{
-    Simulates point patterns according to the null hypothesis and returns the envelope of \emph{K} according to the confidence level.
+    Simulates point patterns according to the null hypothesis and returns the envelope of \emph{m} according to the confidence level.
 }
 \usage{
-KEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, 
-          ReferenceType = "", NeighborType = ReferenceType, 
-          SimulationType = "RandomPosition", Global = FALSE)
+mEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05,
+          ReferenceType, NeighborType = ReferenceType, CaseControl = FALSE,
+          adjust = 1, SimulationType = "RandomLocation", Global = FALSE)
 }
 \arguments{
   \item{X}{
     A point pattern (\code{\link{wmppp.object}}).
   }
   \item{r}{
-    A vector of distances. If \code{NULL}, a sensible default value is chosen (512 intervals, from 0 to half the diameter of the window) following \code{\link{spatstat}}.
+    A vector of distances. If \code{NULL}, a default value is set: 512 equally spaced values are used up to the median distance between points (following Duranton and Overman, 2005).
   }
   \item{NumberOfSimulations}{
     The number of simulations to run, 100 by default.
@@ -25,16 +25,22 @@ KEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05,
     The risk level, 5\% by default.
   }
   \item{ReferenceType}{
-    One of the point types. Default is all point types.
+    One of the point types.
   }
   \item{NeighborType}{
-    One of the point types. By default, the same as reference type.
+    One of the point types, equal to the reference type by default to caculate univariate M.
+  }
+  \item{CaseControl}{
+    Logical; if \code{TRUE}, the case-control version of \emph{M} is computed. \emph{ReferenceType} points are cases, \emph{NeighborType} points are controls.
+  }
+  \item{adjust}{
+    Force the automatically selected bandwidth to be multiplied by \code{adjust}. Setting it to values lower than one (1/2 for example) will sharpen the estimation.
   }
   \item{SimulationType}{
     A string describing the null hypothesis to simulate. The null hypothesis may be
-    "\emph{RandomPosition}": points are drawn in a Poisson process (default);
-    "\emph{RandomLabeling}": randomizes point types, keeping locations unchanged;
-    "\emph{PopulationIndependence}": keeps reference points unchanged, shifts other point locations.
+    "\emph{RandomLocation}": points are redistributed on the actual locations (default);
+    "\emph{RandomLabeling}": randomizes point types, keeping locations and weights unchanged;
+    "\emph{PopulationIndependence}": keeps reference points unchanged, randomizes other point locations.
   }
   \item{Global}{
     Logical; if \code{TRUE}, a global envelope sensu Duranton and Overman (2005) is calculated. 
@@ -63,20 +69,19 @@ KEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05,
   Eric Marcon <Eric.Marcon@ecofog.gf>
 }
 \seealso{
-  \code{\link{Khat}}, \code{\link{rRandomPositionK}}, \code{\link{rRandomLocation}}, \code{\link{rPopulationIndependenceK}}
+  \code{\link{mhat}}
 }
 
 \examples{
 
 data(paracou16)
-# Keep only 20\% of points to run this example
-X <- as.wmppp(rthin(paracou16, 0.2))
+# Keep only 50\% of points to run this example
+X <- as.wmppp(rthin(paracou16, 0.5))
 plot(X)
 
-# Calculate confidence envelope (should be 1000 simulations, reduced to 20 to save time)
-r <- 0:30
-NumberOfSimulations <- 20
-# Plot the envelope
-plot(KEnvelope(X, r, NumberOfSimulations), ./(pi*r^2) ~ r)
-
+# Calculate confidence envelope (should be 1000 simulations, reduced to 4 to save time)
+NumberOfSimulations <- 4
+Alpha <- .10
+plot(mEnvelope(X, , NumberOfSimulations, Alpha, 
+    "V. Americana", "Q. Rosea", FALSE, ,"RandomLabeling"))
 }

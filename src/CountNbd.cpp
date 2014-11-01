@@ -44,7 +44,7 @@ void CountNbd(SEXP Rr, SEXP Rx, SEXP Ry, SEXP RWeight, SEXP RNbd, SEXP RIsRefere
           if (IsNeighborType[j]) {
             Nbd(i, k) += Weight[j];
           }
-          // j is a reference type: add i's neighborhood to it
+          // j is a reference point: add i's neighborhood to it
           if (IsReferenceType[j]) {
             Nbd(j, Nr+k) += Weight[i];
             // i is a point of interest around j
@@ -57,7 +57,7 @@ void CountNbd(SEXP Rr, SEXP Rx, SEXP Ry, SEXP RWeight, SEXP RNbd, SEXP RIsRefere
     } else {
       // Point i is not a reference point
       for (int j=i+1; j < Nbd.nrow(); j++) {
-        // If point j is a reference point, i may be in its neighborhood
+        // If point j is a reference point, it may be in its neighborhood
         if (IsReferenceType[j]) {
           // Calculate squared distance
           Distance2 = (x[i]-x[j])*(x[i]-x[j]) + (y[i]-y[j])*(y[i]-y[j]);
@@ -188,6 +188,83 @@ void DistKd(SEXP Rx, SEXP Ry, SEXP RPointWeight, SEXP RWeights, SEXP RDist, SEXP
         Weights[d] = PointWeight[i]*PointWeight[j];
         }
         d++;
+      }
+    }
+  }
+}
+
+// [[Rcpp::export]]
+void CountNbdKd(SEXP Rr, SEXP Rx, SEXP Ry, SEXP RWeight, SEXP RNbd, SEXP RIsReferenceType, SEXP RIsNeighborType) {
+// Count the number of neighbors around each point for Kd, same as CountNbd but 
+   // consider neighbors of interest only
+   // do no attribute neighbors to each point, mix them
+// Only ReferenceType points are considered. 
+// The weights of NeighborType points are counted.
+
+  //Distances
+  NumericVector r(Rr);
+  // x, y coordinates of points
+  NumericVector x(Rx);
+  NumericVector y(Ry);
+  // Point weights
+  NumericVector Weight(RWeight);
+  // Matrix (single row) counting the number of neighbors. Modified by this routine.
+  NumericMatrix Nbd(RNbd);
+  // Boolean vectors describing reference and neighbor points
+  IntegerVector IsReferenceType(RIsReferenceType);
+  IntegerVector IsNeighborType(RIsNeighborType);
+
+  double Distance2;
+  double Nr = r.length();
+  NumericVector r2 = r*r;
+
+  for (int i=0; i < (x.length()-1); i++) {
+    // Consider reference type points
+    if (IsReferenceType[i]) {
+      // Point j is a neighbor of i. No neighbor is ignored.
+      for (int j=i+1; j < x.length(); j++) {
+        // Calculate squared distance
+        Distance2 = (x[i]-x[j])*(x[i]-x[j]) + (y[i]-y[j])*(y[i]-y[j]);
+        // Ignore point j if it is too far from point i
+        if (Distance2 <= r2[Nr-1]) {
+          // Find the column of the matrix corresponding to the distance
+          int k = 0; 
+          while (Distance2 > r2[k]) {
+            k++;
+          }
+          // The neighbor is a point of interest
+          if (IsNeighborType[j]) {
+            Nbd(0, k) += Weight[i]*Weight[j];
+          }
+          // j is a reference point
+          if (IsReferenceType[j]) {
+            // i is a point of interest around j
+            if (IsNeighborType[i]) {
+              Nbd(0, k) += Weight[i]*Weight[j];
+            }
+          }        
+        }
+      }
+    } else {
+      // Point i is not a reference point
+      for (int j=i+1; j < x.length(); j++) {
+        // If point j is a reference point, it may be in its neighborhood
+        if (IsReferenceType[j]) {
+          // Calculate squared distance
+          Distance2 = (x[i]-x[j])*(x[i]-x[j]) + (y[i]-y[j])*(y[i]-y[j]);
+          // Ignore point j if it is too far from point i
+          if (Distance2 <= r2[Nr-1]) {
+            // Find the column of the matrix corresponding to the distance
+            int k = 0; 
+            while (Distance2 > r2[k]) {
+              k++;
+            }
+            // i is a point of interest around j
+            if (IsNeighborType[i]) {
+              Nbd(0, k) += Weight[i]*Weight[j];
+            }
+          }
+        }
       }
     }
   }

@@ -1,5 +1,5 @@
 Khat <-
-function(X, r = NULL, ReferenceType = "", NeighborType = "", CheckArguments = TRUE) {
+function(X, r = NULL, ReferenceType = "", NeighborType = ReferenceType, CheckArguments = TRUE) {
 
   if (CheckArguments) {
     CheckdbmssArguments()

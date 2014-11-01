@@ -15,7 +15,7 @@ Mhat(X, r = NULL, ReferenceType, NeighborType = ReferenceType,
     A weighted, marked planar point pattern (\code{\link{wmppp.object}}).
   }
   \item{r}{
-    A vector of distances. If \code{NULL}, a default value is set: 64 unequally spaced values are used up to half the maximum distance between points \eqn{d_m}. The first value is 0, first steps are small (\eqn{d_m/800}) then incresase progressively up to \eqn{d_m/40}.
+    A vector of distances. If \code{NULL}, a default value is set: 64 unequally spaced values are used up to half the maximum distance between points \eqn{d_m}. The first value is 0, first steps are small (\eqn{d_m/800}) then increase progressively up to \eqn{d_m/40}.
   }
   \item{ReferenceType}{
     One of the point types.

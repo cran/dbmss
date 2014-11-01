@@ -21,7 +21,7 @@ rRandomLocation(X, ReferenceType = "", CheckArguments = TRUE)
   }
 }
 \details{
-  Points are redistributed randomly across the locations of the original point pattern. This randomization is equivalent to random labeling.
+  Points are redistributed randomly across the locations of the original point pattern. This randomization is equivalent to random labeling, considering the label is both point type and point weight.
 }
 \value{
   A new weighted, marked, planar point pattern (an object of class \code{wmppp}, see \code{\link{wmppp.object}}).

@@ -2,6 +2,7 @@
 \alias{CountNbd}
 \alias{CountNbdCC}
 \alias{DistKd}
+\alias{CountNbdKd}
 \title{
   Auxiliary functions to count point neighbors
 }
@@ -12,6 +13,7 @@
 CountNbd(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType)
 CountNbdCC(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType)
 DistKd(Rx, Ry, RPointWeight, RWeights, RDist, RIsReferenceType, RIsNeighborType)
+CountNbdKd(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType)
 }
 \arguments{
   \item{Rr}{

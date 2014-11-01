@@ -1,6 +1,6 @@
 KEnvelope <-
 function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, 
-         ReferenceType = "", NeighborType = "", SimulationType = "RandomPosition", Global = FALSE) {
+         ReferenceType = "", NeighborType = ReferenceType, SimulationType = "RandomPosition", Global = FALSE) {
 
   CheckdbmssArguments()
   

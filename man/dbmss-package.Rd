@@ -3,17 +3,17 @@
 \alias{dbmss}
 \docType{package}
 \title{
-  Distance based measures of spatial structures
+  Distance-Based Measures of Spatial Structures
 }
 \description{
-  This package allows simple computation of a full set of spatial statistic functions of distance to characterize spatial structures of mapped objects, including classical ones (Ripley's \emph{K} and others) and more recent ones used by spatial economists (Duranton and Overman's \emph{Kd}, Marcon and Puech's \emph{M}). It relies on spatstat for some core calculation.
+  Simple computation of spatial statistic functions of distance to characterize spatial structures of mapped objects, including classical ones (Ripley's \emph{K} and others) and more recent ones used by spatial economists (Duranton and Overman's \emph{Kd}, Marcon and Puech's \emph{M}). It relies on spatstat for some core calculation.
 }
 \details{
 \tabular{ll}{
 Package: \tab dbmss\cr
 Type: \tab Package\cr
-Version: \tab 2.1.1\cr
-Date: \tab 2014-05-13\cr
+Version: \tab 2.1.2\cr
+Date: \tab 2014-11-01\cr
 License: \tab GNU General Public License\cr
 }
 }
