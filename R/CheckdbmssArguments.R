@@ -51,8 +51,10 @@ function() {
   # Controls 
   if (!is.na(names(Args["Controls"]))) {
     Controls <- eval(expression(Controls), parent.frame())
-    if (!Controls %in% X$marks$PointType)
-      stop(paste(ErrorFunction, "Controls must be a point type of the point pattern, it cannot be", sQuote(Controls)))    
+    if (!is.null(Controls)) {
+      if (!(Controls %in% X$marks$PointType))
+        stop(paste(ErrorFunction, "Controls must be a point type of the point pattern, it cannot be", sQuote(Controls)))
+    }
   }
   
   # CaseControl 
@@ -104,6 +106,24 @@ function() {
       stop(paste(ErrorFunction, "Alpha must be a number, it cannot be", sQuote(Alpha)))    
     if (Alpha<=0 | Alpha>=1)
       stop(paste(ErrorFunction, "Alpha must be strictly between 0 and 1, it cannot be", sQuote(Alpha)))    
+  }
+  
+  # Adjust 
+  if (!is.na(names(Args["Adjust"]))) {
+    Adjust <- eval(expression(Adjust), parent.frame())
+    if (!is.numeric(Adjust))
+      stop(paste(ErrorFunction, "Adjust must be a number, it cannot be", sQuote(Adjust)))    
+    if (Adjust<=0)
+      stop(paste(ErrorFunction, "Adjust must be strictly positive, it cannot be", sQuote(Adjust)))    
+  }
+  
+  # Approximate 
+  if (!is.na(names(Args["Approximate"]))) {
+    Approximate <- eval(expression(Approximate), parent.frame())
+    if (!is.numeric(Approximate))
+      stop(paste(ErrorFunction, "Approximate must be a number, it cannot be", sQuote(Approximate)))    
+    if (Approximate < 0)
+      stop(paste(ErrorFunction, "Approximate must be positive, it cannot be", sQuote(Approximate)))    
   }
   
   return (TRUE)

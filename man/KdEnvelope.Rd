@@ -9,7 +9,7 @@
 \usage{
 KdEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, 
            NeighborType = ReferenceType, Weighted = FALSE, Original = TRUE, 
-           Approximate = ifelse(X$n < 10000, 0, 1), 
+           Approximate = ifelse(X$n < 10000, 0, 1), Adjust = 1, MaxRange = "ThirdW", 
            SimulationType = "RandomLocation", Global = FALSE)
 }
 \arguments{
@@ -40,6 +40,14 @@ KdEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType,
   \item{Approximate}{
     if not 0 (1 is a good choice), exact distances between pairs of points are rounded to 1024 times \code{Approximate} single values equally spaced between 0 and the largest distance. This technique (Scholl and Brenner, 2013) allows saving a lot of memory when addressing large point sets (the default value is 1 over 10000 points). Increasing \code{Approximate} allows better precision at the cost of proportional memory use.
   }
+  \item{Adjust}{
+    Force the automatically selected bandwidth (following Silverman, 1986) to be multiplied by \code{Adjust}. Setting it to values lower than one (1/2 for example) will sharpen the estimation. If not 1, \code{Original} is ignored.
+  }
+  \item{MaxRange}{
+    The maximum value of \code{r} to consider, ignored if \code{r} is not \code{NULL}. Default is "ThirdW", one third of the diameter of the window. Other choices are "HalfW", and "QuarterW" and "D02005".
+    "HalfW", and "QuarterW" are for half or the quarter of the diameter of the window.
+    "D02005" is for the median distance observed between points, following Duranton and Overman (2005). "ThirdW" should be close to "DO2005" but has the advantage to be independent of the point types chosen as \code{ReferenceType} and \code{NeighborType}, to simplify comparisons between different types. "D02005" is approximated by "ThirdW" if \code{Approximate} is not 0.
+  }
   \item{SimulationType}{
     A string describing the null hypothesis to simulate. The null hypothesis may be
     "\emph{RandomLocation}": points are redistributed on the actual locations (default);
@@ -53,12 +61,12 @@ KdEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType,
 \details{
   This envelope is local by default, that is to say it is computed separately at each distance. See Loosmore and Ford (2006) for a discussion.
   
-  The global enveloppe is calculated by iteration: the simulations reaching one of the upper or lower values at any distance are eliminated at each step. The process is repeated until \emph{Alpha / Number of simulations} simulations are dropped. The remaining upper and lower bounds at all distances constitute the global envelope. Interpolation is used if the exact ratio cannot be reached.
+  The global envelope is calculated by iteration: the simulations reaching one of the upper or lower values at any distance are eliminated at each step. The process is repeated until \emph{Alpha / Number of simulations} simulations are dropped. The remaining upper and lower bounds at all distances constitute the global envelope. Interpolation is used if the exact ratio cannot be reached.
 }
 \value{
   An envelope object (\code{\link{envelope}}). There are methods for print and plot for this class.
   
-  The \code{fv} contains the observed value of the function, its average simulated value and the confidence enveloppe.
+  The \code{fv} contains the observed value of the function, its average simulated value and the confidence envelope.
 }
 \references{
   Duranton, G. and Overman, H. G. (2005). Testing for Localisation Using Micro-Geographic Data. \emph{Review of Economic Studies} 72(4): 1077-1106.

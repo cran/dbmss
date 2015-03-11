@@ -1,15 +1,23 @@
 Dhat <-
-function(X, r = NULL, Cases, Controls, Intertype = FALSE, CheckArguments = TRUE) {
+function(X, r = NULL, Cases, Controls = NULL, Intertype = FALSE, CheckArguments = TRUE) {
   if (CheckArguments) {
     CheckdbmssArguments()
   }
   # K of cases.
-  KCases <- Khat(X, r, Cases, Cases, CheckArguments)   
+  KCases <- Khat(X, r, Cases, Cases, CheckArguments = FALSE)
+  # Default controls are all points except cases. Reserved name is "CoNtRoLs_"
+  Y <- X
+  if (is.null(Controls)) {
+    Controls <- "CoNtRoLs_"
+    if (Controls %in% levels(Y$marks$PointType)) stop("A point type is named 'CoNtRoLs_'. It must be changed to use the 'Controls = NULL' option of Dhat.")
+    levels(Y$marks$PointType) <- c(levels(Y$marks$PointType), Controls)
+    Y$marks$PointType[Y$marks$PointType != Cases] <- Controls
+  }
   # K of controls. r must be those of cases.
   if (Intertype) {
-    KControls <- Khat(X, KCases$r, Cases, Controls, CheckArguments)   
+    KControls <- Khat(Y, KCases$r, Cases, Controls, CheckArguments = FALSE)   
   } else {
-    KControls <- Khat(X, KCases$r, Controls, Controls, CheckArguments)     
+    KControls <- Khat(Y, KCases$r, Controls, Controls, CheckArguments = FALSE)     
   }
   # Calculate the difference (a difference between fv's yields a dataframe)
   Dvalues <- KCases-KControls

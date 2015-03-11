@@ -1,5 +1,5 @@
-\name{FillEnveloppe}
-\alias{FillEnveloppe}
+\name{FillEnvelope}
+\alias{FillEnvelope}
 \title{
   Transform simulation values to an fv
 }
@@ -7,7 +7,7 @@
   This function is used internally to calculate envelope values and store them into an \code{\link{fv.object}}.
 }
 \usage{
-FillEnveloppe(Envelope, Alpha, Global)
+FillEnvelope(Envelope, Alpha, Global)
 }
 \arguments{
   \item{Envelope}{

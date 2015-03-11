@@ -9,17 +9,15 @@ using namespace Rcpp;
 void CountNbd(SEXP Rr, SEXP Rx, SEXP Ry, SEXP RWeight, SEXP RNbd, SEXP RIsReferenceType, SEXP RIsNeighborType);
 RcppExport SEXP dbmss_CountNbd(SEXP RrSEXP, SEXP RxSEXP, SEXP RySEXP, SEXP RWeightSEXP, SEXP RNbdSEXP, SEXP RIsReferenceTypeSEXP, SEXP RIsNeighborTypeSEXP) {
 BEGIN_RCPP
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< SEXP >::type Rr(RrSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type Rx(RxSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type Ry(RySEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RWeight(RWeightSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RNbd(RNbdSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RIsReferenceType(RIsReferenceTypeSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RIsNeighborType(RIsNeighborTypeSEXP );
-        CountNbd(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType);
-    }
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< SEXP >::type Rr(RrSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type Rx(RxSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type Ry(RySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RWeight(RWeightSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RNbd(RNbdSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RIsReferenceType(RIsReferenceTypeSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RIsNeighborType(RIsNeighborTypeSEXP);
+    CountNbd(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType);
     return R_NilValue;
 END_RCPP
 }
@@ -27,17 +25,15 @@ END_RCPP
 void CountNbdCC(SEXP Rr, SEXP Rx, SEXP Ry, SEXP RWeight, SEXP RNbd, SEXP RIsReferenceType, SEXP RIsNeighborType);
 RcppExport SEXP dbmss_CountNbdCC(SEXP RrSEXP, SEXP RxSEXP, SEXP RySEXP, SEXP RWeightSEXP, SEXP RNbdSEXP, SEXP RIsReferenceTypeSEXP, SEXP RIsNeighborTypeSEXP) {
 BEGIN_RCPP
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< SEXP >::type Rr(RrSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type Rx(RxSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type Ry(RySEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RWeight(RWeightSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RNbd(RNbdSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RIsReferenceType(RIsReferenceTypeSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RIsNeighborType(RIsNeighborTypeSEXP );
-        CountNbdCC(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType);
-    }
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< SEXP >::type Rr(RrSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type Rx(RxSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type Ry(RySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RWeight(RWeightSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RNbd(RNbdSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RIsReferenceType(RIsReferenceTypeSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RIsNeighborType(RIsNeighborTypeSEXP);
+    CountNbdCC(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType);
     return R_NilValue;
 END_RCPP
 }
@@ -45,17 +41,15 @@ END_RCPP
 void DistKd(SEXP Rx, SEXP Ry, SEXP RPointWeight, SEXP RWeights, SEXP RDist, SEXP RIsReferenceType, SEXP RIsNeighborType);
 RcppExport SEXP dbmss_DistKd(SEXP RxSEXP, SEXP RySEXP, SEXP RPointWeightSEXP, SEXP RWeightsSEXP, SEXP RDistSEXP, SEXP RIsReferenceTypeSEXP, SEXP RIsNeighborTypeSEXP) {
 BEGIN_RCPP
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< SEXP >::type Rx(RxSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type Ry(RySEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RPointWeight(RPointWeightSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RWeights(RWeightsSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RDist(RDistSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RIsReferenceType(RIsReferenceTypeSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RIsNeighborType(RIsNeighborTypeSEXP );
-        DistKd(Rx, Ry, RPointWeight, RWeights, RDist, RIsReferenceType, RIsNeighborType);
-    }
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< SEXP >::type Rx(RxSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type Ry(RySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RPointWeight(RPointWeightSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RWeights(RWeightsSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RDist(RDistSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RIsReferenceType(RIsReferenceTypeSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RIsNeighborType(RIsNeighborTypeSEXP);
+    DistKd(Rx, Ry, RPointWeight, RWeights, RDist, RIsReferenceType, RIsNeighborType);
     return R_NilValue;
 END_RCPP
 }
@@ -63,17 +57,15 @@ END_RCPP
 void CountNbdKd(SEXP Rr, SEXP Rx, SEXP Ry, SEXP RWeight, SEXP RNbd, SEXP RIsReferenceType, SEXP RIsNeighborType);
 RcppExport SEXP dbmss_CountNbdKd(SEXP RrSEXP, SEXP RxSEXP, SEXP RySEXP, SEXP RWeightSEXP, SEXP RNbdSEXP, SEXP RIsReferenceTypeSEXP, SEXP RIsNeighborTypeSEXP) {
 BEGIN_RCPP
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< SEXP >::type Rr(RrSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type Rx(RxSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type Ry(RySEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RWeight(RWeightSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RNbd(RNbdSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RIsReferenceType(RIsReferenceTypeSEXP );
-        Rcpp::traits::input_parameter< SEXP >::type RIsNeighborType(RIsNeighborTypeSEXP );
-        CountNbdKd(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType);
-    }
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< SEXP >::type Rr(RrSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type Rx(RxSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type Ry(RySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RWeight(RWeightSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RNbd(RNbdSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RIsReferenceType(RIsReferenceTypeSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type RIsNeighborType(RIsNeighborTypeSEXP);
+    CountNbdKd(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType);
     return R_NilValue;
 END_RCPP
 }

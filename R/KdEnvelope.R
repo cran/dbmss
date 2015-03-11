@@ -1,6 +1,7 @@
 KdEnvelope <-
-function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, NeighborType = ReferenceType, 
-         Weighted = FALSE, Original = TRUE, Approximate = ifelse(X$n < 10000, 0, 1),
+function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, 
+         ReferenceType, NeighborType = ReferenceType, Weighted = FALSE,  Original = TRUE, 
+         Approximate = ifelse(X$n < 10000, 0, 1), Adjust = 1, MaxRange = "ThirdW", 
          SimulationType = "RandomLocation", Global = FALSE) {
 
   CheckdbmssArguments()
@@ -15,7 +16,8 @@ function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, Ne
     stop(paste("The null hypothesis", sQuote(SimulationType), "has not been recognized."))
   # local envelope, keep extreme values for lo and hi (nrank=1)
   Envelope <- envelope(X, fun=Kdhat, nsim=NumberOfSimulations, nrank=1,
-                       r=r, ReferenceType=ReferenceType, NeighborType=NeighborType, Weighted=Weighted, Original=Original, Approximate=Approximate,
+                       r=r, ReferenceType=ReferenceType, NeighborType=NeighborType, Weighted=Weighted, Original=Original, 
+                       Approximate=Approximate, Adjust=Adjust, MaxRange=MaxRange,
                        CheckArguments = FALSE,
                        simulate=SimulatedPP, savefuns=TRUE
                        )
@@ -25,7 +27,7 @@ function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, Ne
                                         PopulationIndependence = "Population Independence"
                                         )
   # Calculate confidence intervals
-  Envelope <- FillEnveloppe(Envelope, Alpha, Global)
+  Envelope <- FillEnvelope(Envelope, Alpha, Global)
   # No edge effect correction
   attr(Envelope, "einfo")$valname <- NULL
   # Return the envelope

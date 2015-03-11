@@ -8,14 +8,15 @@
 }
 \usage{
 mhat(X, r = NULL, ReferenceType, NeighborType = ReferenceType,
-    CaseControl = FALSE, adjust = 1, CheckArguments = TRUE)
+    CaseControl = FALSE, Original = TRUE, Approximate = ifelse(X$n < 10000, 0, 1),
+    Adjust = 1, MaxRange = "ThirdW", CheckArguments = TRUE)
 }
 \arguments{
   \item{X}{
     A weighted, marked planar point pattern (\code{\link{wmppp.object}}).
   }
   \item{r}{
-    A vector of distances. If \code{NULL}, a default value is set: 512 equally spaced values are used up to the median distance between points (following Duranton and Overman, 2005).
+    A vector of distances. If \code{NULL}, a default value is set: 512 equally spaced values are used, from the smallest distance to the range defined by \code{MaxRange}. the between points to half the diameter of the window.
   }
   \item{ReferenceType}{
     One of the point types.
@@ -26,25 +27,41 @@ mhat(X, r = NULL, ReferenceType, NeighborType = ReferenceType,
   \item{CaseControl}{
     Logical; if \code{TRUE}, the case-control version of \emph{M} is computed. \emph{ReferenceType} points are cases, \emph{NeighborType} points are controls.
   }
-  \item{adjust}{
-    Force the automatically selected bandwidth to be multiplied by \code{adjust}. Setting it to values lower than one (1/2 for example) will sharpen the estimation.
+  \item{Original}{
+    Logical; if \code{TRUE} (by default), the original bandwidth selection by Duranton and Overman (2005) following Silverman (1986: eq 3.31) is used. If \code{FALSE}, it is calculated following Sheather and Jones (1991), \emph{i.e.} the state of the art. See \code{\link{bw.SJ}} for more details.
+  }
+  \item{Approximate}{
+    if not 0 (1 is a good choice), exact distances between pairs of points are rounded to 1024 times \code{Approximate} single values equally spaced between 0 and the largest distance. This technique (Scholl and Brenner, 2013) allows saving a lot of memory when addressing large point sets (the default value is 1 over 10000 points). Increasing \code{Approximate} allows better precision at the cost of proportional memory use.
+  }
+  \item{Adjust}{
+    Force the automatically selected bandwidth (following \code{Original}) to be multiplied by \code{Adjust}. Setting it to values lower than one (1/2 for example) will sharpen the estimation. 
+  }
+  \item{MaxRange}{
+    The maximum value of \code{r} to consider, ignored if \code{r} is not \code{NULL}. Default is "ThirdW", one third of the diameter of the window. Other choices are "HalfW", and "QuarterW" and "D02005".
+    "HalfW", and "QuarterW" are for half or the quarter of the diameter of the window.
+    "D02005" is for the median distance observed between points, following Duranton and Overman (2005). "ThirdW" should be close to "DO2005" but has the advantage to be independent of the point types chosen as \code{ReferenceType} and \code{NeighborType}, to simplify comparisons between different types. "D02005" is approximated by "ThirdW" if \code{Approximate} is not 0.
   }
   \item{CheckArguments}{
     Logical; if \code{TRUE}, the function arguments are verified. Should be set to \code{FALSE} to save time in simulations for example, when the arguments have been checked elsewhere.
   }
 }
 \details{
-  \emph{m} is a weighted, density, relative measure of a point pattern structure. Its value at any distance is the ratio of neighbors of the \emph{NeighborType} to all points around \emph{ReferenceType} points, normalized by its value over the windows.
+  \emph{m} is a weighted, density, relative measure of a point pattern structure (Lang \emph{et al.}, 2014). Its value at any distance is the ratio of neighbors of the \emph{NeighborType} to all points around \emph{ReferenceType} points, normalized by its value over the windows.
   
-  The number of neighbors at each distance is estimated by a Gaussian kernel whose bandwith is chosen optimally according to Sheather and Jones (1991). It can be sharpened or smoothed by multiplying it by \code{adjust}.
+  The number of neighbors at each distance is estimated by a Gaussian kernel whose bandwith is chosen optimally according to Silverman (1986: eq 3.31). It can be sharpened or smoothed by multiplying it by \code{Adjust}. The bandwidth of Sheather and Jones (1991) would be better but it is very slow to calculate for large point patterns and it sometimes fails. It is often sharper than that of Silverman. 
 }
+
 \value{
   An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.
 }
 \references{
   Duranton, G. and Overman, H. G. (2005). Testing for Localisation Using Micro-Geographic Data. \emph{Review of Economic Studies} 72(4): 1077-1106.
 
-  Sheather, S. J. and Jones M. C. (1991) A reliable data-based bandwidth selection method for kernel density estimation. Journal of the Royal Statistical Society B, 53(3): 683-690.
+  Lang G., Marcon E. and Puech F. (2014) Distance-Based Measures of Spatial Concentration: Introducing a Relative Density Function. \emph{HAL} 01082178, 1-18.
+
+  Sheather, S. J. and Jones, M. C. (1991) A reliable data-based bandwidth selection method for kernel density estimation. \emph{Journal of the Royal Statistical Society series B}, 53, 683-690.
+
+  Silverman, B. W. (1986). \emph{Density estimation for statistics and data analysis}. Chapman and Hall, London.
 }
 \author{
   Eric Marcon <Eric.Marcon@ecofog.gf>

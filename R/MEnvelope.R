@@ -24,7 +24,7 @@ function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, Ne
                                         PopulationIndependence = "Population Independence"
                                         )
   # Calculate confidence intervals
-  Envelope <- FillEnveloppe(Envelope, Alpha, Global)
+  Envelope <- FillEnvelope(Envelope, Alpha, Global)
   # No edge effect correction
   attr(Envelope, "einfo")$valname <- NULL
   # Return the envelope

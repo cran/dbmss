@@ -1,4 +1,4 @@
-FillEnveloppe <-
+FillEnvelope <-
 function(Envelope, Alpha, Global) {
 
   # Sims contains simulated values (one line per simulation)

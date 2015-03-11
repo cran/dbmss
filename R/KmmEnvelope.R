@@ -15,7 +15,7 @@ function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType = "
   attr(Envelope, "einfo")$H0 <- "Random Location"
   
   # Calculate confidence intervals
-  Envelope <- FillEnveloppe(Envelope, Alpha, Global)
+  Envelope <- FillEnvelope(Envelope, Alpha, Global)
   # Return the envelope
   return (Envelope)
 }

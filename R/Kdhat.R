@@ -1,7 +1,7 @@
 Kdhat <-
 function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FALSE,
-         Original = TRUE, Approximate = ifelse(X$n < 10000, 0, 1), 
-         CheckArguments = TRUE) {
+         Original = TRUE, Approximate = ifelse(X$n < 10000, 0, 1), Adjust = 1,
+         MaxRange = "ThirdW", CheckArguments = TRUE) {
   
   if (CheckArguments) {
     CheckdbmssArguments()
@@ -30,19 +30,25 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
     IsNeighborType <- Y$marks$PointType==NeighborType
   }
 
+  # Roughly estimate max distances
+  if(is.null(r)) {
+    # Default interval for R: between the min distance
+    rmin <- 0
+    # and the diameter of the window /2 or /4. DO2005 is ignored at this stage.
+    rmax <- switch(MaxRange,
+                   HalfW = diameter(X$win)/2,
+                   ThirdW =  diameter(X$win)/3,
+                   QuarterW = diameter(X$win)/4)
+    if(is.null(rmax)) rmax <- diameter(X$win)/3
+  } else {
+    rmin <- 0
+    rmax <- max(r)
+  }
+  
   if (Approximate) {
     # Round distances to save memory
-    # Roughly estimate max distances
-    if(is.null(r)) {
-      # Default interval for R: between the min distance and the median one.
-      rmin <- 0
-      rmax <- sqrt((max(Y$x)-min(Y$x))^2 + (max(Y$y)-min(Y$y))^2)
-    } else {
-      rmin <- 0
-      rmax <- max(r)
-    }
-    # Prepare 1024*Approximate steps
-    rseq <- seq(from = rmin, to = rmax, length.out = 1024*Approximate)
+    # Prepare steps so that 1024*Approximate steps are between 0 and rmax. Pairs further than 2*rmax apart are dropped.
+    rseq <- seq(from = rmin, to = rmax*2, length.out = 2048*Approximate)
     Nr <- length(rseq)
     # Prepare a matrix, single line, one value for each distance.
     NeighborWeights <- matrix(0.0, nrow=1, ncol=Nr)
@@ -59,12 +65,14 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
     # Adjust distances: values are the centers of intervals
     rseq <- c(0, (rseq[2:Nr]+rseq[1:Nr-1])/2)
 
-    if(is.null(r)) {
-      # Find the max distance, take the median
-      rmax <- max(rseq[NeighborWeights>0])/2
+    # Estimate the density. Change the bandwith according to adjust if requested.
+    if (Adjust != 1) {
+      if (Original) {
+        h <- bw.nrd0(rseq) * Adjust
+      } else {
+        h <- bw.SJ(rseq) * Adjust
+      }
     }
-    
-    # Estimate the density
     Density <- density(rseq, weights=NeighborWeights/sum(NeighborWeights), cut=0, to=rmax, bw=bw)  
     
   } else {
@@ -90,18 +98,24 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
     DistKd(Y$x, Y$y, Y$marks$PointWeight, Weights, Dist, IsReferenceType, IsNeighborType)
     
     if(is.null(r)) {
-      # Default interval for R: between the min distance and the median one.
+      # Min distance obtained from the data rather than 0
       rmin <- min(Dist)
-      rmax <- median(Dist)
-    } else {
-      rmin <- min(r)
-      rmax <- max(r)
+      # Max distance may be obtained from the data rather than from the window
+      if (MaxRange == "DO2005") rmax <- median(Dist)
     }
-    # Estimate probability density.
+    
+    # Estimate the density. Change the bandwith according to adjust if requested.
+    if (Adjust != 1) {
+      if (Original) {
+        h <- bw.nrd0(Dist) * Adjust
+      } else {
+        h <- bw.SJ(Dist) * Adjust
+      }
+    }
     if (Weighted) {
       Density <- density(Dist, weights=Weights/sum(Weights), cut=0, from=rmin, to=rmax, bw=bw)
     } else {
-      Density <- density(Dist, cut=0, from=rmin, to=rmax, bw=bw)  
+      Density <- density(Dist, cut=0, from=rmin, to=rmax, bw=bw)
     }
   }
   

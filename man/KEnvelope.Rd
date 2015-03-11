@@ -43,12 +43,12 @@ KEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05,
 \details{
   This envelope is local by default, that is to say it is computed separately at each distance. See Loosmore and Ford (2006) for a discussion.
   
-  The global enveloppe is calculated by iteration: the simulations reaching one of the upper or lower values at any distance are eliminated at each step. The process is repeated until \emph{Alpha / Number of simulations} simulations are dropped. The remaining upper and lower bounds at all distances constitute the global envelope. Interpolation is used if the exact ratio cannot be reached.
+  The global envelope is calculated by iteration: the simulations reaching one of the upper or lower values at any distance are eliminated at each step. The process is repeated until \emph{Alpha / Number of simulations} simulations are dropped. The remaining upper and lower bounds at all distances constitute the global envelope. Interpolation is used if the exact ratio cannot be reached.
 }
 \value{
   An envelope object (\code{\link{envelope}}). There are methods for print and plot for this class.
   
-  The \code{fv} contains the observed value of the function, its average simulated value and the confidence enveloppe.
+  The \code{fv} contains the observed value of the function, its average simulated value and the confidence envelope.
 }
 \references{
   Duranton, G. and Overman, H. G. (2005). Testing for Localisation Using Micro-Geographic Data. \emph{Review of Economic Studies} 72(4): 1077-1106.
@@ -58,6 +58,8 @@ KEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05,
   Loosmore, N. B. and Ford, E. D. (2006). Statistical inference using the G or K point pattern spatial statistics. \emph{Ecology} 87(8): 1925-1931.
   
   Marcon, E. and F. Puech (2012). A typology of distance-based measures of spatial concentration. \emph{HAL SHS}. 00679993.
+
+  Silverman, B. W. (1986). \emph{Density estimation for statistics and data analysis}. Chapman and Hall, London.
 }
 \author{
   Eric Marcon <Eric.Marcon@ecofog.gf>

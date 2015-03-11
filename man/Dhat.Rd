@@ -6,7 +6,7 @@
 \description{
   Estimates the \emph{D} function}
 \usage{
-Dhat(X, r = NULL, Cases, Controls, Intertype = FALSE, CheckArguments = TRUE)
+Dhat(X, r = NULL, Cases, Controls = NULL, Intertype = FALSE, CheckArguments = TRUE)
 }
 \arguments{
   \item{X}{
@@ -19,7 +19,7 @@ Dhat(X, r = NULL, Cases, Controls, Intertype = FALSE, CheckArguments = TRUE)
     One of the point types.
   }
   \item{Controls}{
-    One of the point types.
+    One of the point types. If \code{NULL}, controls are all types except for cases.
   }
   \item{Intertype}{
     Logical; if \code{TRUE}, \emph{D} is computed as \emph{Di} in Marcon and Puech (2012). 
