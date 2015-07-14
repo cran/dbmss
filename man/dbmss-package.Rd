@@ -12,8 +12,8 @@
 \tabular{ll}{
 Package: \tab dbmss\cr
 Type: \tab Package\cr
-Version: \tab 2.1.3\cr
-Date: \tab 2015-03-11\cr
+Version: \tab 2.2.1\cr
+Date: \tab 2015-07-14\cr
 License: \tab GNU General Public License\cr
 }
 }
@@ -26,6 +26,6 @@ Florence Puech
 Maintainer: Eric Marcon <Eric.Marcon@ecofog.gf>
 }
 \references{
-  Marcon, E., Lang, G., Traissac, S. and F. Puech (submitted). Tools to Characterize Point Patterns: dbmss for R. \emph{Journal of Statistical Software}.
+  Marcon, E., Lang, G., Traissac, S. and F. Puech (in press). Tools to Characterize Point Patterns: dbmss for R. \emph{Journal of Statistical Software}.
 }
 \keyword{package}

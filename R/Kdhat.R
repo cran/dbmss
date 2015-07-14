@@ -68,12 +68,12 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
     # Estimate the density. Change the bandwith according to adjust if requested.
     if (Adjust != 1) {
       if (Original) {
-        h <- bw.nrd0(rseq) * Adjust
+        bw <- stats::bw.nrd0(rseq) * Adjust
       } else {
-        h <- bw.SJ(rseq) * Adjust
+        bw <- stats::bw.SJ(rseq) * Adjust
       }
     }
-    Density <- density(rseq, weights=NeighborWeights/sum(NeighborWeights), cut=0, to=rmax, bw=bw)  
+    Density <- stats::density(rseq, weights=NeighborWeights/sum(NeighborWeights), cut=0, to=rmax, bw=bw)  
     
   } else {
     # Classical estimation
@@ -101,21 +101,21 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
       # Min distance obtained from the data rather than 0
       rmin <- min(Dist)
       # Max distance may be obtained from the data rather than from the window
-      if (MaxRange == "DO2005") rmax <- median(Dist)
+      if (MaxRange == "DO2005") rmax <- stats::median(Dist)
     }
     
     # Estimate the density. Change the bandwith according to adjust if requested.
     if (Adjust != 1) {
       if (Original) {
-        h <- bw.nrd0(Dist) * Adjust
+        bw <- stats::bw.nrd0(Dist) * Adjust
       } else {
-        h <- bw.SJ(Dist) * Adjust
+        bw <- stats::bw.SJ(Dist) * Adjust
       }
     }
     if (Weighted) {
-      Density <- density(Dist, weights=Weights/sum(Weights), cut=0, from=rmin, to=rmax, bw=bw)
+      Density <- stats::density(Dist, weights=Weights/sum(Weights), cut=0, from=rmin, to=rmax, bw=bw)
     } else {
-      Density <- density(Dist, cut=0, from=rmin, to=rmax, bw=bw)
+      Density <- stats::density(Dist, cut=0, from=rmin, to=rmax, bw=bw)
     }
   }
   
@@ -126,7 +126,7 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
     Kd <- Density$y
   } else {
     # Interpolate results at the chosen R
-    Kd <- approx(Density$x, Density$y, xout=r)$y    
+    Kd <- stats::approx(Density$x, Density$y, xout=r)$y    
   }
   KdEstimate <- data.frame(r, Kd)
   colnames(KdEstimate) <- c("r", "Kd")

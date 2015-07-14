@@ -131,8 +131,8 @@ Ktest <- function(X, r)
     b2 <- brn(ra2, w, l)
     
     # Numerical computing of the elliptic integral
-    int2 <- integrate(integrand3, lower=0, upper=1, r1=ra1, r2=ra2)
-    intcorner <- adaptIntegrate(corner, lowerLimit=c(0, 0), upperLimit=c(1, 1))
+    int2 <- stats::integrate(integrand3, lower=0, upper=1, r1=ra1, r2=ra2)
+    intcorner <- cubature::adaptIntegrate(corner, lowerLimit=c(0, 0), upperLimit=c(1, 1))
   
     # line 1
     covh1_ <- (w-2*r2)/w*(l-2*r2)/l*b1*b2
@@ -191,7 +191,7 @@ Ktest <- function(X, r)
     Kest <- NbPairs*w*l/(X$n*(X$n-1))-espKi_
     
     TestVector <- invsqrtmat(sigmaKi_) %*% Kest 
-    return(1-pchisq(sum(TestVector*TestVector), length(r)))
+    return(1 - stats::pchisq(sum(TestVector*TestVector), length(r)))
   }
   else return(NA) 
 }

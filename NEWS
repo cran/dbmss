@@ -1,3 +1,12 @@
+  CHANGES IN dbmss VERSION 2.2.1
+  ==============================
+
+BUG FIXES
+
+  o Adjust argument ignored in Kdhat. Fixed.
+
+
+
   CHANGES IN dbmss VERSION 2.2.0
   ==============================
   

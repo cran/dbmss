@@ -71,16 +71,16 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
     
     # Estimate the bandwith according to adjust if requested.
     if (Original) {
-      h <- bw.nrd0(rseq)*Adjust
+      h <- stats::bw.nrd0(rseq)*Adjust
     } else {
-      h <- bw.SJ(rseq)*Adjust
+      h <- stats::bw.SJ(rseq)*Adjust
     }
 
     # Calculate densities of neighbors (with unnormalized weights so suppress warnings)
-    Djc <- t(apply(Nbd[, 1:Nr], 1, function(x) suppressWarnings(density(rseq, bw=h, weights=x, cut=0, from=rmin, to=rmax, na.rm=TRUE))$y))
-    Dj <- t(apply(Nbd[, (Nr+1):(2*Nr)], 1, function(x) suppressWarnings(density(rseq, bw=h, weights=x, cut=0, from=rmin, to=rmax, na.rm=TRUE))$y))
+    Djc <- t(apply(Nbd[, 1:Nr], 1, function(x) suppressWarnings(stats::density(rseq, bw=h, weights=x, cut=0, from=rmin, to=rmax, na.rm=TRUE))$y))
+    Dj <- t(apply(Nbd[, (Nr+1):(2*Nr)], 1, function(x) suppressWarnings(stats::density(rseq, bw=h, weights=x, cut=0, from=rmin, to=rmax, na.rm=TRUE))$y))
     # Get the x values of the density estimation: estimate one vector
-    x <- density(rseq, bw=h, cut=0, from=rmin, to=rmax, na.rm=TRUE)$x
+    x <- stats::density(rseq, bw=h, cut=0, from=rmin, to=rmax, na.rm=TRUE)$x
     
     
   } else {
@@ -90,9 +90,9 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
     diag(pdAll) <- NA    
     # Choose the bandwith based on all distance pairs between reference and neighbor points
     if (Original) {
-      h <- bw.nrd0(pdAll[upper.tri(pdAll) & outer(IsReferenceType, IsNeighborType)]) * Adjust
+      h <- stats::bw.nrd0(pdAll[upper.tri(pdAll) & outer(IsReferenceType, IsNeighborType)]) * Adjust
     } else {
-      h <- bw.SJ(pdAll[upper.tri(pdAll) & outer(IsReferenceType, IsNeighborType)]) * Adjust
+      h <- stats::bw.SJ(pdAll[upper.tri(pdAll) & outer(IsReferenceType, IsNeighborType)]) * Adjust
     }
     # Keep the lines of the matrix corresponding to reference points (cases).
     pdAll <- pdAll[IsReferenceType, ]
@@ -101,14 +101,14 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
       # Min distance obtained from the data rather than 0
       rmin <- min(pdAll, na.rm=TRUE)
       # Max distance may be obtained from the data rather than from the window
-      if (MaxRange == "DO2005") rmax <- median(pdAll, na.rm = TRUE)
+      if (MaxRange == "DO2005") rmax <- stats::median(pdAll, na.rm = TRUE)
     }
 
     # Calculate densities of neighbors (with unnormalized weights so suppress warnings)
-    Djc <- t(apply(pdAll[, IsNeighborType], 1, function(x) suppressWarnings(density(x, bw=h, weights=X$marks$PointWeight[IsNeighborType][!is.na(x)], cut=0, from=rmin, to=rmax, na.rm=TRUE))$y))
-    Dj <- t(apply(pdAll, 1, function(x) suppressWarnings(density(x, bw=h, weights=X$marks$PointWeight[!is.na(x)], cut=0, from=rmin, to=rmax, na.rm=TRUE))$y))
+    Djc <- t(apply(pdAll[, IsNeighborType], 1, function(x) suppressWarnings(stats::density(x, bw=h, weights=X$marks$PointWeight[IsNeighborType][!is.na(x)], cut=0, from=rmin, to=rmax, na.rm=TRUE))$y))
+    Dj <- t(apply(pdAll, 1, function(x) suppressWarnings(stats::density(x, bw=h, weights=X$marks$PointWeight[!is.na(x)], cut=0, from=rmin, to=rmax, na.rm=TRUE))$y))
     # Get the x values of the density estimation: estimate one vector
-    x <- density(pdAll[1, IsNeighborType], bw=h, cut=0, from=rmin, to=rmax, na.rm=TRUE)$x
+    x <- stats::density(pdAll[1, IsNeighborType], bw=h, cut=0, from=rmin, to=rmax, na.rm=TRUE)$x
   }
   
   
@@ -121,7 +121,7 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
   if (is.null(r)) {
     r <- x
   } else {
-    mvalues <- approx(x, mvalues, xout=r)$y
+    mvalues <- stats::approx(x, mvalues, xout=r)$y
   }
   # Put the results into an fv object
   mEstimate <- data.frame(r, rep(1, length(r)), mvalues)
