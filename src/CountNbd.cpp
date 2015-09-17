@@ -217,7 +217,8 @@ void CountNbdKd(SEXP Rr, SEXP Rx, SEXP Ry, SEXP RWeight, SEXP RNbd, SEXP RIsRefe
   double Distance2;
   double Nr = r.length();
   NumericVector r2 = r*r;
-
+  int k = 0; 
+  
   for (int i=0; i < (x.length()-1); i++) {
     // Consider reference type points
     if (IsReferenceType[i]) {
@@ -225,25 +226,27 @@ void CountNbdKd(SEXP Rr, SEXP Rx, SEXP Ry, SEXP RWeight, SEXP RNbd, SEXP RIsRefe
       for (int j=i+1; j < x.length(); j++) {
         // Calculate squared distance
         Distance2 = (x[i]-x[j])*(x[i]-x[j]) + (y[i]-y[j])*(y[i]-y[j]);
-        // Ignore point j if it is too far from point i
         if (Distance2 <= r2[Nr-1]) {
           // Find the column of the matrix corresponding to the distance
-          int k = 0; 
+          k = 0; 
           while (Distance2 > r2[k]) {
             k++;
           }
-          // The neighbor is a point of interest
-          if (IsNeighborType[j]) {
+        } else {
+          // Extra column for pairs far away
+          k = Nr;
+        }
+        // The neighbor is a point of interest
+        if (IsNeighborType[j]) {
+          Nbd(0, k) += Weight[i]*Weight[j];
+        }
+        // j is a reference point
+        if (IsReferenceType[j]) {
+          // i is a point of interest around j
+          if (IsNeighborType[i]) {
             Nbd(0, k) += Weight[i]*Weight[j];
           }
-          // j is a reference point
-          if (IsReferenceType[j]) {
-            // i is a point of interest around j
-            if (IsNeighborType[i]) {
-              Nbd(0, k) += Weight[i]*Weight[j];
-            }
-          }        
-        }
+        }        
       }
     } else {
       // Point i is not a reference point
@@ -252,17 +255,19 @@ void CountNbdKd(SEXP Rr, SEXP Rx, SEXP Ry, SEXP RWeight, SEXP RNbd, SEXP RIsRefe
         if (IsReferenceType[j]) {
           // Calculate squared distance
           Distance2 = (x[i]-x[j])*(x[i]-x[j]) + (y[i]-y[j])*(y[i]-y[j]);
-          // Ignore point j if it is too far from point i
           if (Distance2 <= r2[Nr-1]) {
             // Find the column of the matrix corresponding to the distance
-            int k = 0; 
+            k = 0; 
             while (Distance2 > r2[k]) {
               k++;
             }
-            // i is a point of interest around j
-            if (IsNeighborType[i]) {
-              Nbd(0, k) += Weight[i]*Weight[j];
-            }
+          } else {
+            // Extra column for pairs far away
+            k = Nr;
+          }
+          // i is a point of interest around j
+          if (IsNeighborType[i]) {
+            Nbd(0, k) += Weight[i]*Weight[j];
           }
         }
       }

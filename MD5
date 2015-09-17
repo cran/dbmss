@@ -1,6 +1,6 @@
-2ea9b4e8f58a7c971299f2495a95aaae *DESCRIPTION
+deb3511a1ea4b44fe147dc6fd15025ad *DESCRIPTION
 916e58d126bb18af3a8e171690642451 *NAMESPACE
-021c4ed5ee21f0686b6f84d8b80bedbe *NEWS
+35487893e045670564bfcf401fab62aa *NEWS
 0860df07a4495e47644cdeec03e24cf9 *R/CheckdbmssArguments.R
 ca8a7c4ef9695353693001211b1378da *R/DEnvelope.R
 bdcf6f3962fd6eb71869f668a72e8e5b *R/Dhat.R
@@ -9,7 +9,7 @@ f1689752dfe089892b84a5b259d98c36 *R/GlobalEnvelope.R
 8e8bec51a9e6d27858d6120f3686eb35 *R/GoFtest.R
 7657dcb592bb2b15e609134809f29eb5 *R/KEnvelope.R
 62452b17c971543882ebde5b1d6b9d3b *R/KdEnvelope.R
-55a9dbfda30527a19b63a6a0b3681b20 *R/Kdhat.R
+d7780b5412274a07380539a7b16c9a74 *R/Kdhat.R
 32359b2a93c1c945da6ed824496dff11 *R/Khat.R
 ae2aecf055a4283731fb6b983179af9f *R/KinhomEnvelope.R
 3f1a5a8f66b89ef3ca53602dd09cff8b *R/Kinhomhat.R
@@ -41,7 +41,7 @@ bafb41f314c2b09e876cbfca5cbc3482 *R/rRandomLabelingM.R
 3db50e2b947a9f07a962499a88ef5fa3 *R/rRandomPositionK.R
 2563df302d990e470eadc09faf8f0fb8 *R/summary.dbmssEnvelope.R
 bab6a3733538009123b7e1ca74e15166 *R/wmppp.R
-363c096023741df343090db7efa91ddf *build/vignette.rds
+c61d107044a46605190936f7a7cf0a5d *build/vignette.rds
 8facc4dd5b258d928eb05bbef3667c99 *data/paracou16.RData
 7b0bb6b0df245b20a84ebffc0242c939 *inst/CITATION
 5185be00ad6a5c050238797d29245436 *inst/doc/dbmss.R
@@ -70,7 +70,7 @@ ebf0005c4b08728db15b590fec9dc763 *man/MEnvelope.Rd
 77a531bf60072717c0ec769b2b1d0f23 *man/Mhat.Rd
 eeabd462490e3981e706f0e570d91656 *man/Rcpp.Rd
 a1049e26b1f6a0c1610b075da4f6a616 *man/as.wmppp.Rd
-e3523e585615209b552a576485b25a79 *man/dbmss-package.Rd
+a16e739dd839999ff47ae88ccb12b4af *man/dbmss-package.Rd
 74db9bf29193aaf7be755a7afa95db70 *man/dbmssEnvelope.Rd
 cd8675bb9e91c7a9bf89d05c76be87b6 *man/gEnvelope.Rd
 c20e091f2fd2b911938f22195d5415b0 *man/generic.spatstat.Rd
@@ -89,7 +89,7 @@ b6414054e142db536e972df25338d58f *man/rRandomPositionK.Rd
 734ac9be437587a7446f93553045522e *man/summary.dbmssEnvelope.Rd
 b0facdc06d8037b4daf086d324fb037c *man/wmppp.Rd
 55ecc837d220696cce7ba779313656f7 *man/wmppp.object.Rd
-b852f60c1102d45b1ae348594172c8b4 *src/CountNbd.cpp
+cc85e031a7058061e50f34f072f18e40 *src/CountNbd.cpp
 b3f86c20b81b51f5162874977d38784d *src/Makevars
 73505498722ad4b07b0ddb3067e92523 *src/Makevars.win
 523cc98d8956f3622a0c95bc4204d52f *src/RcppExports.cpp

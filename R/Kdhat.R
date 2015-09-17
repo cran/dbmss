@@ -47,11 +47,13 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
   
   if (Approximate) {
     # Round distances to save memory
-    # Prepare steps so that 1024*Approximate steps are between 0 and rmax. Pairs further than 2*rmax apart are dropped.
+    # Prepare steps so that 1024*Approximate steps are between 0 and rmax.
+    # Pairs further than 2*rmax apart will be stored in an extra element.
     rseq <- seq(from = rmin, to = rmax*2, length.out = 2048*Approximate)
+    # Number of distances
     Nr <- length(rseq)
-    # Prepare a matrix, single line, one value for each distance.
-    NeighborWeights <- matrix(0.0, nrow=1, ncol=Nr)
+    # Prepare a matrix, single line, one value for each distance + 1 extra for pairs far away.
+    NeighborWeights <- matrix(0.0, nrow=1, ncol=Nr+1)
     # Weights
     if (Weighted) {
       Weights <- Y$marks$PointWeight
@@ -73,7 +75,14 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
         bw <- stats::bw.SJ(rseq) * Adjust
       }
     }
-    Density <- stats::density(rseq, weights=NeighborWeights/sum(NeighborWeights), cut=0, to=rmax, bw=bw)  
+    
+    # The last element of the vector NeighborWeights contains the weight of pairs farther than 2 rmax
+    FarWeights <- NeighborWeights[Nr+1]
+    # Keep the other elements
+    NeighborWeights <- NeighborWeights[-(Nr+1)]
+    
+    # Estimate density taking into account far pairs. Suppress warnings because density does not sum to 1.
+    Density <- suppressWarnings(stats::density(rseq, weights=NeighborWeights/(sum(NeighborWeights)+FarWeights), cut=0, to=rmax, bw=bw))
     
   } else {
     # Classical estimation
@@ -112,10 +121,15 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
         bw <- stats::bw.SJ(Dist) * Adjust
       }
     }
+    # Increase the number of estimation points if necessary. 
+    # If rmax << Dist, too few estimation points may be below rmax
+    # Try to have at least 128 of them. Limit the total number of points to 4096 (i.e. rmax must be >1/32 max(Dist))
+    nDensity <- max(min(512, max(Dist)/rmax*128), 4096)
+    # Estimate density
     if (Weighted) {
-      Density <- stats::density(Dist, weights=Weights/sum(Weights), cut=0, from=rmin, to=rmax, bw=bw)
+      Density <- stats::density(Dist, weights=Weights/sum(Weights), cut=0, from=rmin, to=rmax, bw=bw, n=nDensity)
     } else {
-      Density <- stats::density(Dist, cut=0, from=rmin, to=rmax, bw=bw)
+      Density <- stats::density(Dist, cut=0, from=rmin, to=rmax, bw=bw, n=nDensity)
     }
   }
   

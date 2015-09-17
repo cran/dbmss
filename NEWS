@@ -1,3 +1,16 @@
+  CHANGES IN dbmss VERSION 2.2.2
+  ==============================
+
+MINOR CHANGE
+
+  o Intervals of estimation of the Kd function are narrower when the distance range is small with respect to the window to improve precision.
+
+BUG FIX
+
+  o Distances pairs more than twice the maximum value of r where ignored when using the approximate estimation of Kd, so Kd was overestimated when r was smaller than usual (much less than the default values). Corrected.
+
+
+
   CHANGES IN dbmss VERSION 2.2.1
   ==============================
 
