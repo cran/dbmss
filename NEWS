@@ -1,3 +1,12 @@
+  CHANGES IN dbmss VERSION 2.2.3
+  ==============================
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+  o Updated CITATION: the paper about this package has been published: Eric Marcon, Stephane Traissac, Florence Puech, Gabriel Lang (2015). Tools to Characterize Point Patterns: dbmss for R. Journal of Statistical Software, 67(3), 1-15.
+
+
+
   CHANGES IN dbmss VERSION 2.2.2
   ==============================
 

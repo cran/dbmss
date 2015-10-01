@@ -33,7 +33,7 @@
 %% almost as usual
 \author{Eric Marcon\\AgroParisTech\\UMR EcoFoG\And
         Stéphane Traissac\\AgroParisTech\\UMR EcoFoG\And
-        Florence Puech\\Université de Paris Sud\\RITM\AND
+        Florence Puech\\RITM, Univ. Paris-Sud\\Université Paris-Saclay \& EXCESS\AND
         Gabriel Lang\\AgroParisTech\\ UMR 518 Math. Info. Appli\\
 }
 
@@ -68,14 +68,14 @@ Their confidence envelopes (including global ones) and tests against counterfact
   E-mail: \email{Stephane.Traissac@ecofog.gf}\\
 
   Florence Puech\\
-  Université Paris Sud, RITM\\
-  54 Boulevard Desgranges\\
-  92 331 Sceaux Cedex, France\\
+  RITM\\
+  Univ. Paris-Sud, Université Paris-Saclay\\
+  92330 Sceaux, France\\
   E-mail: \email{Florence.Puech@u-psud.fr}\\
 
   Gabriel Lang\\
   AgroParisTech, INRA, UMR 518 Math. Info. Appli.\\
-  16 rue Claude Bernard
+  16 rue Claude Bernard\\
   75005 Paris, France\\
   E-mail: \email{Gabriel.Lang@agroparistech.fr}\\
 
@@ -89,7 +89,7 @@ Their confidence envelopes (including global ones) and tests against counterfact
 
 <<Declarations, echo=FALSE>>=
 options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
-library(dbmss)
+library("dbmss")
 @
 
 \section{Introduction}
@@ -102,7 +102,7 @@ These methods estimate the value of a function of distance to each point calcula
 \item Absolute functions such as $K_d$ \citep{Duranton2005} have no reference at all but their value can be compared to the appropriate null hypothesis to test it.
 \end{itemize}
 
-Relative and absolute functions have been built from descriptive statistics of point patterns, not related to the underlying point processes, so they are seen as heuristic and ignored by the statistical literature \citep{Illian2008}. Topographic functions are implemented in the \pkg{spatstat} package \citep{Baddeley2005} for \proglang{R} \citep{R2012} but absolute and relative functions are missing. We fill this gap by proposing the \pkg{dbmss} package. We first clarify their definition (sections \ref{Relative} and \ref{Absolute}), their null hypotheses, what they assume and what they test. The \pkg{dbmss} package makes the computation of the whole set of distance-based methods simple for empirical researchers by introducing measures that are not available elsewhere and wrapping some topographic measures available in \pkg{spatstat} so that all can be used the same way.
+Relative and absolute functions have been built from descriptive statistics of point patterns, not related to the underlying point processes, so they are seen as heuristic and ignored by the statistical literature \citep{Illian2008}. Topographic functions are implemented in the \pkg{spatstat} package \citep{Baddeley2005} for \proglang{R} \citep{R2012} but absolute and relative functions are missing. We fill this gap by proposing the \pkg{dbmss} package. It makes the computation of the whole set of distance-based methods simple for empirical researchers by introducing measures that are not available elsewhere and wrapping some topographic measures available in \pkg{spatstat} so that all can be used the same way.
 
 Estimated values of the functions must be tested against a null hypothesis. The usual empirical way to characterize a spatial structure consists in computing the appropriate function and comparing it to the quantiles of a large number of simulations of the null hypothesis to reject \citep{Kenkel1988}. We propose extended possibilities to evaluate confidence envelopes, including ``global envelopes" \citep{Duranton2005}, a goodness-of-fit test \citep{Diggle1983} and an analytical test \citep{Lang2010, Marcon2013}.
 
@@ -281,7 +281,7 @@ par(mfrow=c(1,1))
 \end{figure}
 
 We illustrate the main features of the package by two examples. The first one comes from the economic literature \citep{Bonneu2007}\footnote{The dataset can be downloaded from: 
- \url {http://www.bentley.edu/centers/sites/www.bentley.edu.centers/files/csbigs/csbigsvol1-2.zip}}. A point pattern gathers data about 20,820 emergencies implying the fire department of the urban area around Toulouse, France, during the year 2004 (Figure~\ref{Toulouse}). The workload associated to each emergency (the number of men $\times$ hours it required) is known. The original study tested the dependence between workload and location of emergencies: it did not exclude the null hypothesis of random labeling. We have a complementary approach here: we consider the 10 percent more serious emergencies, \emph{i.e.}\ those which caused the highest workload. $K_d$ may detect concentration (or dispersion) if, at a distance $r$ from a serious emergency, the probability to find another serious emergency is greater (or lower) than that of finding an emergency whatever its workload:
+ \url {http://publications-sfds.fr/index.php/csbigs/article/downloadSuppFile/376/69}}. A point pattern gathers data about 20,820 emergencies implying the fire department of the urban area around Toulouse, France, during the year 2004 (Figure~\ref{Toulouse}). The workload associated to each emergency (the number of men $\times$ hours it required) is known. The original study tested the dependence between workload and location of emergencies: it did not exclude the null hypothesis of random labeling. We have a complementary approach here: we consider the 10 percent more serious emergencies, \emph{i.e.}\ those which caused the highest workload. $K_d$ may detect concentration (or dispersion) if, at a distance $r$ from a serious emergency, the probability to find another serious emergency is greater (or lower) than that of finding an emergency whatever its workload:
 
 <<KdCode, eval=FALSE>>=
 <<CSBIGS>>
@@ -343,7 +343,7 @@ plot(Envelope, main="", ylim=c(0, 20))
 The calculated function (Figure~\ref{MQr}) is \emph{M}, showing the repulsion between \emph{V. Americana} and \emph{Q. rosea} up to 30 m. Significance is unclear, since the observed values of the function are very close to the lower bound of the envelope. The complete study, with a larger dataset allowing significant results, can be found in \cite{Marcon2012b}.
 
 \subsection{Goodness-of-fit test}
-A Goodness-of-fit test for \emph{K} has been proposed by \cite{Diggle1983}, applied to \emph{K} by \cite{Loosmore2006} and to \emph{M} by \cite{Marcon2012b}. It calculates the  distance between the actual values of the function and its average value obtained in simulations of the null hypothesis. The same distance is calculated for each simulated point pattern, and the returned $p$~value of the test if the ratio of simulations whose distance is larger than that of the real point pattern. The test is performed by the \code{GoFtest} function whose argument is the envelope previously calculated (actually, the function uses the simulation values). Applied to the example of Paracou trees, the $p$~value is 25.5\%:
+A Goodness-of-fit test for \emph{K} has been proposed by \cite{Diggle1983}, applied to \emph{K} by \cite{Loosmore2006} and to \emph{M} by \cite{Marcon2012b}. It calculates the  distance between the actual values of the function and its average value obtained in simulations of the null hypothesis. The same distance is calculated for each simulated point pattern, and the returned $p$~value of the test if the ratio of simulations whose distance is larger than that of the real point pattern. The test is performed by the \code{GoFtest} function whose argument is the envelope previously calculated (actually, the function uses the simulation values). Applied to the example of Paracou trees, the $p$~value is:
 
 <<MEnvelope>>=
 GoFtest(Envelope)

@@ -5,7 +5,7 @@
 ### code chunk number 1: Declarations
 ###################################################
 options(prompt = "R> ", continue = "+  ", width = 70, useFancyQuotes = FALSE)
-library(dbmss)
+library("dbmss")
 
 
 ###################################################

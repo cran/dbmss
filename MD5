@@ -1,6 +1,6 @@
-deb3511a1ea4b44fe147dc6fd15025ad *DESCRIPTION
+8d0ea4aeb641579a6b3da82e2cff8629 *DESCRIPTION
 916e58d126bb18af3a8e171690642451 *NAMESPACE
-35487893e045670564bfcf401fab62aa *NEWS
+6571ebdb847ecd8ac18f63848749586b *NEWS
 0860df07a4495e47644cdeec03e24cf9 *R/CheckdbmssArguments.R
 ca8a7c4ef9695353693001211b1378da *R/DEnvelope.R
 bdcf6f3962fd6eb71869f668a72e8e5b *R/Dhat.R
@@ -43,10 +43,10 @@ bafb41f314c2b09e876cbfca5cbc3482 *R/rRandomLabelingM.R
 bab6a3733538009123b7e1ca74e15166 *R/wmppp.R
 c61d107044a46605190936f7a7cf0a5d *build/vignette.rds
 8facc4dd5b258d928eb05bbef3667c99 *data/paracou16.RData
-7b0bb6b0df245b20a84ebffc0242c939 *inst/CITATION
-5185be00ad6a5c050238797d29245436 *inst/doc/dbmss.R
-81ea3d47989ebcda6da6bf254774402b *inst/doc/dbmss.Rnw
-0da4fb42586f878544ffefb1ab049fc1 *inst/doc/dbmss.pdf
+8ecbe5dc5d885164fd6f631c73f2724d *inst/CITATION
+8e85bb98e30dbbdf4dcc7a4a5e93c4a9 *inst/doc/dbmss.R
+be7573aa8cf023e68af75cdf561624be *inst/doc/dbmss.Rnw
+e11fffcf3996b32972f0fbe77d158107 *inst/doc/dbmss.pdf
 d3e4eccf39e2cc0f32b8fb9f132537ca *man/CheckdbmssArguments.Rd
 17182e800e21e405f48842a5b8391562 *man/DEnvelope.Rd
 4858550961353b65dfde33393f97f59a *man/Dhat.Rd
@@ -70,7 +70,7 @@ ebf0005c4b08728db15b590fec9dc763 *man/MEnvelope.Rd
 77a531bf60072717c0ec769b2b1d0f23 *man/Mhat.Rd
 eeabd462490e3981e706f0e570d91656 *man/Rcpp.Rd
 a1049e26b1f6a0c1610b075da4f6a616 *man/as.wmppp.Rd
-a16e739dd839999ff47ae88ccb12b4af *man/dbmss-package.Rd
+40135ef1d943a96b602998d3548054fb *man/dbmss-package.Rd
 74db9bf29193aaf7be755a7afa95db70 *man/dbmssEnvelope.Rd
 cd8675bb9e91c7a9bf89d05c76be87b6 *man/gEnvelope.Rd
 c20e091f2fd2b911938f22195d5415b0 *man/generic.spatstat.Rd
@@ -95,5 +95,5 @@ b3f86c20b81b51f5162874977d38784d *src/Makevars
 523cc98d8956f3622a0c95bc4204d52f *src/RcppExports.cpp
 cc48b15db04d7b6d9250ad62494b124b *vignettes/CSBIGS.Rdata
 392279f6ffb420c5d0e848299ac36b44 *vignettes/KdFig.pdf
-81ea3d47989ebcda6da6bf254774402b *vignettes/dbmss.Rnw
-dc6751d3f13eb76f489a676687e9d6ce *vignettes/dbmss.bib
+be7573aa8cf023e68af75cdf561624be *vignettes/dbmss.Rnw
+467ef0031f3139cdbe752d606837214b *vignettes/dbmss.bib
