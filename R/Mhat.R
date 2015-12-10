@@ -36,15 +36,19 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
   
   Nr <- length(r)
   # Neighborhoods (i.e. all neighbors of a point less than a distance apart)
-  # Prepare matrix, one line for each point, one column for each distance
+  # Prepare matrix (serial version only), one line for each point, one column for each distance
   # Store weights of neighbors of interest in first Nr columns, all points from Nr+1 to 2*Nr
-  Nbd <- matrix(0.0, nrow=X$n, ncol=2*Nr)
+  # Nbd <- matrix(0.0, nrow=X$n, ncol=2*Nr)
   
   # Call C routine to fill Nbd
   if (CaseControl) {
-    CountNbdCC(r, X$x, X$y, X$marks$PointWeight, Nbd, IsReferenceType, IsNeighborType)    
+    Nbd <- parallelCountNbdCC(r, X$x, X$y, X$marks$PointWeight, IsReferenceType, IsNeighborType)
+    # Serial version (returns nothing but modifies Nbd)
+    #CountNbdCC(r, X$x, X$y, X$marks$PointWeight, Nbd, IsReferenceType, IsNeighborType)    
   } else {
-    CountNbd(r, X$x, X$y, X$marks$PointWeight, Nbd, IsReferenceType, IsNeighborType)
+    Nbd <- parallelCountNbd(r, X$x, X$y, X$marks$PointWeight, IsReferenceType, IsNeighborType)
+    # Serial version (returns nothing but modifies Nbd)
+    # CountNbd(r, X$x, X$y, X$marks$PointWeight, Nbd, IsReferenceType, IsNeighborType)
   }
   
   # Keep the lines of the matrix corresponding to reference points (cases).

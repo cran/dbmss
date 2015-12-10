@@ -1,3 +1,13 @@
+  CHANGES IN dbmss VERSION 2.2.4
+  ==============================
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+  o Mhat and mhat C++ code is now parallelized thanks to RcppParallel
+  o Small performance improvement of Kdhat (around 5% faster)
+  
+  
+  
   CHANGES IN dbmss VERSION 2.2.3
   ==============================
 

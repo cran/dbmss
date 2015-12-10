@@ -53,16 +53,16 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
     # Number of distances
     Nr <- length(rseq)
     # Prepare a matrix, single line, one value for each distance + 1 extra for pairs far away.
-    NeighborWeights <- matrix(0.0, nrow=1, ncol=Nr+1)
+    NeighborWeight <- matrix(0.0, nrow=1, ncol=Nr+1)
     # Weights
     if (Weighted) {
-      Weights <- Y$marks$PointWeight
+      Weight <- Y$marks$PointWeight
     } else {
-      Weights <- rep(1, Y$n)
+      Weight <- rep(1, Y$n)
     }
     
     # Call C routine to fill NeighborWeights
-    CountNbdKd(rseq, Y$x, Y$y, Weights, NeighborWeights, IsReferenceType, IsNeighborType)
+    CountNbdKd(rseq, Y$x, Y$y, Weight, NeighborWeight, IsReferenceType, IsNeighborType)
     
     # Adjust distances: values are the centers of intervals
     rseq <- c(0, (rseq[2:Nr]+rseq[1:Nr-1])/2)
@@ -76,13 +76,13 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
       }
     }
     
-    # The last element of the vector NeighborWeights contains the weight of pairs farther than 2 rmax
-    FarWeights <- NeighborWeights[Nr+1]
+    # The last element of the vector NeighborWeight contains the weight of pairs farther than 2 rmax
+    FarWeight <- NeighborWeight[Nr+1]
     # Keep the other elements
-    NeighborWeights <- NeighborWeights[-(Nr+1)]
+    NeighborWeight <- NeighborWeight[-(Nr+1)]
     
     # Estimate density taking into account far pairs. Suppress warnings because density does not sum to 1.
-    Density <- suppressWarnings(stats::density(rseq, weights=NeighborWeights/(sum(NeighborWeights)+FarWeights), cut=0, to=rmax, bw=bw))
+    Density <- suppressWarnings(stats::density(rseq, Weight=NeighborWeight/(sum(NeighborWeight)+FarWeight), cut=0, to=rmax, bw=bw))
     
   } else {
     # Classical estimation
@@ -98,13 +98,13 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
     
     # Prepare a vector for weights if Weighted. Else, set a single value.
     if (Weighted) {
-      Weights <- vector(mode="double", length=NbDist)
+      Weight <- vector(mode="double", length=NbDist)
     } else {
-      Weights <- 1
+      Weight <- 1
     }
     
     # C++ routine to fill distances and weights
-    DistKd(Y$x, Y$y, Y$marks$PointWeight, Weights, Dist, IsReferenceType, IsNeighborType)
+    DistKd(Y$x, Y$y, Y$marks$PointWeight, Weight, Dist, IsReferenceType, IsNeighborType)
     
     if(is.null(r)) {
       # Min distance obtained from the data rather than 0
@@ -127,7 +127,7 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, Weighted = FA
     nDensity <- max(min(512, max(Dist)/rmax*128), 4096)
     # Estimate density
     if (Weighted) {
-      Density <- stats::density(Dist, weights=Weights/sum(Weights), cut=0, from=rmin, to=rmax, bw=bw, n=nDensity)
+      Density <- stats::density(Dist, Weight=Weight/sum(Weight), cut=0, from=rmin, to=rmax, bw=bw, n=nDensity)
     } else {
       Density <- stats::density(Dist, cut=0, from=rmin, to=rmax, bw=bw, n=nDensity)
     }

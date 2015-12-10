@@ -1,6 +1,7 @@
-\name{CountNbd}
-\alias{CountNbd}
-\alias{CountNbdCC}
+\name{parallelCountNbd}
+\alias{parallelCountNbd}
+\alias{parallelCountNbdCC}
+\alias{parallelCountNbdm}
 \alias{DistKd}
 \alias{CountNbdKd}
 \title{
@@ -10,38 +11,57 @@
   C++ routines used for fast count of neighbors.
 }
 \usage{
-CountNbd(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType)
-CountNbdCC(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType)
-DistKd(Rx, Ry, RPointWeight, RWeights, RDist, RIsReferenceType, RIsNeighborType)
+parallelCountNbd(r, x, y, Weight, IsReferenceType, IsNeighborType)
+parallelCountNbdCC(r, x, y, Weight, IsReferenceType, IsNeighborType)
+parallelCountNbdm(x, y, ReferencePoints)
+DistKd(Rx, Ry, RPointWeight, RWeight, RDist, RIsReferenceType, RIsNeighborType)
 CountNbdKd(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType)
 }
 \arguments{
   \item{Rr}{
     A vector of distances.
   }
+  \item{r}{
+    A vector of distances.
+  }
   \item{Rx}{
     A vector of \emph{x} coordinates.
+  }
+  \item{x}{
+    A vector of \emph{x} coordinates.
+  }
+  \item{Ry}{
+    A vector of \emph{y} coordinates.
   }
   \item{y}{
     A vector of \emph{y} coordinates.
   }
+  \item{RPointWeight}{
+    A vector of point weights.
+  }
+  \item{RWeight}{
+    A vector of point weights.
+  }
   \item{Weight}{
     A vector of point weights.
   }
-  \item{PointWeight}{
-    A vector of point weights.
+  \item{ReferencePoints}{
+    A vector of pont indices.
   }
-  \item{Nbd}{
+  \item{RNbd}{
     A matrix to store the weight of neighbors.
   }
-  \item{Weights}{
-    A vector of point-pair weights.
-  }
-  \item{Dist}{
+  \item{RDist}{
     A vector of point-pair distances.
+  }
+  \item{RIsReferenceType}{
+    A boolean vector to recognize reference points.
   }
   \item{IsReferenceType}{
     A boolean vector to recognize reference points.
+  }
+  \item{RIsNeighborType}{
+    A boolean vector to recognize neighbor points.
   }
   \item{IsNeighborType}{
     A boolean vector to recognize neighbor points.
