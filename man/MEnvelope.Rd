@@ -13,7 +13,7 @@ MEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05,
 }
 \arguments{
   \item{X}{
-    A point pattern (\code{\link{wmppp.object}}).
+    A point pattern (\code{\link{wmppp.object}}) or a \code{\link{Dtable}} object.
   }
   \item{r}{
     A vector of distances. If \code{NULL}, a default value is set: 32 unequally spaced values are used up to half the maximum distance between points \eqn{d_m}. The first value is 0, first steps are small (\eqn{d_m/200}) then incresase progressively up to \eqn{d_m/20}.

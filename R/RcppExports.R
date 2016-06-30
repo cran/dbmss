@@ -13,8 +13,16 @@ parallelCountNbd <- function(r, x, y, Weight, IsReferenceType, IsNeighborType) {
     .Call('dbmss_parallelCountNbd', PACKAGE = 'dbmss', r, x, y, Weight, IsReferenceType, IsNeighborType)
 }
 
+parallelCountNbdDt <- function(r, Dmatrix, Weight, IsReferenceType, IsNeighborType) {
+    .Call('dbmss_parallelCountNbdDt', PACKAGE = 'dbmss', r, Dmatrix, Weight, IsReferenceType, IsNeighborType)
+}
+
 parallelCountNbdCC <- function(r, x, y, Weight, IsReferenceType, IsNeighborType) {
     .Call('dbmss_parallelCountNbdCC', PACKAGE = 'dbmss', r, x, y, Weight, IsReferenceType, IsNeighborType)
+}
+
+parallelCountNbdDtCC <- function(r, Dmatrix, Weight, IsReferenceType, IsNeighborType) {
+    .Call('dbmss_parallelCountNbdDtCC', PACKAGE = 'dbmss', r, Dmatrix, Weight, IsReferenceType, IsNeighborType)
 }
 
 parallelCountNbdm <- function(x, y, ReferencePoints) {

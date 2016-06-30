@@ -1,4 +1,5 @@
 as.wmppp <-
-function (X, ...) {
+function (X, ...)
+{
   UseMethod("as.wmppp")
 }

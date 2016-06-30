@@ -1,6 +1,8 @@
 \name{parallelCountNbd}
 \alias{parallelCountNbd}
+\alias{parallelCountNbdDt}
 \alias{parallelCountNbdCC}
+\alias{parallelCountNbdDtCC}
 \alias{parallelCountNbdm}
 \alias{DistKd}
 \alias{CountNbdKd}
@@ -14,6 +16,8 @@
 parallelCountNbd(r, x, y, Weight, IsReferenceType, IsNeighborType)
 parallelCountNbdCC(r, x, y, Weight, IsReferenceType, IsNeighborType)
 parallelCountNbdm(x, y, ReferencePoints)
+parallelCountNbdDt(r, Dmatrix, Weight, IsReferenceType, IsNeighborType)
+parallelCountNbdDtCC(r, Dmatrix, Weight, IsReferenceType, IsNeighborType)
 DistKd(Rx, Ry, RPointWeight, RWeight, RDist, RIsReferenceType, RIsNeighborType)
 CountNbdKd(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType)
 }
@@ -35,6 +39,9 @@ CountNbdKd(Rr, Rx, Ry, RWeight, RNbd, RIsReferenceType, RIsNeighborType)
   }
   \item{y}{
     A vector of \emph{y} coordinates.
+  }
+  \item{Dmatrix}{
+    A matrix of distances.
   }
   \item{RPointWeight}{
     A vector of point weights.

@@ -139,7 +139,7 @@ void CountNbdKd(SEXP Rr, SEXP Rx, SEXP Ry, SEXP RWeight, SEXP RNbd, SEXP RIsRefe
 #include <RcppParallel.h>
 using namespace RcppParallel;
 
-// M and approximated m
+// M and approximated m, applied to wmppp
 struct CountNbdWrkr : public Worker
 {
   // source vectors
@@ -159,13 +159,13 @@ struct CountNbdWrkr : public Worker
                const LogicalVector IsReferenceType, const LogicalVector IsNeighborType,
                NumericMatrix Nbd) 
     : r2(r2), Rx(x), Ry(y), RWeight(Weight), RIsReferenceType(IsReferenceType), RIsNeighborType(IsNeighborType), RNbd(Nbd) {}
-
+  
   // count neighbors
   void operator()(std::size_t begin, std::size_t end) {
     double Distance2, dx, dy;
     double Nr = r2.length();
     unsigned int k;
-
+    
     for (unsigned int i=begin; i < end; i++) {
       // Consider reference type points
       if (RIsReferenceType[i]) {
@@ -217,7 +217,79 @@ NumericMatrix parallelCountNbd(NumericVector r,
 
 
 
-// M and approximated m, case-control
+// M applied to Dtable and approximated m,
+struct CountNbdDtWrkr : public Worker
+{
+  // source vectors, distances are not squared
+  const RVector<double> r1;
+  const RMatrix<double> RDmatrix;
+  const RVector<double> RWeight;
+  const RVector<int> RIsReferenceType;
+  const RVector<int> RIsNeighborType;
+  
+  // destination matrix
+  RMatrix<double> RNbd;
+  
+  // constructor
+  CountNbdDtWrkr(const NumericVector r1, 
+               const NumericMatrix Dmatrix, const NumericVector Weight, 
+               const LogicalVector IsReferenceType, const LogicalVector IsNeighborType,
+               NumericMatrix Nbd) 
+    : r1(r1), RDmatrix(Dmatrix), RWeight(Weight), RIsReferenceType(IsReferenceType), RIsNeighborType(IsNeighborType), RNbd(Nbd) {}
+  
+  // count neighbors
+  void operator()(std::size_t begin, std::size_t end) {
+    double Nr = r1.length();
+    unsigned int k;
+    
+    for (unsigned int i=begin; i < end; i++) {
+      // Consider reference type points
+      if (RIsReferenceType[i]) {
+        // Point j is a neighbor of i. No neighbor is ignored.
+        for (unsigned int j=0; j < RNbd.nrow(); j++) {
+          if (i != j) {
+            // Ignore point j if it is too far from point i
+            if (RDmatrix(i, j) <= r1[Nr-1]) {
+              // Find the column of the matrix corresponding to the distance
+              k = 0; 
+              while (RDmatrix(i, j) > r1[k]) {
+                k++;
+              }
+              // Add j's weight to i's neighborhood
+              RNbd(i, Nr+k) += RWeight[j];
+              // The neighbor is a point of interest
+              if (RIsNeighborType[j]) {
+                RNbd(i, k) += RWeight[j];
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+// [[Rcpp::export]]
+NumericMatrix parallelCountNbdDt(NumericVector r, 
+                                 NumericMatrix Dmatrix, NumericVector Weight, 
+                                 LogicalVector IsReferenceType, LogicalVector IsNeighborType) {
+  
+  // allocate the output matrix
+  NumericMatrix Nbd(Weight.length(), 2*r.length());
+  
+  // CountNbd functor, distances are not squared
+  CountNbdDtWrkr countNbdDtWrkr(r, Dmatrix, Weight, IsReferenceType, IsNeighborType, Nbd);
+  
+  // call parallelFor to do the work
+  parallelFor(0, Weight.length(), countNbdDtWrkr);
+  
+  // return the output matrix
+  return Nbd;
+}
+
+
+
+// M and approximated m, case-control, applied to wmppp
 struct CountNbdCCWrkr : public Worker
 {
   // source vectors
@@ -282,8 +354,8 @@ struct CountNbdCCWrkr : public Worker
 
 // [[Rcpp::export]]
 NumericMatrix parallelCountNbdCC(NumericVector r, 
-                               NumericVector x, NumericVector y, NumericVector Weight, 
-                               LogicalVector IsReferenceType, LogicalVector IsNeighborType) {
+                                NumericVector x, NumericVector y, NumericVector Weight, 
+                                LogicalVector IsReferenceType, LogicalVector IsNeighborType) {
   
   // allocate the output matrix
   NumericMatrix Nbd(x.length(), 2*r.length());
@@ -293,6 +365,82 @@ NumericMatrix parallelCountNbdCC(NumericVector r,
   
   // call parallelFor to do the work
   parallelFor(0, x.length(), countNbdCCWrkr);
+  
+  // return the output matrix
+  return Nbd;
+}
+
+
+// M and approximated m, case-control, applied to Dtable
+struct CountNbdDtCCWrkr : public Worker
+{
+  // source vectors, distances are not squared
+  const RVector<double> r1;
+  const RMatrix<double> RDmatrix;
+  const RVector<double> RWeight;
+  const RVector<int> RIsReferenceType;
+  const RVector<int> RIsNeighborType;
+  
+  // destination matrix
+  RMatrix<double> RNbd;
+  
+  // constructor
+  CountNbdDtCCWrkr(const NumericVector r1, 
+                  const NumericMatrix Dmatrix, const NumericVector Weight, 
+                  const LogicalVector IsReferenceType, const LogicalVector IsNeighborType,
+                  NumericMatrix Nbd) 
+    : r1(r1), RDmatrix(Dmatrix), RWeight(Weight), RIsReferenceType(IsReferenceType), RIsNeighborType(IsNeighborType), RNbd(Nbd) {}
+  
+  // count neighbors
+  void operator()(std::size_t begin, std::size_t end) {
+    double Nr = r1.length();
+    unsigned int k;
+    
+    for (unsigned int i=begin; i < end; i++) {
+      // Consider cases
+      if (RIsReferenceType[i]) {
+        // Point j is a neighbor of i.
+        for (unsigned int j=0; j < RNbd.nrow(); j++) {
+          if (i != j) {
+            // Ignore point j if it is neither a case nor a control
+            if (RIsNeighborType[j] || RIsReferenceType[j]) {
+              // Ignore point j if it is too far from point i
+              if (RDmatrix(i, j) <= r1[Nr-1]) {
+                // Find the column of the matrix corresponding to the distance
+                k = 0; 
+                while (RDmatrix(i, j) > r1[k]) {
+                  k++;
+                }
+                // The neighbor is a control: add j's weight to i's neighborhood
+                if (RIsNeighborType[j]) {
+                  RNbd(i, Nr+k) += RWeight[j];
+                }
+                // The neighbor is a case: add it to i's neighborhood
+                if (RIsReferenceType[j]) {
+                  RNbd(i, k) += RWeight[j];
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+// [[Rcpp::export]]
+NumericMatrix parallelCountNbdDtCC(NumericVector r, 
+                                  NumericMatrix Dmatrix, NumericVector Weight, 
+                                  LogicalVector IsReferenceType, LogicalVector IsNeighborType) {
+  
+  // allocate the output matrix
+  NumericMatrix Nbd(Weight.length(), 2*r.length());
+  
+  // CountNbd functor, distances are not squared
+  CountNbdDtCCWrkr countNbdDtCCWrkr(r, Dmatrix, Weight, IsReferenceType, IsNeighborType, Nbd);
+  
+  // call parallelFor to do the work
+  parallelFor(0, Weight.length(), countNbdDtCCWrkr);
   
   // return the output matrix
   return Nbd;

@@ -4,7 +4,7 @@
   Create a Weighted, Marked, Planar Point Pattern
 }
 \description{
-  Creates an object of class \code{"wmppp"} represented a two-dimensional point pattern with weights and labels.
+  Creates an object of class \code{"wmppp"} representing a two-dimensional point pattern with weights and labels.
 }
 \usage{
 wmppp(df, window = NULL, unitname = NULL)

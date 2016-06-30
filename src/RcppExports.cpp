@@ -53,6 +53,21 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// parallelCountNbdDt
+NumericMatrix parallelCountNbdDt(NumericVector r, NumericMatrix Dmatrix, NumericVector Weight, LogicalVector IsReferenceType, LogicalVector IsNeighborType);
+RcppExport SEXP dbmss_parallelCountNbdDt(SEXP rSEXP, SEXP DmatrixSEXP, SEXP WeightSEXP, SEXP IsReferenceTypeSEXP, SEXP IsNeighborTypeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type r(rSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type Dmatrix(DmatrixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Weight(WeightSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type IsReferenceType(IsReferenceTypeSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type IsNeighborType(IsNeighborTypeSEXP);
+    __result = Rcpp::wrap(parallelCountNbdDt(r, Dmatrix, Weight, IsReferenceType, IsNeighborType));
+    return __result;
+END_RCPP
+}
 // parallelCountNbdCC
 NumericMatrix parallelCountNbdCC(NumericVector r, NumericVector x, NumericVector y, NumericVector Weight, LogicalVector IsReferenceType, LogicalVector IsNeighborType);
 RcppExport SEXP dbmss_parallelCountNbdCC(SEXP rSEXP, SEXP xSEXP, SEXP ySEXP, SEXP WeightSEXP, SEXP IsReferenceTypeSEXP, SEXP IsNeighborTypeSEXP) {
@@ -66,6 +81,21 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< LogicalVector >::type IsReferenceType(IsReferenceTypeSEXP);
     Rcpp::traits::input_parameter< LogicalVector >::type IsNeighborType(IsNeighborTypeSEXP);
     __result = Rcpp::wrap(parallelCountNbdCC(r, x, y, Weight, IsReferenceType, IsNeighborType));
+    return __result;
+END_RCPP
+}
+// parallelCountNbdDtCC
+NumericMatrix parallelCountNbdDtCC(NumericVector r, NumericMatrix Dmatrix, NumericVector Weight, LogicalVector IsReferenceType, LogicalVector IsNeighborType);
+RcppExport SEXP dbmss_parallelCountNbdDtCC(SEXP rSEXP, SEXP DmatrixSEXP, SEXP WeightSEXP, SEXP IsReferenceTypeSEXP, SEXP IsNeighborTypeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type r(rSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type Dmatrix(DmatrixSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Weight(WeightSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type IsReferenceType(IsReferenceTypeSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type IsNeighborType(IsNeighborTypeSEXP);
+    __result = Rcpp::wrap(parallelCountNbdDtCC(r, Dmatrix, Weight, IsReferenceType, IsNeighborType));
     return __result;
 END_RCPP
 }

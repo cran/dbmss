@@ -12,7 +12,7 @@ Mhat(X, r = NULL, ReferenceType, NeighborType = ReferenceType,
 }
 \arguments{
   \item{X}{
-    A weighted, marked planar point pattern (\code{\link{wmppp.object}}).
+    A weighted, marked planar point pattern (\code{\link{wmppp.object}}) or a \code{\link{Dtable}} object.
   }
   \item{r}{
     A vector of distances. If \code{NULL}, a default value is set: 64 unequally spaced values are used up to half the maximum distance between points \eqn{d_m}. The first value is 0, first steps are small (\eqn{d_m/800}) then increase progressively up to \eqn{d_m/40}.

@@ -1,4 +1,19 @@
-  CHANGES IN dbmss VERSION 2.2.4
+  CHANGES IN dbmss VERSION 2.3-0
+  ==============================
+
+IMPROVEMENTS
+
+  o Distance matrices can be used instead of point patterns in Mhat, mhat and Kdhat and their envelopes.
+  o The estimation of density used by Kd now includes reflection: the estimation of Kd is more accute than before, but values may vary from previous versions close to the minimum distance.
+  o LazyData is used to save memory.
+
+BUG FIXES
+
+  o Weighted argument was ignored in Kdhat (bug introduced in v.2.2-4). Fixed.
+
+
+
+  CHANGES IN dbmss VERSION 2.2-4
   ==============================
 
 SIGNIFICANT USER-VISIBLE CHANGES
@@ -8,7 +23,7 @@ SIGNIFICANT USER-VISIBLE CHANGES
   
   
   
-  CHANGES IN dbmss VERSION 2.2.3
+  CHANGES IN dbmss VERSION 2.2-3
   ==============================
 
 SIGNIFICANT USER-VISIBLE CHANGES
@@ -17,7 +32,7 @@ SIGNIFICANT USER-VISIBLE CHANGES
 
 
 
-  CHANGES IN dbmss VERSION 2.2.2
+  CHANGES IN dbmss VERSION 2.2-2
   ==============================
 
 MINOR CHANGE
@@ -30,7 +45,7 @@ BUG FIX
 
 
 
-  CHANGES IN dbmss VERSION 2.2.1
+  CHANGES IN dbmss VERSION 2.2-1
   ==============================
 
 BUG FIXES
@@ -39,7 +54,7 @@ BUG FIXES
 
 
 
-  CHANGES IN dbmss VERSION 2.2.0
+  CHANGES IN dbmss VERSION 2.2-0
   ==============================
   
 SIGNIFICANT USER-VISIBLE CHANGES
@@ -54,7 +69,7 @@ MINOR CHANGE
 
 
   
-  CHANGES IN dbmss VERSION 2.1.2
+  CHANGES IN dbmss VERSION 2.1-2
   ==============================
   
 SIGNIFICANT USER-VISIBLE CHANGES
@@ -69,7 +84,7 @@ BUG FIXES
 
 
   
-  CHANGES IN dbmss VERSION 2.1.1
+  CHANGES IN dbmss VERSION 2.1-1
   ==============================
   
 SIGNIFICANT USER-VISIBLE CHANGES
@@ -83,7 +98,7 @@ BUG FIXES
 
 
 
-  CHANGES IN dbmss VERSION 2.1.0
+  CHANGES IN dbmss VERSION 2.1-0
   ==============================
   
 SIGNIFICANT USER-VISIBLE CHANGES
@@ -91,7 +106,7 @@ SIGNIFICANT USER-VISIBLE CHANGES
   o Kdhat and M are computed through C++ loops instead of spatstat paridist(). Much faster, and uses far less memory.
 
 
-  CHANGES IN dbmss VERSION 2.0.6
+  CHANGES IN dbmss VERSION 2.0-6
   ==============================
   
 SIGNIFICANT USER-VISIBLE CHANGES
@@ -104,7 +119,7 @@ MINOR CHANGE
   o Kdhat probability density estimation is cut at the lowest distance between points instead of 0.
 
 
-  CHANGES IN dbmss VERSION 2.0.5
+  CHANGES IN dbmss VERSION 2.0-5
   ==============================
   
 BUG FIXES
@@ -112,7 +127,7 @@ BUG FIXES
   o Kdhat with Reference and Neighbor points of the same type and Weighted=TRUE returned an error. Fixed.
 
   
-  CHANGES IN dbmss VERSION 2.0.3
+  CHANGES IN dbmss VERSION 2.0-3
   ==============================
   
 OVERVIEW
@@ -120,7 +135,7 @@ OVERVIEW
   o Minor corrections, mainly comments and formating.
 
   
-  CHANGES IN dbmss VERSION 2.0.0
+  CHANGES IN dbmss VERSION 2.0-0
   ==============================
 
 OVERVIEW 
@@ -134,7 +149,7 @@ SIGNIFICANT USER-VISIBLE CHANGES
   o Results are of class fv, envelopes of class envelope.
 
   
-  CHANGES IN dbmss VERSION 1.2.5
+  CHANGES IN dbmss VERSION 1.2-5
   ==============================
 
 OVERVIEW 
@@ -142,7 +157,7 @@ OVERVIEW
   o NEWS file added.
 
 
-  CHANGES IN dbmss VERSION 1.2.4
+  CHANGES IN dbmss VERSION 1.2-4
   ==============================
   
 OVERVIEW 
@@ -159,7 +174,7 @@ BUG FIXES
 
 
 
-  CHANGES IN dbmss VERSION 1.2.3
+  CHANGES IN dbmss VERSION 1.2-3
   ==============================
   
 OVERVIEW 
@@ -168,7 +183,7 @@ OVERVIEW
 
  
 
-  CHANGES IN dbmss VERSION 1.2.1
+  CHANGES IN dbmss VERSION 1.2-1
   ==============================
   
 OVERVIEW 

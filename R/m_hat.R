@@ -33,37 +33,37 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
 
   # Roughly estimate max distances
   if(is.null(r)) {
-    # Default interval for R: between the min distance
-    rmin <- 0
-    # and the diameter of the window /2 or /4. DO2005 is ignored at this stage.
+    rmin <- Diameter <- 0
+    # Estimate max distance in the point set
+    if (inherits(X, "Dtable")) {
+      # Dtable case
+      Diameter <- max(X$Dmatrix)
+    } else {
+      # wmppp case, approximate rmax by the diameter of the window
+      Diameter <- diameter(X$win)
+    }
+    # Set rmax to window /2, /3 or /4. DO2005 is ignored at this stage.
     rmax <- switch(MaxRange,
-                   HalfW = diameter(X$win)/2,
-                   ThirdW =  diameter(X$win)/3,
-                   QuarterW = diameter(X$win)/4)
-    if(is.null(rmax)) rmax <- diameter(X$win)/3
+                   HalfW = Diameter/2,
+                   ThirdW =  Diameter/3,
+                   QuarterW = Diameter/4)
+    if(is.null(rmax)) rmax <- Diameter/3
   } else {
     rmin <- 0
     rmax <- max(r)
   }
   
-  if (Approximate) {
+  if (Approximate & !inherits(X, "Dtable")) {
     # Round distances to save memory
     # Prepare steps so that 1024*Approximate steps are between 0 and rmax. Pairs further than 2*rmax apart are dropped.
     rseq <- seq(from = rmin, to = rmax*2, length.out = 2048*Approximate)
     Nr <- length(rseq)
-    # Prepare a matrix (serial version only), one line for each point, one column for each distance
-    # Store weights of neighbors of interest in first Nr columns, all points from Nr+1 to 2*Nr
-    # Nbd <- matrix(0.0, nrow=X$n, ncol=2*Nr)
-    
+
     # Call C routine to fill Nbd
     if (CaseControl) {
       Nbd <- parallelCountNbdCC(rseq, X$x, X$y, X$marks$PointWeight, IsReferenceType, IsNeighborType)
-      # Serial version (returns nothing but modifies Nbd)
-      #CountNbdCC(r, X$x, X$y, X$marks$PointWeight, Nbd, IsReferenceType, IsNeighborType)    
     } else {
       Nbd <- parallelCountNbd(rseq, X$x, X$y, X$marks$PointWeight, IsReferenceType, IsNeighborType)
-      # Serial version (returns nothing but modifies Nbd)
-      # CountNbd(r, X$x, X$y, X$marks$PointWeight, Nbd, IsReferenceType, IsNeighborType)
     }
     
     # Keep the lines of the matrix corresponding to reference points (cases).
@@ -81,25 +81,34 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
     }
 
     # Calculate densities of neighbors (with unnormalized weights so suppress warnings)
-    Djc <- t(apply(Nbd[, 1:Nr], 1, function(x) suppressWarnings(stats::density(rseq, bw=h, weights=x, cut=0, from=rmin, to=rmax, na.rm=TRUE))$y))
-    Dj <- t(apply(Nbd[, (Nr+1):(2*Nr)], 1, function(x) suppressWarnings(stats::density(rseq, bw=h, weights=x, cut=0, from=rmin, to=rmax, na.rm=TRUE))$y))
+    Djc <- t(apply(Nbd[, 1:Nr], 1, function(x) suppressWarnings(stats::density(rseq, bw=h, weights=x, from=rmin, to=rmax, na.rm=TRUE))$y))
+    Dj <- t(apply(Nbd[, (Nr+1):(2*Nr)], 1, function(x) suppressWarnings(stats::density(rseq, bw=h, weights=x, from=rmin, to=rmax, na.rm=TRUE))$y))
     # Get the x values of the density estimation: estimate one vector
-    x <- stats::density(rseq, bw=h, cut=0, from=rmin, to=rmax, na.rm=TRUE)$x
+    x <- stats::density(rseq, bw=h, from=rmin, to=rmax, na.rm=TRUE)$x
     
     
   } else {
     # Classical estimation
     
-    # Call C routine to fill Nbd. Send x, y, and the list of reference points (indexed from 0 in C instead of 1 in R)
-    Nbd <- parallelCountNbdm(X$x, X$y, which(IsReferenceType)-1)
-    # Negative values are actually NA
-    Nbd[Nbd < 0] <- NA
+    if (inherits(X, "Dtable")) {
+      # Dtable case: set distances between identical points to NA and keep reference points only
+      Nbd <- X$Dmatrix
+      diag(Nbd) <- NA
+      Nbd <- Nbd[IsReferenceType, ]
+    } else {
+      # wmppp case:
+      # Call C routine to fill Nbd: a distance matrix, reference points in lines, neighbors in columns
+      # Send x, y, and the list of reference points (indexed from 0 in C instead of 1 in R)
+      Nbd <- parallelCountNbdm(X$x, X$y, which(IsReferenceType)-1)
+      # Negative values are actually NA
+      Nbd[Nbd < 0] <- NA
+    }
     
     # Choose the bandwith based on all distance pairs between reference and neighbor points
     # Prepare the data
     RefDistances <- Nbd[, IsNeighborType]
     if (ReferenceType==NeighborType) {
-      # Make a square matrix and keep the upper half as a vector
+      # RefDistances is a square matrix: keep the upper half as a vector
       RefDistances <- RefDistances[upper.tri(RefDistances)]
     }
     
@@ -117,10 +126,10 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
     }
 
     # Calculate densities of neighbors (with unnormalized weights so suppress warnings)
-    Djc <- t(apply(Nbd[, IsNeighborType], 1, function(x) suppressWarnings(stats::density(x, bw=h, weights=X$marks$PointWeight[IsNeighborType][!is.na(x)], cut=0, from=rmin, to=rmax, na.rm=TRUE))$y))
-    Dj <- t(apply(Nbd, 1, function(x) suppressWarnings(stats::density(x, bw=h, weights=X$marks$PointWeight[!is.na(x)], cut=0, from=rmin, to=rmax, na.rm=TRUE))$y))
+    Djc <- t(apply(Nbd[, IsNeighborType], 1, function(x) suppressWarnings(stats::density(x, bw=h, weights=X$marks$PointWeight[IsNeighborType][!is.na(x)], from=rmin, to=rmax, na.rm=TRUE))$y))
+    Dj <- t(apply(Nbd, 1, function(x) suppressWarnings(stats::density(x, bw=h, weights=X$marks$PointWeight[!is.na(x)], from=rmin, to=rmax, na.rm=TRUE))$y))
     # Get the x values of the density estimation: estimate one vector
-    x <- stats::density(Nbd[1, IsNeighborType], bw=h, cut=0, from=rmin, to=rmax, na.rm=TRUE)$x
+    x <- stats::density(Nbd[1, IsNeighborType], bw=h, from=rmin, to=rmax, na.rm=TRUE)$x
   }
   
   

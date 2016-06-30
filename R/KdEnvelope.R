@@ -2,6 +2,7 @@ KdEnvelope <-
 function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, 
          ReferenceType, NeighborType = ReferenceType, Weighted = FALSE,  Original = TRUE, 
          Approximate = ifelse(X$n < 10000, 0, 1), Adjust = 1, MaxRange = "ThirdW", 
+         StartFromMinR = FALSE, 
          SimulationType = "RandomLocation", Global = FALSE) {
 
   CheckdbmssArguments()
@@ -17,7 +18,7 @@ function(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05,
   # local envelope, keep extreme values for lo and hi (nrank=1)
   Envelope <- envelope(X, fun=Kdhat, nsim=NumberOfSimulations, nrank=1,
                        r=r, ReferenceType=ReferenceType, NeighborType=NeighborType, Weighted=Weighted, Original=Original, 
-                       Approximate=Approximate, Adjust=Adjust, MaxRange=MaxRange,
+                       Approximate=Approximate, Adjust=Adjust, MaxRange=MaxRange, StartFromMinR=StartFromMinR, 
                        CheckArguments = FALSE,
                        simulate=SimulatedPP, savefuns=TRUE
                        )

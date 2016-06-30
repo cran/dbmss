@@ -10,11 +10,12 @@
 KdEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType, 
            NeighborType = ReferenceType, Weighted = FALSE, Original = TRUE, 
            Approximate = ifelse(X$n < 10000, 0, 1), Adjust = 1, MaxRange = "ThirdW", 
+           StartFromMinR = FALSE,
            SimulationType = "RandomLocation", Global = FALSE)
 }
 \arguments{
   \item{X}{
-    A point pattern (\code{\link{wmppp.object}}).
+    A point pattern (\code{\link{wmppp.object}}) or a \code{\link{Dtable}} object.
   }
   \item{r}{
     A vector of distances. If \code{NULL}, a default value is set: 512 equally spaced values are used, and the first 256 are returned, corresponding to half the maximum distance between points (following Duranton and Overman, 2005).
@@ -38,7 +39,7 @@ KdEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType,
     Logical; if \code{TRUE} (by default), the original bandwidth selection by Duranton and Overman (2005) following Silverman (2006: eq 3.31) is used. If \code{FALSE}, it is calculated following Sheather and Jones (1991), \emph{i.e.} the state of the art. See \code{\link{bw.SJ}} for more details.
   }
   \item{Approximate}{
-    if not 0 (1 is a good choice), exact distances between pairs of points are rounded to 1024 times \code{Approximate} single values equally spaced between 0 and the largest distance. This technique (Scholl and Brenner, 2013) allows saving a lot of memory when addressing large point sets (the default value is 1 over 10000 points). Increasing \code{Approximate} allows better precision at the cost of proportional memory use.
+    if not 0 (1 is a good choice), exact distances between pairs of points are rounded to 1024 times \code{Approximate} single values equally spaced between 0 and the largest distance. This technique (Scholl and Brenner, 2015) allows saving a lot of memory when addressing large point sets (the default value is 1 over 10000 points). Increasing \code{Approximate} allows better precision at the cost of proportional memory use. Ignored if \code{X} is a \code{\link{Dtable}} object.
   }
   \item{Adjust}{
     Force the automatically selected bandwidth (following Silverman, 1986) to be multiplied by \code{Adjust}. Setting it to values lower than one (1/2 for example) will sharpen the estimation. If not 1, \code{Original} is ignored.
@@ -47,6 +48,11 @@ KdEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType,
     The maximum value of \code{r} to consider, ignored if \code{r} is not \code{NULL}. Default is "ThirdW", one third of the diameter of the window. Other choices are "HalfW", and "QuarterW" and "D02005".
     "HalfW", and "QuarterW" are for half or the quarter of the diameter of the window.
     "D02005" is for the median distance observed between points, following Duranton and Overman (2005). "ThirdW" should be close to "DO2005" but has the advantage to be independent of the point types chosen as \code{ReferenceType} and \code{NeighborType}, to simplify comparisons between different types. "D02005" is approximated by "ThirdW" if \code{Approximate} is not 0.
+    if \code{X} is a \code{\link{Dtable}} object, the diameter of the window is taken as the max distance between points.
+  }
+  \item{StartFromMinR}{
+    Logical; if \code{TRUE}, points are assumed to be further from each other than the minimum observed distance, So \emph{Kd} will not be estimated below it: it is assumed to be 0. If \code{FALSE}, by default, distances are smoothed down to $r=0$.
+    Ignored if \code{Approximate} is not 0: then, estimation always starts from $r=0$.
   }
   \item{SimulationType}{
     A string describing the null hypothesis to simulate. The null hypothesis may be
@@ -77,7 +83,7 @@ KdEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05, ReferenceType,
   
   Marcon, E. and F. Puech (2012). A typology of distance-based measures of spatial concentration. \emph{HAL SHS}. 00679993.
 
-  Scholl, T. and Brenner, T. (2013) Optimizing Distance-Based Methods for Big Data Analysis, \emph{Working Papers on Innovation and Space} No 2013-09, Philipps University Marburg
+  Scholl, T. and Brenner, T. (2015) Optimizing distance-based methods for large data sets, \emph{Journal of Geographical Systems} 17(4): 333-351.
 
   Silverman, B. W. (1986). \emph{Density estimation for statistics and data analysis}. Chapman and Hall, London.
 }

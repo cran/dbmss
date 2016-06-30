@@ -6,13 +6,13 @@ function() {
   ErrorFunction <- paste("Error in ", ParentFunction, ":")
   Args <- formals(match.fun(ParentFunction))
   
-  # Get the point pattern
+  # Get the point pattern or the Dtable
   X <- eval(expression(X), parent.frame())
   
   # X 
   if (!is.na(names(Args["X"]))) {
-    if (!inherits(X, "wmppp"))
-      stop(paste(ErrorFunction, "X is not of class wmppp"))    
+    if (!(inherits(X, "wmppp") | (inherits(X, "Dtable"))))
+      stop(paste(ErrorFunction, "X must be of class wmppp or Dtable"))    
   }
 
   # r
@@ -124,6 +124,13 @@ function() {
       stop(paste(ErrorFunction, "Approximate must be a number, it cannot be", sQuote(Approximate)))    
     if (Approximate < 0)
       stop(paste(ErrorFunction, "Approximate must be positive, it cannot be", sQuote(Approximate)))    
+  }
+
+  # StartFromMinR 
+  if (!is.na(names(Args["StartFromMinR"]))) {
+    StartFromMinR <- eval(expression(StartFromMinR), parent.frame())
+    if (!is.logical(StartFromMinR))
+      stop(paste(ErrorFunction, "StartFromMinR must be TRUE or FALSE, it cannot be", sQuote(StartFromMinR)))    
   }
   
   return (TRUE)

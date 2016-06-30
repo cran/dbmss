@@ -1,5 +1,7 @@
 Mhat <-
-function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl = FALSE, CheckArguments = TRUE) {
+function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, 
+         CaseControl = FALSE, CheckArguments = TRUE)
+{
   # Eliminate erroneous configurations
   if (CheckArguments) {
     CheckdbmssArguments()
@@ -11,7 +13,13 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
   
   # Default r values: 64 values up to half the max distance
   if (is.null(r)) {
-    rMax <- diameter(X$window)
+    if (inherits(X, "Dtable")) {
+      # Dtable case
+      rMax <- max(X$Dmatrix)
+    } else {
+      # wmppp case
+      rMax <- diameter(X$window)
+    }
     r <- rMax*c(0, 1:20, seq(22, 40, 2), seq(45, 100,5), seq(110, 200, 10), seq(220, 400, 20))/800
   }
   
@@ -36,19 +44,25 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
   
   Nr <- length(r)
   # Neighborhoods (i.e. all neighbors of a point less than a distance apart)
-  # Prepare matrix (serial version only), one line for each point, one column for each distance
   # Store weights of neighbors of interest in first Nr columns, all points from Nr+1 to 2*Nr
-  # Nbd <- matrix(0.0, nrow=X$n, ncol=2*Nr)
-  
+
   # Call C routine to fill Nbd
   if (CaseControl) {
-    Nbd <- parallelCountNbdCC(r, X$x, X$y, X$marks$PointWeight, IsReferenceType, IsNeighborType)
-    # Serial version (returns nothing but modifies Nbd)
-    #CountNbdCC(r, X$x, X$y, X$marks$PointWeight, Nbd, IsReferenceType, IsNeighborType)    
+    if (inherits(X, "Dtable")) {
+      # Dtable case
+      Nbd <- parallelCountNbdDtCC(r, X$Dmatrix, X$marks$PointWeight, IsReferenceType, IsNeighborType)
+    } else {
+      # wmppp case
+      Nbd <- parallelCountNbdCC(r, X$x, X$y, X$marks$PointWeight, IsReferenceType, IsNeighborType)
+    }
   } else {
-    Nbd <- parallelCountNbd(r, X$x, X$y, X$marks$PointWeight, IsReferenceType, IsNeighborType)
-    # Serial version (returns nothing but modifies Nbd)
-    # CountNbd(r, X$x, X$y, X$marks$PointWeight, Nbd, IsReferenceType, IsNeighborType)
+    if (inherits(X, "Dtable")) {
+      # Dtable case
+      Nbd <- parallelCountNbdDt(r, X$Dmatrix, X$marks$PointWeight, IsReferenceType, IsNeighborType)
+    } else {
+      # wmppp case
+      Nbd <- parallelCountNbd(r, X$x, X$y, X$marks$PointWeight, IsReferenceType, IsNeighborType)
+    }
   }
   
   # Keep the lines of the matrix corresponding to reference points (cases).
@@ -69,5 +83,4 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
   
   # Return the values of M(r)
   return (fv(MEstimate, argu="r", ylab=quote(M(r)), valu="M", fmla= ". ~ r", alim=c(0, max(r)), labl=c("r", "%s[ind](r)", paste("hat(%s)(r)", sep="")), desc=c("distance argument r", "theoretical independent M(r)", "Estimated M(r)"), unitname=X$window$unit, fname="M"))
-  
 }

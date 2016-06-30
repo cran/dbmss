@@ -1,6 +1,7 @@
 wmppp <-
-function(df, window = NULL, unitname = NULL) {
-  
+function(df, window = NULL, unitname = NULL) 
+{
+  # Check the data
   if (!is.data.frame(df))
     stop("The data used to create a wmppp must be a dataframe.")
   if (ncol(df) < 2)

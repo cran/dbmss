@@ -11,7 +11,7 @@ rRandomLabelingM(X, CheckArguments = TRUE)
 }
 \arguments{
   \item{X}{
-    A weighted, marked, planar point pattern (\code{\link{wmppp.object}}).
+    A weighted, marked, planar point pattern (\code{\link{wmppp.object}}) or a \code{\link{Dtable}} object.
   }
   \item{CheckArguments}{
     Logical; if \code{TRUE}, the function arguments are verified. Should be set to \code{FALSE} to save time in simulations for example, when the arguments have been checked elsewhere.
