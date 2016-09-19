@@ -1,10 +1,19 @@
   CHANGES IN dbmss VERSION 2.3-0
   ==============================
 
-IMPROVEMENTS
+INTERNAL CHANGES
+
+  o Enforcement of the use of C++11 to avoid warnings due to RcppParallel.
+
+
+
+  CHANGES IN dbmss VERSION 2.2-5
+  ==============================
+
+SIGNIFICANT USER-VISIBLE CHANGES
 
   o Distance matrices can be used instead of point patterns in Mhat, mhat and Kdhat and their envelopes.
-  o The estimation of density used by Kd now includes reflection: the estimation of Kd is more accute than before, but values may vary from previous versions close to the minimum distance.
+  o The estimation of density used by Kd now includes reflection: the estimation of Kd is more accurate than before, but values may vary from previous versions close to the minimum distance.
   o LazyData is used to save memory.
 
 BUG FIXES

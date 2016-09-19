@@ -1,6 +1,6 @@
-5bf3e81be36a5304ba7ab0060b3612e0 *DESCRIPTION
+9141fa27d183b77a8b37f208a3fe29aa *DESCRIPTION
 c354ae3451e65382dbc093f244e3d422 *NAMESPACE
-7f8569e852fa565f026c8942243116e8 *NEWS
+4aeeed7eccbb803030a3a0e61e12f311 *NEWS
 9becaeba32dcd7ebc1d94b29aa534ea3 *R/CheckdbmssArguments.R
 ca8a7c4ef9695353693001211b1378da *R/DEnvelope.R
 bdcf6f3962fd6eb71869f668a72e8e5b *R/Dhat.R
@@ -51,7 +51,7 @@ da3dede4a4bb7e4becbcccc279f9ffb2 *R/wmppp.R
 8ecbe5dc5d885164fd6f631c73f2724d *inst/CITATION
 8e85bb98e30dbbdf4dcc7a4a5e93c4a9 *inst/doc/dbmss.R
 c6afe91680d4d0084749ff329c0c1986 *inst/doc/dbmss.Rnw
-9a4e9e2c455e5470d91ab63421553868 *inst/doc/dbmss.pdf
+94eb9845f0e17f28e051e20d75b743e7 *inst/doc/dbmss.pdf
 d3e4eccf39e2cc0f32b8fb9f132537ca *man/CheckdbmssArguments.Rd
 17182e800e21e405f48842a5b8391562 *man/DEnvelope.Rd
 4858550961353b65dfde33393f97f59a *man/Dhat.Rd
@@ -98,8 +98,8 @@ b6414054e142db536e972df25338d58f *man/rRandomPositionK.Rd
 e751e97d53021fd6b658cc98ec900a06 *man/wmppp.Rd
 55ecc837d220696cce7ba779313656f7 *man/wmppp.object.Rd
 29fa02515ffe6133da77431603554b31 *src/CountNbd.cpp
-716af377bda58dfc9f208ac916c88178 *src/Makevars
-6c7887c498cff22bda30331ecad6b5e6 *src/Makevars.win
+e8a94e55d5aa749dfa5523a68f2c03e8 *src/Makevars
+d00b080414174aebc2d29225a224e4f0 *src/Makevars.win
 3b5f93704dea8df45429ada29cdc37cc *src/RcppExports.cpp
 2a1ea68c10e85d3a23ca62c5f0dbf363 *tests/testthat.R
 5919a5b8f18a4108d19ca1021b0a4889 *tests/testthat/testKd.R
