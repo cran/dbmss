@@ -1,3 +1,28 @@
+  CHANGES IN dbmss VERSION 2.5-1
+  ==============================
+
+NEW FEATURES
+
+  o On GitHub now.
+  o Individual values of m and M available from Mhat and mhat with argument Individual.
+  o Point names can be specified as row names of the dataframe passed to wmppp(). They are preserved in the fv object returned by individual Mhat and mhat to identify points more easily.
+
+IMPROVEMENTS
+
+  o Far less memory is used to compute M and approximated m functions. The ratio of necessary memory equals that of the number of reference points to the total number of points.
+  o [.wmppp function added to spatstat generics
+
+
+
+  CHANGES IN dbmss VERSION 2.4-1
+  ==============================
+
+IMPROVEMENTS
+
+  o Declaration of the required versions of R and spatstats in DESCRIPTION to avoid error in CRAN test on oldrel Windows platform.
+  
+
+  
   CHANGES IN dbmss VERSION 2.4-0
   ==============================
 

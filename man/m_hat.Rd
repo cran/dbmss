@@ -9,7 +9,7 @@
 \usage{
 mhat(X, r = NULL, ReferenceType, NeighborType = ReferenceType,
     CaseControl = FALSE, Original = TRUE, Approximate = ifelse(X$n < 10000, 0, 1),
-    Adjust = 1, MaxRange = "ThirdW", CheckArguments = TRUE)
+    Adjust = 1, MaxRange = "ThirdW", Individual = FALSE, CheckArguments = TRUE)
 }
 \arguments{
   \item{X}{
@@ -42,6 +42,9 @@ mhat(X, r = NULL, ReferenceType, NeighborType = ReferenceType,
     "D02005" is for the median distance observed between points, following Duranton and Overman (2005). "ThirdW" should be close to "DO2005" but has the advantage to be independent of the point types chosen as \code{ReferenceType} and \code{NeighborType}, to simplify comparisons between different types. "D02005" is approximated by "ThirdW" if \code{Approximate} is not 0.
     if \code{X} is a \code{\link{Dtable}} object, the diameter of the window is taken as the max distance between points.
   }
+  \item{Individual}{
+    Logical; if \code{TRUE}, values of the function around each individual point are returned.
+  }
   \item{CheckArguments}{
     Logical; if \code{TRUE}, the function arguments are verified. Should be set to \code{FALSE} to save time in simulations for example, when the arguments have been checked elsewhere.
   }
@@ -52,9 +55,13 @@ mhat(X, r = NULL, ReferenceType, NeighborType = ReferenceType,
   The number of neighbors at each distance is estimated by a Gaussian kernel whose bandwith is chosen optimally according to Silverman (1986: eq 3.31). It can be sharpened or smoothed by multiplying it by \code{Adjust}. The bandwidth of Sheather and Jones (1991) would be better but it is very slow to calculate for large point patterns and it sometimes fails. It is often sharper than that of Silverman. 
   
   If \code{X} is not a \code{\link{Dtable}} object, the maximum value of \code{r} is obtained from the geometry of the window rather than caculating the median distance between points as suggested by Duranton and Overman (2005) to save (a lot of) calculation time.
+  
+   If \emph{CaseControl} is \code{TRUE}, then \emph{ReferenceType} points are cases and \emph{NeighborType} points are controls. The univariate concentration of cases is calculated as if \emph{NeighborType} was equal to \emph{ReferenceType}, but only controls are considered when counting all points around cases (Marcon et al., 2012). This makes sense when the sampling design is such that all points of \emph{ReferenceType} (the cases) but only a sample of the other points (the controls) are recorded. Then, the whole distribution of points is better represented by the controls alone.
 }
 \value{
   An object of class \code{fv}, see \code{\link{fv.object}}, which can be plotted directly using \code{\link{plot.fv}}.
+
+  If \code{Individual} is set to \code{TRUE}, the object also contains the value of the function around each individual \emph{ReferenceType} point taken as the only reference point. The column names of the \code{fv} are "m_" followed by the point names, i.e. the row names of the marks of the point pattern.
 }
 \note{
   Estimating \emph{m} relies on calculating distances, exactly or approximately (if \code{Approximate} is not 0).
@@ -67,7 +74,9 @@ mhat(X, r = NULL, ReferenceType, NeighborType = ReferenceType,
   Duranton, G. and Overman, H. G. (2005). Testing for Localisation Using Micro-Geographic Data. \emph{Review of Economic Studies} 72(4): 1077-1106.
 
   Lang G., Marcon E. and Puech F. (2014) Distance-Based Measures of Spatial Concentration: Introducing a Relative Density Function. \emph{HAL} 01082178, 1-18.
-  
+
+  Marcon, E., F. Puech and S. Traissac (2012). Characterizing the relative spatial structure of point patterns. \emph{International Journal of Ecology} 2012(Article ID 619281): 11.
+
   Scholl, T. and Brenner, T. (2015) Optimizing distance-based methods for large data sets, \emph{Journal of Geographical Systems} 17(4): 333-351.
 
   Sheather, S. J. and Jones, M. C. (1991) A reliable data-based bandwidth selection method for kernel density estimation. \emph{Journal of the Royal Statistical Society series B}, 53, 683-690.

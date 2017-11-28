@@ -1,6 +1,6 @@
 Mhat <-
 function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, 
-         CaseControl = FALSE, CheckArguments = TRUE)
+         CaseControl = FALSE, Individual = FALSE, CheckArguments = TRUE)
 {
   # Eliminate erroneous configurations
   if (CheckArguments) {
@@ -65,22 +65,33 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType,
     }
   }
   
-  # Keep the lines of the matrix corresponding to reference points (cases).
-  # Other lines are useless and have not been filled by the loops
-  NbdInt <- Nbd[IsReferenceType, 1:Nr]
-  NbdAll <- Nbd[IsReferenceType, (Nr+1):(2*Nr)]
   # Cumulate weights up to each distance
-  NbdInt <- t(apply(NbdInt, 1, cumsum))
-  NbdAll <- t(apply(NbdAll, 1, cumsum))
+  NbdInt <- t(apply(Nbd[, 1:Nr], 1, cumsum))
+  NbdAll <- t(apply(Nbd[, (Nr+1):(2*Nr)], 1, cumsum))
   
   # Calulate the ratio of points of interest around each point
   LocalRatio <- NbdInt/NbdAll
   # Divide it by the global ratio. Ignore points with no neighbor at all.
   Mvalues <- apply(LocalRatio, 2, function(x) sum(x[is.finite(x)])/sum(GlobalRatio[is.finite(x)]))
+  # Keep individual values
+  if (Individual) {
+    Mvalues <- cbind(Mvalues, t(LocalRatio/GlobalRatio))
+  }
+  
   # Put the results into an fv object
   MEstimate <- data.frame(r, rep(1, length(r)), Mvalues)
-  colnames(MEstimate) <- c("r", "theo", "M")
+  ColNames <- c("r", "theo", "M")
+  Labl <- c("r", "%s[ind](r)", "hat(%s)(r)")
+  Desc <- c("Distance argument r", "Theoretical independent M(r)", "Estimated M(r)")  
+  if (Individual) {
+    # ColNumbers will usually be line numbers of the marks df, but may be real names.
+    ColNumbers <- row.names(X$marks[IsReferenceType, ])
+    ColNames <- c(ColNames, paste("M", ColNumbers, sep="_"))
+    Labl <- c(Labl, paste("hat(%s)[", ColNumbers, "](r)", sep=""))
+    Desc <- c(Desc, paste("Individual M(r) around point", ColNumbers))
+  }
+  colnames(MEstimate) <- ColNames
   
   # Return the values of M(r)
-  return (fv(MEstimate, argu="r", ylab=quote(M(r)), valu="M", fmla= ". ~ r", alim=c(0, max(r)), labl=c("r", "%s[ind](r)", paste("hat(%s)(r)", sep="")), desc=c("distance argument r", "theoretical independent M(r)", "Estimated M(r)"), unitname=X$window$unit, fname="M"))
+  return (fv(MEstimate, argu="r", ylab=quote(M(r)), valu="M", fmla= "cbind(M,theo)~r", alim=c(0, max(r)), labl=Labl, desc=Desc, unitname=X$window$unit, fname="M"))
 }

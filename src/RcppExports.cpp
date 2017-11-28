@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // DistKd
 void DistKd(SEXP Rx, SEXP Ry, SEXP RPointWeight, SEXP RWeight, SEXP RDist, SEXP RIsReferenceType, SEXP RIsNeighborType);
-RcppExport SEXP dbmss_DistKd(SEXP RxSEXP, SEXP RySEXP, SEXP RPointWeightSEXP, SEXP RWeightSEXP, SEXP RDistSEXP, SEXP RIsReferenceTypeSEXP, SEXP RIsNeighborTypeSEXP) {
+RcppExport SEXP _dbmss_DistKd(SEXP RxSEXP, SEXP RySEXP, SEXP RPointWeightSEXP, SEXP RWeightSEXP, SEXP RDistSEXP, SEXP RIsReferenceTypeSEXP, SEXP RIsNeighborTypeSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type Rx(RxSEXP);
@@ -23,7 +23,7 @@ END_RCPP
 }
 // CountNbdKd
 void CountNbdKd(SEXP Rr, SEXP Rx, SEXP Ry, SEXP RWeight, SEXP RNbd, SEXP RIsReferenceType, SEXP RIsNeighborType);
-RcppExport SEXP dbmss_CountNbdKd(SEXP RrSEXP, SEXP RxSEXP, SEXP RySEXP, SEXP RWeightSEXP, SEXP RNbdSEXP, SEXP RIsReferenceTypeSEXP, SEXP RIsNeighborTypeSEXP) {
+RcppExport SEXP _dbmss_CountNbdKd(SEXP RrSEXP, SEXP RxSEXP, SEXP RySEXP, SEXP RWeightSEXP, SEXP RNbdSEXP, SEXP RIsReferenceTypeSEXP, SEXP RIsNeighborTypeSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< SEXP >::type Rr(RrSEXP);
@@ -39,7 +39,7 @@ END_RCPP
 }
 // parallelCountNbd
 NumericMatrix parallelCountNbd(NumericVector r, NumericVector x, NumericVector y, NumericVector Weight, LogicalVector IsReferenceType, LogicalVector IsNeighborType);
-RcppExport SEXP dbmss_parallelCountNbd(SEXP rSEXP, SEXP xSEXP, SEXP ySEXP, SEXP WeightSEXP, SEXP IsReferenceTypeSEXP, SEXP IsNeighborTypeSEXP) {
+RcppExport SEXP _dbmss_parallelCountNbd(SEXP rSEXP, SEXP xSEXP, SEXP ySEXP, SEXP WeightSEXP, SEXP IsReferenceTypeSEXP, SEXP IsNeighborTypeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -55,7 +55,7 @@ END_RCPP
 }
 // parallelCountNbdDt
 NumericMatrix parallelCountNbdDt(NumericVector r, NumericMatrix Dmatrix, NumericVector Weight, LogicalVector IsReferenceType, LogicalVector IsNeighborType);
-RcppExport SEXP dbmss_parallelCountNbdDt(SEXP rSEXP, SEXP DmatrixSEXP, SEXP WeightSEXP, SEXP IsReferenceTypeSEXP, SEXP IsNeighborTypeSEXP) {
+RcppExport SEXP _dbmss_parallelCountNbdDt(SEXP rSEXP, SEXP DmatrixSEXP, SEXP WeightSEXP, SEXP IsReferenceTypeSEXP, SEXP IsNeighborTypeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -70,7 +70,7 @@ END_RCPP
 }
 // parallelCountNbdCC
 NumericMatrix parallelCountNbdCC(NumericVector r, NumericVector x, NumericVector y, NumericVector Weight, LogicalVector IsReferenceType, LogicalVector IsNeighborType);
-RcppExport SEXP dbmss_parallelCountNbdCC(SEXP rSEXP, SEXP xSEXP, SEXP ySEXP, SEXP WeightSEXP, SEXP IsReferenceTypeSEXP, SEXP IsNeighborTypeSEXP) {
+RcppExport SEXP _dbmss_parallelCountNbdCC(SEXP rSEXP, SEXP xSEXP, SEXP ySEXP, SEXP WeightSEXP, SEXP IsReferenceTypeSEXP, SEXP IsNeighborTypeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -86,7 +86,7 @@ END_RCPP
 }
 // parallelCountNbdDtCC
 NumericMatrix parallelCountNbdDtCC(NumericVector r, NumericMatrix Dmatrix, NumericVector Weight, LogicalVector IsReferenceType, LogicalVector IsNeighborType);
-RcppExport SEXP dbmss_parallelCountNbdDtCC(SEXP rSEXP, SEXP DmatrixSEXP, SEXP WeightSEXP, SEXP IsReferenceTypeSEXP, SEXP IsNeighborTypeSEXP) {
+RcppExport SEXP _dbmss_parallelCountNbdDtCC(SEXP rSEXP, SEXP DmatrixSEXP, SEXP WeightSEXP, SEXP IsReferenceTypeSEXP, SEXP IsNeighborTypeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -101,7 +101,7 @@ END_RCPP
 }
 // parallelCountNbdm
 NumericMatrix parallelCountNbdm(NumericVector x, NumericVector y, IntegerVector ReferencePoints);
-RcppExport SEXP dbmss_parallelCountNbdm(SEXP xSEXP, SEXP ySEXP, SEXP ReferencePointsSEXP) {
+RcppExport SEXP _dbmss_parallelCountNbdm(SEXP xSEXP, SEXP ySEXP, SEXP ReferencePointsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
