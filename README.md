@@ -1,4 +1,4 @@
-# Distance Based Measures of Spatial Structures
+# Distance Based Measures of Spatial Structures <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 [![CRAN version](http://www.r-pkg.org/badges/version/dbmss)](https://CRAN.r-project.org/package=dbmss)
 [![](http://cranlogs.r-pkg.org/badges/dbmss)](https://CRAN.R-project.org/package=dbmss)
@@ -6,15 +6,13 @@
 [![Build Status](https://travis-ci.org/EricMarcon/dbmss.svg?branch=master)](https://travis-ci.org/EricMarcon/dbmss)
 [![codecov](https://codecov.io/github/EricMarcon/dbmss/branch/master/graphs/badge.svg)](https://codecov.io/github/EricMarcon/dbmss) 
 
-dbmss is an R package for simple computation of spatial statistic functions of distance to characterize the spatial structures
-of mapped objects, including classical ones (Ripley's *K* and others) and more recent ones used by spatial economists 
-(Duranton and Overman's *Kd*, Marcon and Puech's *M*). Relies on spatstat for some core calculation.
+dbmss is an R package for simple computation of spatial statistic functions of distance to characterize the spatial structures of mapped objects, including classical ones (Ripley's *K* and others) and more recent ones used by spatial economists (Duranton and Overman's *Kd*, Marcon and Puech's *M*). It relies on spatstat for some core calculation.
 
 # Vignettes
 
-A quick [introduction](https://EricMarcon.github.io/dbmss/) is in `vignette("docs", "dbmss")`.
+A quick [introduction](https://EricMarcon.github.io/dbmss/) is in `vignette("dbmss", "dbmss")`.
 
-A full documentation is available in section section of the same vignette (Reference Guide).
+A full documentation is available on the package website (Articles: Reference Guide).
 It is a continuous update of the paper published in the Journal of Statistical Software ([Marcon et al., 2015](https://www.jstatsoft.org/article/view/v067c03)).
 
 ## Reference

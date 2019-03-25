@@ -64,6 +64,11 @@
   Estimating \emph{Kd} relies on calculating distances, exactly or approximately (if \code{Approximate} is not 0).
   Then distances are smoothed by estimating their probability density.
   Reflection is used to estimate density close to the lowest distance, that is the minimum observed distance (if \code{StartFromMinR} is \code{TRUE}) or 0: all distances below 4 times the estimation kernel bandwith apart from the lowest distance are duplicated (symmetrically with respect to the lowest distance) to avoid edge effects (underestimation of the density close to the lowest distance).
+  
+  Density estimation heavily relies on the bandwith.
+  Starting from version 2.7, the optimal bandwith is computed from the distribution of distances between pairs of points up to twice the maximum distance considered.
+  The consequence is that choosing a smaller range of distances in argument \code{r} results in less smoothed $Kd$ values.
+  The default values (\code{r = NULL}, \code{MaxRange = "ThirdW"}) are such that almost all the pairs of points (except those more than 2/3 of the window diameter apart) are taken into account to determine the bandwith.
 }
 \references{
   Duranton, G. and Overman, H. G. (2005). Testing for Localisation Using Micro-Geographic Data. \emph{Review of Economic Studies} 72(4): 1077-1106.
