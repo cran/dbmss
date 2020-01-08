@@ -1,7 +1,7 @@
 Package: dbmss
 Type: Package
 Title: Distance-Based Measures of Spatial Structures
-Version: 2.7-0
+Version: 2.7-1
 Authors@R: c(
     person("Eric", "Marcon", email="eric.marcon@ecofog.gf", role=c("aut", "cre"), comment = c(ORCID = "0000-0002-5249-321X")),
     person("Gabriel", "Lang", email="gabriel.lang@agroparistech.fr", role="aut", comment = c(ORCID = "0000-0002-4325-6044")),
@@ -16,7 +16,7 @@ BugReports: https://github.com/EricMarcon/dbmss/issues
 License: GNU General Public License
 Depends: R (>= 3.3.0), spatstat, Rcpp (>= 0.12.14), ggplot2
 Imports: cubature, reshape2, stats, RcppParallel, spatstat.utils (>=
-        1.3-1)
+        1.3-1), tibble
 Suggests: testthat, knitr, pkgdown
 LinkingTo: Rcpp, RcppParallel
 VignetteBuilder: knitr
@@ -25,11 +25,11 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 NeedsCompilation: yes
-Packaged: 2019-03-25 21:47:44 UTC; Eric.Marcon
+Packaged: 2020-01-03 20:30:45 UTC; Eric.Marcon
 Author: Eric Marcon [aut, cre] (<https://orcid.org/0000-0002-5249-321X>),
   Gabriel Lang [aut] (<https://orcid.org/0000-0002-4325-6044>),
   Stephane Traissac [aut],
   Florence Puech [aut] (<https://orcid.org/0000-0002-5279-6878>)
 Maintainer: Eric Marcon <eric.marcon@ecofog.gf>
 Repository: CRAN
-Date/Publication: 2019-03-25 22:53:36 UTC
+Date/Publication: 2020-01-08 02:30:02 UTC
