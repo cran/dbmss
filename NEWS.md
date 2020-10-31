@@ -1,3 +1,10 @@
+# dbmss 2.7-2
+
+## Bug fixes
+
+- argument `main` in `autoplot()` was ignored.
+
+
 # dbmss 2.7-1
 
 ## Improvements
