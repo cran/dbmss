@@ -41,24 +41,20 @@ Dhat(X, r = NULL, Cases, Controls = NULL, Intertype = FALSE, CheckArguments = TR
   
   Marcon, E. and F. Puech (2017). A typology of distance-based measures of spatial concentration. \emph{Regional Science and Urban Economics}. 62:56-67.
 }
-\author{
-  Eric Marcon <Eric.Marcon@ecofog.gf>
-}
 \note{
   The computation of \code{Dhat} relies on spatstat functions \code{\link{Kest}} and \code{\link{Kcross}}.
 }
-
 \seealso{
   \code{\link{Khat}}, \code{\link{DEnvelope}}, \code{\link{Kest}}, \code{\link{Kcross}}
 }
 \examples{
 data(paracou16)
-plot(paracou16)
+autoplot(paracou16)
 
 # Calculate D
 r <- 0:30
 (Paracou <- Dhat(paracou16, r, "V. Americana", "Q. Rosea", Intertype = TRUE))
 
 # Plot (after normalization by pi.r^2)
-plot(Paracou, ./(pi*r^2) ~ r)
+autoplot(Paracou, ./(pi*r^2) ~ r)
 }

@@ -35,24 +35,20 @@ Lhat(X, r = NULL, ReferenceType = "", NeighborType = "", CheckArguments = TRUE)
 \references{
   Besag, J. E. (1977). Comments on Ripley's paper. \emph{Journal of the Royal Statistical Society B} 39(2): 193-195.
 }
-\author{
-  Eric Marcon <Eric.Marcon@ecofog.gf>
-}
 \note{
   \emph{L} was originally defined as \eqn{L(r)=\sqrt{\frac{K}{\pi}}}. It has been used as \eqn{L(r)=\sqrt{\frac{K}{\pi}}-r} in a part of the literature because this normalization is easier to plot.
 }
-
 \seealso{
   \code{\link{Khat}}, \code{\link{LEnvelope}}
 }
 \examples{
 data(paracou16)
-plot(paracou16)
+autoplot(paracou16)
 
 # Calculate L
 r <- 0:30
 (Paracou <- Lhat(paracou16, r))
 
 # Plot
-plot(Paracou)
+autoplot(Paracou)
 }

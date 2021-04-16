@@ -19,10 +19,7 @@
   \code{\link{ppp.object}},
   \code{\link{wmppp}},
   \code{\link{as.wmppp}}
-}
-
-\author{
-  Eric Marcon <Eric.Marcon@ecofog.gf>
+  \code{\link{autoplot.wmppp}}
 }
 \examples{
 # Draw the coordinates of 10 points
@@ -38,4 +35,7 @@ X <- wmppp(data.frame(X, Y, PointType, PointWeight), owin())
 par(mfrow=c(1,2))
 plot(X, which.marks=1, main="Point weights")
 plot(X, which.marks=2, main="Point types")
+
+# Or use autoplot for a ggplot
+autoplot(X)
 }

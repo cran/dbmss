@@ -43,6 +43,7 @@ KinhomEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05,
 }
 \details{
   The random location null hypothesis is that of Duranton and Overman (2005). It is appropriate to test the univariate \emph{Kinhom} function of a single point type, redistributing it over all point locations.
+  It allows fixing lambda along simulations so the warning message can be ignored.
   
   The random labeling hypothesis is appropriate for the bivariate \emph{Kinhom} function.
   
@@ -68,18 +69,16 @@ KinhomEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05,
   
   Marcon, E. and F. Puech (2017). A typology of distance-based measures of spatial concentration. \emph{Regional Science and Urban Economics}. 62:56-67.
 }
-\author{
-  Eric Marcon <Eric.Marcon@ecofog.gf>
-}
 \seealso{
   \code{\link{Kinhomhat}}
 }
-
 \examples{
 data(paracou16)
 # Keep only 20\% of points to run this example
 X <- as.wmppp(rthin(paracou16, 0.2))
-plot(X)
+autoplot(X, 
+  labelSize = expression("Basal area (" ~cm^2~ ")"), 
+  labelColor = "Species")
 
 # Density of all trees
 lambda <- density.ppp(X, bw.diggle(X))
@@ -92,6 +91,6 @@ plot(V.americana, add=TRUE)
 r <- 0:30
 NumberOfSimulations <- 4
 Alpha <- .10
-plot(KinhomEnvelope(X, r,NumberOfSimulations, Alpha, , 
+autoplot(KinhomEnvelope(X, r,NumberOfSimulations, Alpha, , 
     SimulationType="RandomPosition", lambda=lambda), ./(pi*r^2) ~ r)
 }

@@ -66,10 +66,10 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType,
   }
   
   # Cumulate weights up to each distance
-  NbdInt <- t(apply(Nbd[, 1:Nr], 1, cumsum))
+  NbdInt <- t(apply(Nbd[, seq_len(Nr)], 1, cumsum))
   NbdAll <- t(apply(Nbd[, (Nr+1):(2*Nr)], 1, cumsum))
   
-  # Calulate the ratio of points of interest around each point
+  # Calculate the ratio of points of interest around each point
   LocalRatio <- NbdInt/NbdAll
   # Divide it by the global ratio. Ignore points with no neighbor at all.
   Mvalues <- apply(LocalRatio, 2, function(x) sum(x[is.finite(x)])/sum(GlobalRatio[is.finite(x)]))
@@ -81,7 +81,7 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType,
   # Put the results into an fv object
   MEstimate <- data.frame(r, rep(1, length(r)), Mvalues)
   ColNames <- c("r", "theo", "M")
-  Labl <- c("r", "%s[ind](r)", "hat(%s)(r)")
+  Labl <- c("r", "%s[theo](r)", "hat(%s)(r)")
   Desc <- c("Distance argument r", "Theoretical independent %s", "Estimated %s")  
   if (Individual) {
     # ColNumbers will usually be line numbers of the marks df, but may be real names.
@@ -93,5 +93,9 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType,
   colnames(MEstimate) <- ColNames
   
   # Return the values of M(r)
-  return (fv(MEstimate, argu="r", ylab=quote(M(r)), valu="M", fmla= "cbind(M,theo)~r", alim=c(0, max(r)), labl=Labl, desc=Desc, unitname=X$window$unit, fname="M"))
+  M <- fv(MEstimate, argu="r", ylab=quote(M(r)), valu="M", 
+          fmla= "cbind(M,theo)~r", alim=c(0, max(r)), labl=Labl, 
+          desc=Desc, unitname=X$window$unit, fname="M")
+  fvnames(M, ".") <- ColNames[-1]
+  return (M)
 }

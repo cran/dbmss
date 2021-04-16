@@ -1,3 +1,14 @@
+# dbmss 2.7-5
+
+## Improvements
+
+- `fmla` argument added in `autoplot.envelope()`.
+- `autoplot.fv()` added.
+- `autoplot.wmppp()` added.
+- CodeFactor optimization applied.
+- Suggests rmarkdown (https://github.com/yihui/knitr/issues/1864)
+
+
 # dbmss 2.7-4
 
 ## Improvements
@@ -9,13 +20,11 @@
 - Updates in the _spatstat_ package: _dbmss_ has been updated to address the creation of _spatstat.core_ et al.
 
 
-
 # dbmss 2.7-3
 
 ## Bug fixes
 
 - argument `main` in `autoplot()` was ignored.
-
 
 
 # dbmss 2.7-1

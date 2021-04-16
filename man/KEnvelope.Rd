@@ -64,22 +64,20 @@ KEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05,
 
   Silverman, B. W. (1986). \emph{Density estimation for statistics and data analysis}. Chapman and Hall, London.
 }
-\author{
-  Eric Marcon <Eric.Marcon@ecofog.gf>
-}
 \seealso{
   \code{\link{Khat}}, \code{\link{rRandomPositionK}}, \code{\link{rRandomLocation}}, \code{\link{rPopulationIndependenceK}}
 }
-
 \examples{
 data(paracou16)
 # Keep only 20\% of points to run this example
 X <- as.wmppp(rthin(paracou16, 0.2))
-plot(X)
+autoplot(X, 
+  labelSize = expression("Basal area (" ~cm^2~ ")"), 
+  labelColor = "Species")
 
 # Calculate confidence envelope (should be 1000 simulations, reduced to 20 to save time)
 r <- 0:30
 NumberOfSimulations <- 20
 # Plot the envelope
-plot(KEnvelope(X, r, NumberOfSimulations), ./(pi*r^2) ~ r)
+autoplot(KEnvelope(X, r, NumberOfSimulations), ./(pi*r^2) ~ r)
 }

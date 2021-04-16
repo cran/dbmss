@@ -35,21 +35,17 @@ ghat(X, r = NULL, ReferenceType = "", NeighborType = "", CheckArguments = TRUE)
 \references{
   Stoyan, D. and Stoyan, H. (1994) \emph{Fractals, random shapes and point fields: methods of geometrical statistics}. John Wiley and Sons. 
 }
-\author{
-  Eric Marcon <Eric.Marcon@ecofog.gf>
-}
-
 \seealso{
   \code{\link{gEnvelope}}
 }
 \examples{
 data(paracou16)
-plot(paracou16)
+autoplot(paracou16)
 
 # Calculate g
 r <- 0:30
 (Paracou <- ghat(paracou16, r, "Q. Rosea", "V. Americana"))
 
 # Plot
-plot(Paracou)
+autoplot(Paracou)
 }

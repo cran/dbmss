@@ -27,15 +27,11 @@ GoFtest(Envelope)
   
   Marcon, E., F. Puech and S. Traissac (2012). Characterizing the relative spatial structure of point patterns. International \emph{Journal of Ecology} 2012(Article ID 619281): 11.  
 }
-\author{
-  Eric Marcon <Eric.Marcon@ecofog.gf>
-}
 \note{
   No support exists in the literature to apply the GoF test to non-cumulative functions (\emph{g}, \emph{Kd}...).
   
   \code{\link{Ktest}} is a much better test (it does not rely on simulations) but it is limited to the \emph{K} function against complete spatial randomness (CSR) in a rectangle window.
 }
-
 \seealso{
   \code{\link{Ktest}}
 }
@@ -45,14 +41,14 @@ nclust <- function(x0, y0, radius, n) {
   return(runifdisc(n, radius, centre=c(x0, y0)))
 }
 X <- rNeymanScott(20, 0.2, nclust, radius=0.3, n=10)
-plot(X)
+autoplot(as.wmppp(X))
 
 # Calculate confidence envelope (should be 1000 simulations, reduced to 50 to save time)
 r <- seq(0, 0.3, 0.01)
 NumberOfSimulations <- 50
 Alpha <- .10
 Envelope <- KEnvelope(as.wmppp(X), r, NumberOfSimulations, Alpha)
-plot(Envelope, ./(pi*r^2) ~ r)
+autoplot(Envelope, ./(pi*r^2) ~ r)
 
 # GoF test. Power is correct if enough simulations are run (say >1000).
 paste("p-value =", GoFtest(Envelope))

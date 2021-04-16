@@ -29,7 +29,7 @@ Ktest(X, r)
   Marcon, E., S. Traissac, and Lang, G. (2013). A Statistical Test for Ripley's Function Rejection of Poisson Null Hypothesis. \emph{ISRN Ecology} 2013(Article ID 753475): 9.
 }
 \author{
-  Gabriel Lang <Gabriel.Lang@agroparistech.fr>, Eric Marcon<Eric.Marcon@ecofog.gf>
+  Gabriel Lang <Gabriel.Lang@agroparistech.fr>, Eric Marcon<Eric.Marcon@agroparistech.fr>
 }
 \seealso{
   \code{\link{Khat}}, \code{\link{GoFtest}}
@@ -40,7 +40,7 @@ nclust <- function(x0, y0, radius, n) {
   return(runifdisc(n, radius, centre=c(x0, y0)))
 }
 X <- rNeymanScott(20, 0.1, nclust, radius=0.2, n=5)
-plot(X)
+autoplot(as.wmppp(X))
 
 # Test it
 Ktest(X, r=seq(0.1, .5, .1))

@@ -42,9 +42,6 @@ Kinhomhat(X, r = NULL, ReferenceType = "", lambda = NULL, CheckArguments = TRUE)
   
   Arbia, G., G. Espa, et al. (2012). Clusters of firms in an inhomogeneous space: The high-tech industries in Milan. \emph{Economic Modelling} 29(1): 3-11.
 }
-\author{
-  Eric Marcon <Eric.Marcon@ecofog.gf>
-}
 \note{
   The computation of \code{Kinhomhat} relies on spatstat functions \code{\link{Kinhom}}, \code{\link{density.ppp}} and \code{\link{bw.diggle}}.
 }
@@ -63,5 +60,5 @@ plot(V.americana, add=TRUE)
 
 # Calculate Kinhom according to the density of all trees
 r <- 0:30
-plot(Kinhomhat(paracou16, r, "V. Americana", lambda), ./(pi*r^2) ~ r)
+autoplot(Kinhomhat(paracou16, r, "V. Americana", lambda), ./(pi*r^2) ~ r)
 }

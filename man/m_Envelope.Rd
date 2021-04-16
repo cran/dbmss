@@ -83,22 +83,20 @@ mEnvelope(X, r = NULL, NumberOfSimulations = 100, Alpha = 0.05,
 
   Silverman, B. W. (1986). \emph{Density estimation for statistics and data analysis}. Chapman and Hall, London.
 }
-\author{
-  Eric Marcon <Eric.Marcon@ecofog.gf>
-}
 \seealso{
   \code{\link{mhat}}
 }
-
 \examples{
 data(paracou16)
 # Keep only 50\% of points to run this example
 X <- as.wmppp(rthin(paracou16, 0.5))
-plot(X)
+autoplot(X, 
+  labelSize = expression("Basal area (" ~cm^2~ ")"), 
+  labelColor = "Species")
 
 # Calculate confidence envelope (should be 1000 simulations, reduced to 4 to save time)
 NumberOfSimulations <- 4
 Alpha <- .10
-plot(mEnvelope(X, , NumberOfSimulations, Alpha, 
+autoplot(mEnvelope(X, , NumberOfSimulations, Alpha, 
     "V. Americana", "Q. Rosea", Original = FALSE, SimulationType = "RandomLabeling"))
 }

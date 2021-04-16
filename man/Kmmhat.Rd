@@ -34,13 +34,9 @@ Kmmhat(X, r = NULL, ReferenceType = "", CheckArguments = TRUE)
   
   Penttinen, A. (2006). Statistics for Marked Point Patterns. in \emph{The Yearbook of the Finnish Statistical Society}. The Finnish Statistical Society, Helsinki: 70-91.
 }
-\author{
-  Eric Marcon <Eric.Marcon@ecofog.gf>
-}
 \note{
   The function is computed using \code{\link{markcorrint}} in spatstat.
 }
-
 \seealso{
   \code{\link{Lmmhat}}, \code{\link{LmmEnvelope}}, \code{\link{markcorrint}}
 }
@@ -48,12 +44,14 @@ Kmmhat(X, r = NULL, ReferenceType = "", CheckArguments = TRUE)
 data(paracou16)
 # Keep only 50\% of points to run this example
 X <- as.wmppp(rthin(paracou16, 0.5))
-plot(X)
+autoplot(X, 
+  labelSize = expression("Basal area (" ~cm^2~ ")"), 
+  labelColor = "Species")
 
 # Calculate Kmm
 r <- seq(0, 30, 2)
 (Paracou <- Kmmhat(X, r))
 
 # Plot
-plot(Paracou, ./(pi*r^2) ~ r)
+autoplot(Paracou, ./(pi*r^2) ~ r)
 }

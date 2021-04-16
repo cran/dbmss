@@ -37,9 +37,6 @@ Khat(X, r = NULL, ReferenceType = "", NeighborType = ReferenceType, CheckArgumen
   
   Ripley, B. D. (1977). Modelling Spatial Patterns. \emph{Journal of the Royal Statistical Society B} 39(2): 172-212.
 }
-\author{
-  Eric Marcon <Eric.Marcon@ecofog.gf>
-}
 \note{
   The computation of \code{Khat} relies on spatstat functions \code{\link{Kest}} and \code{\link{Kcross}}.
 }
@@ -48,13 +45,12 @@ Khat(X, r = NULL, ReferenceType = "", NeighborType = ReferenceType, CheckArgumen
 }
 \examples{
 data(paracou16)
-plot(paracou16)
+autoplot(paracou16)
 
 # Calculate K
 r <- 0:30
 (Paracou <- Khat(paracou16, r))
 
 # Plot (after normalization by pi.r^2)
-plot(Paracou, ./(pi*r^2) ~ r)
+autoplot(Paracou, ./(pi*r^2) ~ r)
 }
-

@@ -67,18 +67,18 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
     }
     
     # Adjust distances: values are the centers of intervals
-    rseq <- c(0, (rseq[2:Nr]+rseq[1:Nr-1])/2)
+    rseq <- c(0, (rseq[2:Nr]+rseq[seq_len(Nr)-1])/2)
     
-    # Estimate the bandwith according to adjust if requested.
+    # Estimate the bandwidth according to adjust if requested.
     # Distances are the values of rseq corresponding to at least a pair of points (reference and neighbor)
     if (Original) {
-      h <- stats::bw.nrd0(rseq[colSums(Nbd[, 1:Nr]) > 0])*Adjust
+      h <- stats::bw.nrd0(rseq[colSums(Nbd[, seq_len(Nr)]) > 0])*Adjust
     } else {
-      h <- stats::bw.SJ(rseq[colSums(Nbd[, 1:Nr]) > 0])*Adjust
+      h <- stats::bw.SJ(rseq[colSums(Nbd[, seq_len(Nr)]) > 0])*Adjust
     }
 
     # Calculate densities of neighbors (with unnormalized weights so suppress warnings)
-    Djc <- t(apply(Nbd[, 1:Nr], 1, function(x) suppressWarnings(stats::density(rseq, bw=h, weights=x, from=rmin, to=rmax, na.rm=TRUE))$y))
+    Djc <- t(apply(Nbd[, seq_len(Nr)], 1, function(x) suppressWarnings(stats::density(rseq, bw=h, weights=x, from=rmin, to=rmax, na.rm=TRUE))$y))
     Dj <- t(apply(Nbd[, (Nr+1):(2*Nr)], 1, function(x) suppressWarnings(stats::density(rseq, bw=h, weights=x, from=rmin, to=rmax, na.rm=TRUE))$y))
     # Get the x values of the density estimation: estimate one vector
     x <- stats::density(rseq, bw=h, from=rmin, to=rmax, na.rm=TRUE)$x
@@ -149,7 +149,7 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
   # Put the results into an fv object
   mEstimate <- data.frame(r, rep(1, length(r)), mvalues)
   ColNames <- c("r", "theo", "m")
-  Labl <- c("r", "%s[ind](r)", "hat(%s)(r)")
+  Labl <- c("r", "%s[theo](r)", "hat(%s)(r)")
   Desc <- c("Distance argument r", "Theoretical independent %s", "Estimated %s")  
   if (Individual) {
     # ColNumbers will usually be line numbers of the marks df, but may be real names.
@@ -160,6 +160,10 @@ function(X, r = NULL, ReferenceType, NeighborType = ReferenceType, CaseControl =
   }
   colnames(mEstimate) <- ColNames
   
-  # Return the values of M(r)
-  return (fv(mEstimate, argu="r", ylab=quote(m(r)), valu="m", fmla= "cbind(m,theo)~r", alim=c(0, max(r)), labl=Labl, desc=Desc, unitname=X$window$unit, fname="m")) 
+  # Return the values of m(r)
+  m <- fv(mEstimate, argu="r", ylab=quote(m(r)), valu="m", 
+          fmla= "cbind(m,theo)~r", alim=c(0, max(r)), labl=Labl, desc=Desc, 
+          unitname=X$window$unit, fname="m")
+  fvnames(m, ".") <- ColNames[-1]
+  return (m) 
 }
