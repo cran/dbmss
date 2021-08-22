@@ -1,6 +1,6 @@
-e7f06b2f5779b13006c08a9ada3d8df1 *DESCRIPTION
+9aede7be44e707068999f8fea41c081e *DESCRIPTION
 c996c1bb5fcc17a0c2abd37dad45b236 *NAMESPACE
-69e6f6acf457d1bb1da3071cd9d6060b *NEWS.md
+de629ca95bd16f3e05f3711a07a17814 *NEWS.md
 e4d7e7514acc81ea4bce38417a7b628e *R/CheckdbmssArguments.R
 ca8a7c4ef9695353693001211b1378da *R/DEnvelope.R
 e2bc3bb66904bd52aa9e247d6c3eb8c3 *R/Dhat.R
@@ -37,7 +37,7 @@ f4f7bd3b2ec1e56994e76edf9fb2e24e *R/envelope.Dtable.R
 acb6e422d25178351d20c58d63c4b664 *R/ghat.R
 012f8e30c3f041f7b8c56077605035dc *R/is.wmppp.R
 830c577afeefcbf297965f51267b1f5a *R/m_Envelope.R
-76ed6566d50b3e48895f9447b8150b46 *R/m_hat.R
+971395474959423e7dc1dea9fdbff55e *R/m_hat.R
 cc631f341e395cf40d467174839c84cd *R/print.dbmssEnvelope.R
 ce9d02461a45a7ef96ec3bf660255dc4 *R/rPopulationIndependenceK.R
 741f7300833f71957c509af57a2237a4 *R/rPopulationIndependenceM.R
@@ -48,12 +48,12 @@ a0fec0d4d971abe58bda174ff3032bbf *R/rRandomPositionK.R
 2563df302d990e470eadc09faf8f0fb8 *R/summary.dbmssEnvelope.R
 e30db2952202e367369a91587778d2c4 *R/wmppp.R
 b9b7ccf937f135eb139b56746a413c13 *README.md
-f71710917943000884526c1dea1b61c1 *build/vignette.rds
+2a3e2c1040d319d2c95137dff8396e02 *build/vignette.rds
 8facc4dd5b258d928eb05bbef3667c99 *data/paracou16.RData
 8ecbe5dc5d885164fd6f631c73f2724d *inst/CITATION
 b2811552839d6e6ebbdddc1b52df1b3a *inst/doc/dbmss.R
 276567484e1d0e1280b005a1e20a40f9 *inst/doc/dbmss.Rmd
-97a2e345d83cfaaa7998d3bfe888e99f *inst/doc/dbmss.html
+a5efa7a9f6008a8686c8d298af7526f0 *inst/doc/dbmss.html
 b14131ef91e519ea3e1b6066ea1e26a6 *man/CheckdbmssArguments.Rd
 fe1d63a8a804bd3a1e14b5e9024d6ca6 *man/DEnvelope.Rd
 e6aff141c6a10d76b66d9282aa1d6dbc *man/Dhat.Rd
@@ -104,7 +104,7 @@ de49e5683d8c2868559ec6381ee2c994 *man/wmppp.object.Rd
 9dc4c14979fcc907a4e0d5ab67dc00d1 *src/CountNbd.cpp
 e8a94e55d5aa749dfa5523a68f2c03e8 *src/Makevars
 d00b080414174aebc2d29225a224e4f0 *src/Makevars.win
-f5b28d6114a7e40cec2c7118fc19ad60 *src/RcppExports.cpp
+844d62a497d2db801cb209dd46bd4b6a *src/RcppExports.cpp
 3e59eaa880bbdb1e6376c62f006623a0 *tests/testthat.R
 f3abddd340c7ff1ca59e797852e3e39f *tests/testthat/testDtable.R
 230a92d96f7b8dc27d769a6c158c2ffa *tests/testthat/testKd.R
