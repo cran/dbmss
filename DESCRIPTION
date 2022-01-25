@@ -1,7 +1,7 @@
 Package: dbmss
 Type: Package
 Title: Distance-Based Measures of Spatial Structures
-Version: 2.7-7
+Version: 2.7-8
 Authors@R: c(
     person("Eric", "Marcon", email="eric.marcon@agroparistech.fr", role=c("aut", "cre"), comment = c(ORCID = "0000-0002-5249-321X")),
     person("Gabriel", "Lang", email="gabriel.lang@agroparistech.fr", role="aut", comment = c(ORCID = "0000-0002-4325-6044")),
@@ -14,10 +14,9 @@ Description: Simple computation of spatial statistic functions of distance to ch
 URL: https://github.com/EricMarcon/dbmss
 BugReports: https://github.com/EricMarcon/dbmss/issues
 License: GNU General Public License
-Depends: R (>= 3.5.0), spatstat.core, spatstat.geom, Rcpp (>= 0.12.14),
-        ggplot2
+Depends: R (>= 3.5.0), spatstat.core, Rcpp (>= 0.12.14), ggplot2
 Imports: cubature, RcppParallel, reshape2, spatstat.utils, stats,
-        tibble
+        tibble, spatstat.geom, spatstat.random
 Suggests: testthat, knitr, pkgdown, rmarkdown
 LinkingTo: Rcpp, RcppParallel
 VignetteBuilder: knitr
@@ -25,11 +24,11 @@ SystemRequirements: pandoc, GNU make
 Encoding: UTF-8
 LazyData: true
 NeedsCompilation: yes
-Packaged: 2021-08-22 13:12:53 UTC; emarc
+Packaged: 2022-01-25 16:49:20 UTC; emarc
 Author: Eric Marcon [aut, cre] (<https://orcid.org/0000-0002-5249-321X>),
   Gabriel Lang [aut] (<https://orcid.org/0000-0002-4325-6044>),
   Stephane Traissac [aut] (<https://orcid.org/0000-0001-9255-1616>),
   Florence Puech [aut] (<https://orcid.org/0000-0002-5279-6878>)
 Maintainer: Eric Marcon <eric.marcon@agroparistech.fr>
 Repository: CRAN
-Date/Publication: 2021-08-22 13:40:02 UTC
+Date/Publication: 2022-01-25 17:22:42 UTC

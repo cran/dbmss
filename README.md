@@ -1,6 +1,7 @@
 # Distance Based Measures of Spatial Structures <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 [![CRAN version](http://www.r-pkg.org/badges/version/dbmss)](https://CRAN.r-project.org/package=dbmss)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/dbmss)](https://CRAN.R-project.org/package=dbmss)
 [![](http://cranlogs.r-pkg.org/badges/dbmss)](https://CRAN.R-project.org/package=dbmss)
 ![R-CMD-check](https://github.com/EricMarcon/dbmss/workflows/R-CMD-check/badge.svg)
 [![codecov](https://codecov.io/github/EricMarcon/dbmss/branch/master/graphs/badge.svg)](https://codecov.io/github/EricMarcon/dbmss)
@@ -13,7 +14,7 @@ dbmss is an R package for simple computation of spatial statistic functions of d
 A quick [introduction](https://EricMarcon.github.io/dbmss/) is in `vignette("dbmss")`.
 
 A [full documentation](https://ericmarcon.github.io/dbmss/articles/articles/reference.html) is available on the package website.
-It is a continuous update of the paper published in the Journal of Statistical Software ([Marcon et al., 2015](https://www.jstatsoft.org/article/view/v067c03)).
+It is a continuous update of the paper published in the Journal of Statistical Software ([Marcon et al., 2015](https://doi.org/10.18637/jss.v067.c03)).
 
 ## Reference
 

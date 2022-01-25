@@ -1,6 +1,6 @@
-9aede7be44e707068999f8fea41c081e *DESCRIPTION
-c996c1bb5fcc17a0c2abd37dad45b236 *NAMESPACE
-de629ca95bd16f3e05f3711a07a17814 *NEWS.md
+6b98d0a6ce3ccccc6a71d84a87222cd1 *DESCRIPTION
+d52841a9a68861d00a90ca038e89804c *NAMESPACE
+eb951b48f0df7985264c21909e281277 *NEWS.md
 e4d7e7514acc81ea4bce38417a7b628e *R/CheckdbmssArguments.R
 ca8a7c4ef9695353693001211b1378da *R/DEnvelope.R
 e2bc3bb66904bd52aa9e247d6c3eb8c3 *R/Dhat.R
@@ -47,8 +47,8 @@ ae8dbff81f08de3c8f16bc4ce37a3d31 *R/rRandomLocation.R
 a0fec0d4d971abe58bda174ff3032bbf *R/rRandomPositionK.R
 2563df302d990e470eadc09faf8f0fb8 *R/summary.dbmssEnvelope.R
 e30db2952202e367369a91587778d2c4 *R/wmppp.R
-b9b7ccf937f135eb139b56746a413c13 *README.md
-2a3e2c1040d319d2c95137dff8396e02 *build/vignette.rds
+9c86003b810587044e30af3b95527f43 *README.md
+6749f1cf32ab21937e5afbfaf2b2e0cd *build/vignette.rds
 8facc4dd5b258d928eb05bbef3667c99 *data/paracou16.RData
 8ecbe5dc5d885164fd6f631c73f2724d *inst/CITATION
 b2811552839d6e6ebbdddc1b52df1b3a *inst/doc/dbmss.R
