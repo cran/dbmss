@@ -1,3 +1,12 @@
+# dbmss 2.7-10
+
+## Improvements
+
+- dbmss no longer depends on ggplot2.
+- Deprecated `aes_(x=~var)` aesthetics in ggplots replaced by `aes(x=.data$var)`.
+- documentation improvements.
+
+
 # dbmss 2.7-8
 
 ## External changes
@@ -178,7 +187,7 @@
 
 - Intervals of estimation of the Kd function are narrower when the distance range is small with respect to the window to improve precision.
 
-# Bug fix
+## Bug fixes
 
 - Distances pairs more than twice the maximum value of `r` where ignored when using the approximate estimation of `Kd`, so `Kd` was overestimated when `r` was smaller than usual (much less than the default values). Corrected.
 

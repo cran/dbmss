@@ -14,7 +14,19 @@
 
 <title>dbmss</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -24,6 +36,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 <style type="text/css">
@@ -125,7 +138,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -142,12 +335,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p>The <em>dbmss</em> package allows simple computation of spatial statistic functions of distance to characterize the spatial structures of mapped objects, including classical ones (Ripley’s K and others) and more recent ones used by spatial economists (Duranton and Overman’s <span class="math inline">\(K_d\)</span>, Marcon and Puech’s <span class="math inline">\(M\)</span>). It relies on <em>spatstat</em> for some core calculation.</p>
+<p>The <em>dbmss</em> package allows simple computation of spatial
+statistic functions of distance to characterize the spatial structures
+of mapped objects, including classical ones (Ripley’s K and others) and
+more recent ones used by spatial economists (Duranton and Overman’s
+<span class="math inline">\(K_d\)</span>, Marcon and Puech’s <span class="math inline">\(M\)</span>). It relies on <em>spatstat</em> for
+some core calculation.</p>
 <p>This vignette contains a quick introduction.</p>
 <div id="data" class="section level1">
 <h1>Data</h1>
-<p>The main data format is <code>wmppp</code> for weighted, marked point pattern. It inherits from the <code>ppp</code> class of the <em>spatstat</em> package.</p>
-<p>A <code>wmppp</code> object can be created from the coordinates of points, their type and their weight.</p>
+<p>The main data format is <code>wmppp</code> for weighted, marked point
+pattern. It inherits from the <code>ppp</code> class of the
+<em>spatstat</em> package.</p>
+<p>A <code>wmppp</code> object can be created from the coordinates of
+points, their type and their weight.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;dbmss&quot;</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw the coordinates of 10 points</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>)</span>
@@ -157,7 +358,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the point pattern. Weights are set to 1 ant the window is adjusted</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">wmppp</span>(<span class="fu">data.frame</span>(X, Y, PointType)))</span></code></pre></div>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
-<p>An example dataset is provided: it is a point pattern from the Paracou forest in French Guiana. Two species of trees are identified, other trees are of type “Other”. Point weights are their basal area, in square centimeters.</p>
+<p>An example dataset is provided: it is a point pattern from the
+Paracou forest in French Guiana. Two species of trees are identified,
+other trees are of type “Other”. Point weights are their basal area, in
+square centimeters.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot (second column of marks is Point Types) </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(paracou16, </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">labelSize =</span> <span class="fu">expression</span>(<span class="st">&quot;Basal area (&quot;</span> <span class="sc">~</span>cm<span class="sc">^</span><span class="dv">2</span><span class="sc">~</span> <span class="st">&quot;)&quot;</span>), </span>
@@ -166,16 +370,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="main-functions" class="section level1">
 <h1>Main functions</h1>
-<p>The main functions of the packages are designed to calculate distance-based measures of spatial structure. Those are non-parametric statistics able to summarize and test the spatial distribution (concentration, dispersion) of points.</p>
-<p>The classical, topographic functions such as Ripley’s <em>K</em> are provided by the <em>spatstat</em> package and supported by <em>dbmss</em> for convenience.</p>
-<p>Relative functions are available in <em>dbmss</em> only. These are the <span class="math inline">\(M\)</span> and <span class="math inline">\(m\)</span> and <span class="math inline">\(K_d\)</span> functions.</p>
-<p>The bivariate <span class="math inline">\(M\)</span> function can be calculated for <em>Q. Rosea</em> trees around <em>V. Americana</em> trees:</p>
+<p>The main functions of the packages are designed to calculate
+distance-based measures of spatial structure. Those are non-parametric
+statistics able to summarize and test the spatial distribution
+(concentration, dispersion) of points.</p>
+<p>The classical, topographic functions such as Ripley’s <em>K</em> are
+provided by the <em>spatstat</em> package and supported by
+<em>dbmss</em> for convenience.</p>
+<p>Relative functions are available in <em>dbmss</em> only. These are
+the <span class="math inline">\(M\)</span> and <span class="math inline">\(m\)</span> and <span class="math inline">\(K_d\)</span> functions.</p>
+<p>The bivariate <span class="math inline">\(M\)</span> function can be
+calculated for <em>Q. Rosea</em> trees around <em>V. Americana</em>
+trees:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">Mhat</span>(paracou16, , <span class="st">&quot;V. Americana&quot;</span>, <span class="st">&quot;Q. Rosea&quot;</span>), <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
 </div>
 <div id="confidence-envelopes" class="section level1">
 <h1>Confidence envelopes</h1>
-<p>Confidence envelopes of various null hypotheses can be calculated. The univariate distribution of <em>Q. Rosea</em> is tested against the null hypothesis of random location.</p>
+<p>Confidence envelopes of various null hypotheses can be calculated.
+The univariate distribution of <em>Q. Rosea</em> is tested against the
+null hypothesis of random location.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(<span class="fu">KdEnvelope</span>(paracou16, , <span class="at">ReferenceType=</span><span class="st">&quot;Q. Rosea&quot;</span>, <span class="at">Global=</span><span class="cn">TRUE</span>), <span class="at">main=</span><span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <pre><code>## Generating 100 simulations by evaluating expression  ...
 ## 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
@@ -184,7 +398,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Done.</code></pre>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
-<p>Significant concentration is detected between about 10 and 20 meters.</p>
+<p>Significant concentration is detected between about 10 and 20
+meters.</p>
 </div>
 <div id="full-documentation" class="section level1">
 <h1>Full documentation</h1>
