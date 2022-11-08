@@ -1,3 +1,14 @@
+# dbmss 2.7-11
+
+## Improvements
+
+- `Ktest()` automatically drops 0 in `r` to avoid an obscure error message.
+
+## External changes
+ 
+- Updates in the _spatstat_ package: _dbmss_ has been updated to address the replacement of _spatstat.core_.
+
+
 # dbmss 2.7-10
 
 ## Improvements

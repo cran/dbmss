@@ -1,6 +1,6 @@
-030abfb469a7f513248392eb42bf6122 *DESCRIPTION
-900db1fca48743a2d1a9745356bb4e97 *NAMESPACE
-468162211b4a19ecae315b099feaabb6 *NEWS.md
+063b3934d442bad226d0a9e15448d509 *DESCRIPTION
+09975feb60ec7abf5c8703db7aaed142 *NAMESPACE
+52d82d350c0d60ba7703e8a1932a9b09 *NEWS.md
 e4d7e7514acc81ea4bce38417a7b628e *R/CheckdbmssArguments.R
 ca8a7c4ef9695353693001211b1378da *R/DEnvelope.R
 e2bc3bb66904bd52aa9e247d6c3eb8c3 *R/Dhat.R
@@ -12,11 +12,11 @@ e8907c383537eb8f3d49746e2863e46d *R/KEnvelope.R
 d0247510a20617ef029a38c7302165b0 *R/KdEnvelope.R
 6c02954b52c14a53f59f8ccc7ff3c8cd *R/Kdhat.R
 32359b2a93c1c945da6ed824496dff11 *R/Khat.R
-854eeea04f5aa44370808d0c4424acd6 *R/KinhomEnvelope.R
+18c02e91297c774e3ee230bac4807605 *R/KinhomEnvelope.R
 3f1a5a8f66b89ef3ca53602dd09cff8b *R/Kinhomhat.R
 082abbadb64b5d2f30be1d9138c9286b *R/KmmEnvelope.R
-bc815ca6ed97f6fea5eb723511f3e1e2 *R/Kmmhat.R
-fbb1f4511f7e2c4d4e3d85230250e462 *R/Ktest.r
+e50c2028d158585931971c6a62be3afc *R/Kmmhat.R
+91e1030e593ca039e0e5556c2baacd04 *R/Ktest.r
 a6cecf925ebe85ce4469a27d617f1c3a *R/LEnvelope.R
 4ed3ae7d41f82ba582358b70ae889262 *R/Lhat.R
 02ae2c77f334952c80e088cd72d35a54 *R/LmmEnvelope.R
@@ -30,7 +30,7 @@ fa63218143f357e1be58704d76d3d8a6 *R/as.Dtable.data.frame.R
 bf2aa14c24615e7a059aef565f2bc990 *R/as.wmppp.R
 44fd61ab19f84f8ebdd4a7491b1dde72 *R/as.wmppp.data.frame.R
 89c271b6a9ce6a18c912a2b9a03b614a *R/as.wmppp.ppp.R
-e17cdb410b66ae0a82d9c1ed70d68fd2 *R/autoplot.R
+33eacb2e794bacf3786a0492811f8a2c *R/autoplot.R
 f4f7bd3b2ec1e56994e76edf9fb2e24e *R/envelope.Dtable.R
 088b713a188ca9473aaacf04792112bd *R/gEnvelope.R
 6851d8f8bbfd6611a3c8a220f6f0ebf1 *R/generic.spatstat.R
@@ -48,12 +48,12 @@ a0fec0d4d971abe58bda174ff3032bbf *R/rRandomPositionK.R
 2563df302d990e470eadc09faf8f0fb8 *R/summary.dbmssEnvelope.R
 e30db2952202e367369a91587778d2c4 *R/wmppp.R
 9c86003b810587044e30af3b95527f43 *README.md
-3433157e976ca832df1793a6b4bad40d *build/vignette.rds
+76d670024e9a6e0aa5d70e13075c3ffd *build/vignette.rds
 8facc4dd5b258d928eb05bbef3667c99 *data/paracou16.RData
 8ecbe5dc5d885164fd6f631c73f2724d *inst/CITATION
 b2811552839d6e6ebbdddc1b52df1b3a *inst/doc/dbmss.R
 276567484e1d0e1280b005a1e20a40f9 *inst/doc/dbmss.Rmd
-6c48de1f5e9bef7a8c66ce8d89254292 *inst/doc/dbmss.html
+208ba756420ab2c08ef8406e2a740d42 *inst/doc/dbmss.html
 b14131ef91e519ea3e1b6066ea1e26a6 *man/CheckdbmssArguments.Rd
 fe1d63a8a804bd3a1e14b5e9024d6ca6 *man/DEnvelope.Rd
 e6aff141c6a10d76b66d9282aa1d6dbc *man/Dhat.Rd
@@ -69,7 +69,7 @@ da70feb5b0526b1d478f9a3cbc0f9f65 *man/Khat.Rd
 ef1d31468f2962ef4eed045e32ca5897 *man/Kinhomhat.Rd
 8d9a44a7cd7c71a3133191838856d541 *man/KmmEnvelope.Rd
 0a5f8574f88a09001c25c8821a178db6 *man/Kmmhat.Rd
-90c59010f3768c73c543e4e4dde26f06 *man/Ktest.Rd
+0d860215ea979d9b1e60a59110c81285 *man/Ktest.Rd
 19b3fe3b090d24064fb3ca400edd819e *man/LEnvelope.Rd
 41db00c24804bbea2fb6f91ae26f0860 *man/Lhat.Rd
 5cf8b1489c82d6f9007e79c504c322bd *man/LmmEnvelope.Rd
@@ -79,7 +79,7 @@ b31b15f701d45f929f42ddfc140219a3 *man/Lmmhat.Rd
 ec925b5dec36bed175486c53abf855e5 *man/Rcpp.Rd
 ea48760ee46acccfc0198de2a5a09b0d *man/as.Dtable.Rd
 016b294b08804ccf5d27225ba9401db4 *man/as.wmppp.Rd
-adfabe8838746c730cc2ac8018878ab7 *man/autoplot.Rd
+17e49bd0d9e3d607e533c6f316a3d10f *man/autoplot.Rd
 243d67499469534979dac7b4f9eaa035 *man/dbmss-package.Rd
 d13d8c9537c4a0e33782f560439845b6 *man/dbmssEnvelope.Rd
 39db9b842c7dac214ce7efeb3351e744 *man/envelope.Dtable.Rd
