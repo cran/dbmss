@@ -1,8 +1,19 @@
+# dbmss 2.8-2
+
+## Improvements
+
+- C code cleaned up.
+
+## External changes
+ 
+- `Dhat()` code modified according to _spatstat.explore_ v.3.2-1 new features (thanks to Prof. Adrian Baddeley).
+
+
 # dbmss 2.8-0
 
 ## Significant user-visible changes
 
-- `kwmppp()` creates a krigged, weighted, marked, planar point pattern to map individual distance-based statistics.
+- `kwmppp()` creates a kriged, weighted, marked, planar point pattern to map individual distance-based statistics.
 - `plot.kwmppp()` (called as `plot()`) allows plotting `kwmppp` objects.
 - argument `verbose` in all envelope functions allows to hide the progress of simulations.
 
