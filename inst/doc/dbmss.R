@@ -1,4 +1,7 @@
 ## ----global_options, include=FALSE--------------------------------------------
+knitr::opts_chunk$set(
+  fig.width = 5       # Larger figures (default is 3, only legend is visible)
+)
 set.seed(2018)
 
 ## ----wmppp, warning=FALSE, message=FALSE--------------------------------------

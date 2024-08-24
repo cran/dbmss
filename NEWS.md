@@ -1,3 +1,11 @@
+# dbmss 2.9-2
+
+## Improvements
+
+- pkgdown site declared in DESCRIPTION URL.
+- figure width is set to 5cm in the vignette to make the figures readable.
+
+
 # dbmss 2.9-0
 
 ## Improvements
