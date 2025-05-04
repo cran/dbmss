@@ -1,22 +1,24 @@
-rRandomLabelingM <-
-function(X, CheckArguments = TRUE) {
-  
-  if (CheckArguments)
+rRandomLabelingM <- function(
+    X,
+    CheckArguments = TRUE) {
+
+  if (CheckArguments) {
     CheckdbmssArguments()
-  
+  }
+
   if (inherits(X, "Dtable")) {
     # Dtable case
     # Randomize marks
-    X$marks$PointType <- sample(X$marks$PointType)
+    marks(X)$PointType <- sample(marks(X)$PointType)
     return(X)
   } else {
     # wmppp case
     # Randomize marks
     RandomizedX <- rlabel(X)
     # Restore weights
-    RandomizedX$marks$PointWeight <- X$marks$PointWeight
-    
+    marks(RandomizedX)$PointWeight <- marks(X)$PointWeight
+
     class(RandomizedX) <- c("wmppp", "ppp")
-    return (RandomizedX)
+    return(RandomizedX)
   }
 }
