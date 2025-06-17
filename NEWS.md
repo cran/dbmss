@@ -1,3 +1,10 @@
+# dbmss 2.11-0
+
+## Improvements
+
+- Extended `GoFtest()` following Myllymäki et al. (2015).
+
+
 # dbmss 2.10-0
 
 ## Improvements

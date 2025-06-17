@@ -1,6 +1,7 @@
 ## ----global_options, include=FALSE--------------------------------------------
 knitr::opts_chunk$set(
-  fig.width = 5,       # Larger figures (default is 3, only legend is visible)
+  # Larger figures (default is 3, only legend is visible)
+  fig.width = 5,       
   out.width = "100%"
 )
 set.seed(2018)
@@ -34,10 +35,22 @@ autoplot(
 )
 
 ## -----------------------------------------------------------------------------
+p16_envelope <- KdEnvelope(paracou16, ReferenceType = "Q. Rosea", Global = TRUE)
 autoplot(
-  KdEnvelope(paracou16, ReferenceType = "Q. Rosea", Global = TRUE), 
+  p16_envelope, 
   main = ""
 )
+
+## -----------------------------------------------------------------------------
+# Test H0 up to 30m
+GoFtest(p16_envelope, Range = c(0, 30))
+
+## -----------------------------------------------------------------------------
+# Simulate a Poisson point pattern
+X <- rpoispp(1000)
+autoplot(as.wmppp(X))
+# Test it
+Ktest(X, r = seq(0.1, .5, .1))
 
 ## -----------------------------------------------------------------------------
 # Calculate individual intertype M(distance) value
